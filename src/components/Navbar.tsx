@@ -1,0 +1,196 @@
+import { useState, useEffect } from 'react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
+import { CONTACT_INFO } from '../data/portfolioData';
+import { useTheme } from '../context/ThemeContext';
+
+interface NavbarProps {
+  onNavigate: (sectionId: string) => void;
+  activeSection: string;
+}
+
+export function Navbar({ onNavigate, activeSection }: NavbarProps) {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: 'Home', href: 'home' },
+    { name: 'About', href: 'about' },
+    { name: 'Projects', href: 'projects' },
+    { name: 'Skills', href: 'skills' },
+    { name: 'Services', href: 'services' },
+    { name: 'Contact', href: 'contact' },
+  ];
+
+  const handleLinkClick = (id: string) => {
+    onNavigate(id);
+    setMobileMenuOpen(false);
+  };
+
+  return (
+    <>
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled
+            ? 'bg-black/85 backdrop-blur-md border-b border-white/10 py-4 shadow-2xl shadow-black/80'
+            : 'bg-black/40 backdrop-blur-sm border-b border-white/5 py-6'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-6 sm:px-10 flex items-center justify-between">
+          {/* Logo */}
+          <button
+            onClick={() => handleLinkClick('home')}
+            className="group flex items-center space-x-3 text-left focus:outline-none"
+          >
+            <div className="text-2xl font-black tracking-tighter text-white">
+              BUIKE<span className="text-white/30">.</span>
+            </div>
+            <span className="hidden sm:inline-block text-[10px] uppercase tracking-[0.25em] opacity-40 font-bold border-l border-white/10 pl-3">
+              Web & AI
+            </span>
+          </button>
+
+          {/* Desktop Navigation Links */}
+          <nav className="hidden md:flex items-center space-x-8 text-xs font-medium uppercase tracking-[0.2em]">
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.href;
+              return (
+                <button
+                  key={link.name}
+                  onClick={() => handleLinkClick(link.href)}
+                  className={`transition-all ${
+                    isActive
+                      ? 'text-white opacity-100 font-bold'
+                      : 'text-white opacity-50 hover:opacity-100'
+                  }`}
+                >
+                  {link.name}
+                </button>
+              );
+            })}
+          </nav>
+
+          {/* Right Action Button & Theme Toggle */}
+          <div className="hidden md:flex items-center space-x-3">
+            <button
+              onClick={toggleTheme}
+              className="px-3 py-2 border border-white/20 hover:border-white/40 rounded-full text-xs font-mono uppercase tracking-wider flex items-center gap-1.5 transition-all text-white bg-white/5 hover:bg-white/10 active:scale-95 cursor-pointer"
+              title={theme === 'dark' ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
+              aria-label="Toggle color theme"
+            >
+              {theme === 'dark' ? (
+                <>
+                  <Sun className="w-3.5 h-3.5 text-amber-300" />
+                  <span className="text-[10px] font-bold">LIGHT</span>
+                </>
+              ) : (
+                <>
+                  <Moon className="w-3.5 h-3.5 text-blue-600" />
+                  <span className="text-[10px] font-bold">DARK</span>
+                </>
+              )}
+            </button>
+
+            <button
+              onClick={() => handleLinkClick('contact')}
+              className="px-5 py-2 border border-white/20 rounded-full text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-all active:scale-95 text-white"
+            >
+              Let's Talk &rarr;
+            </button>
+          </div>
+
+          {/* Mobile Right Controls: Theme Toggle & Menu Button */}
+          <div className="md:hidden flex items-center space-x-2">
+            <button
+              onClick={toggleTheme}
+              className="p-2 text-white/80 hover:text-white border border-white/15 rounded-lg bg-white/5 active:scale-95"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-4 h-4 text-amber-300" />
+              ) : (
+                <Moon className="w-4 h-4 text-blue-600" />
+              )}
+            </button>
+
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 text-white/80 hover:text-white focus:outline-none border border-white/10 rounded-lg bg-white/5"
+              aria-label="Toggle navigation menu"
+            >
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Mobile Navigation Drawer */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-40 bg-black/98 backdrop-blur-2xl md:hidden pt-28 px-8 flex flex-col justify-between pb-12 border-b border-white/10">
+          <div className="space-y-6">
+            <div className="flex items-center justify-between pb-3 border-b border-white/10">
+              <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-white/40 font-bold">
+                Menu Index
+              </span>
+              <button
+                onClick={toggleTheme}
+                className="flex items-center gap-1.5 px-2.5 py-1 border border-white/15 rounded-full text-[10px] font-mono uppercase tracking-wider text-white"
+              >
+                {theme === 'dark' ? (
+                  <>
+                    <Sun className="w-3 h-3 text-amber-300" />
+                    <span>LIGHT MODE</span>
+                  </>
+                ) : (
+                  <>
+                    <Moon className="w-3 h-3 text-blue-600" />
+                    <span>DARK MODE</span>
+                  </>
+                )}
+              </button>
+            </div>
+            <div className="flex flex-col space-y-4">
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.href;
+                return (
+                  <button
+                    key={link.name}
+                    onClick={() => handleLinkClick(link.href)}
+                    className={`flex items-center justify-between text-left py-2 text-xl font-display uppercase tracking-wider transition-colors ${
+                      isActive ? 'text-white font-black' : 'text-white/50 hover:text-white'
+                    }`}
+                  >
+                    <span>{link.name}</span>
+                    <span className="text-xs font-mono text-white/30">/{link.href}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          <div className="space-y-4 pt-6 border-t border-white/10">
+            <div className="text-xs font-mono text-white/50">
+              <span className="block text-white font-medium mb-1">Available for new projects</span>
+              <span>{CONTACT_INFO.email}</span>
+            </div>
+            <button
+              onClick={() => handleLinkClick('contact')}
+              className="w-full py-3.5 bg-white text-black uppercase text-xs tracking-widest font-bold flex items-center justify-center gap-2 hover:invert transition-all"
+            >
+              <span>Let's Talk &rarr;</span>
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+

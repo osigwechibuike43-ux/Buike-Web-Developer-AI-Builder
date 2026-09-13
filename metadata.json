@@ -1,0 +1,6 @@
+{
+  "name": "Buike — Web Developer & AI Builder",
+  "description": "Buike is a web developer building modern websites, digital experiences, and exploring AI-powered technology.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
