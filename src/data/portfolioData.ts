@@ -13,7 +13,8 @@ export const CONTACT_INFO = {
   phone: '09168144059',
   formattedPhone: '+234 916 814 4059',
   whatsappUrl: 'https://wa.me/2349168144059?text=Hi%20Buike,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project.',
-  location: 'Available Worldwide / Remote',
+  location: 'Owerri, Imo State, Nigeria',
+  baseLocation: 'Owerri, Imo State',
   status: 'Available for Web & AI Projects',
 };
 

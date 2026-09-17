@@ -1,10 +1,13 @@
 import { InteractiveTerminal } from './InteractiveTerminal';
+import { useProfilePhoto } from '../context/ProfilePhotoContext';
 
 interface HeroProps {
   onNavigate: (sectionId: string) => void;
 }
 
 export function Hero({ onNavigate }: HeroProps) {
+  const { photoUrl } = useProfilePhoto();
+
   return (
     <section id="home" className="relative min-h-screen pt-32 pb-20 flex items-center justify-center overflow-hidden bg-black text-white">
       {/* Background technical accents */}
@@ -16,12 +19,30 @@ export function Hero({ onNavigate }: HeroProps) {
           {/* Left Hero Content */}
           <div className="lg:col-span-7 flex flex-col justify-between text-left space-y-8">
             <div>
-              {/* Eyebrow status */}
-              <div className="flex items-center space-x-2 mb-6">
-                <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
-                <span className="text-[10px] uppercase tracking-[0.3em] opacity-50 font-bold font-mono">
-                  Web Developer &amp; AI Builder
-                </span>
+              {/* Eyebrow status with developer avatar */}
+              <div className="flex items-center space-x-3.5 mb-6">
+                <div className="relative flex items-center">
+                  <div className="w-11 h-11 rounded-full overflow-hidden border border-white/30 shadow-md bg-neutral-900 flex-shrink-0">
+                    <img
+                      src={photoUrl}
+                      alt="Buike - Web Developer & AI Builder"
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover object-center scale-105"
+                    />
+                  </div>
+                  <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 rounded-full ring-2 ring-black"></span>
+                </div>
+                <div className="flex flex-col">
+                  <div className="flex items-center space-x-2">
+                    <span className="text-xs font-mono font-bold tracking-wider text-white uppercase">Buike</span>
+                    <span className="text-[9px] font-mono px-1.5 py-0.5 bg-emerald-500/10 text-emerald-400 rounded border border-emerald-500/20 uppercase tracking-widest font-semibold">
+                      Open to Work
+                    </span>
+                  </div>
+                  <span className="text-[10px] uppercase tracking-[0.25em] opacity-60 font-mono font-medium text-white/80">
+                    Web Developer &amp; AI Builder
+                  </span>
+                </div>
               </div>
 
               {/* Editorial Giant Display Name */}

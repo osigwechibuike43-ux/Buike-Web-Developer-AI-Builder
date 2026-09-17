@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { Mail, MessageSquare, Copy, Check, Sparkles } from 'lucide-react';
 import { CONTACT_INFO } from '../data/portfolioData';
+import { useProfilePhoto } from '../context/ProfilePhotoContext';
 
 export function ContactSection() {
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
   const [customMsg, setCustomMsg] = useState('');
   const [projectType, setProjectType] = useState('E-Commerce Website');
+  const { photoUrl } = useProfilePhoto();
 
   const copyToClipboard = (text: string, type: 'email' | 'phone') => {
     navigator.clipboard.writeText(text);
@@ -56,8 +58,34 @@ export function ContactSection() {
               Whether it's a high-impact website, multi-tier digital product, or something experimental, I turn visions into durable, clean code.
             </p>
 
-            {/* Direct Contact Cards */}
+            {/* Direct Contact Cards & Presence Badge */}
             <div className="space-y-3 pt-2">
+              {/* Verified Developer Presence */}
+              <div className="flex items-center space-x-3.5 p-3.5 bg-white/5 border border-white/10">
+                <div className="relative w-10 h-10 rounded-full overflow-hidden border border-white/25 bg-neutral-900 flex-shrink-0">
+                  <img
+                    src={photoUrl}
+                    alt="Buike"
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover object-center"
+                  />
+                  <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 rounded-full ring-2 ring-black"></span>
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-mono font-bold text-white uppercase tracking-wider">
+                      Direct line with Buike
+                    </span>
+                    <span className="text-[9px] font-mono px-1.5 py-0.5 bg-emerald-400/10 text-emerald-400 rounded border border-emerald-400/20 uppercase tracking-widest font-semibold">
+                      Fast Response
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-white/50 font-sans truncate pt-0.5">
+                    No middlemen or agencies. Speak directly with the developer building your app.
+                  </p>
+                </div>
+              </div>
+
               {/* Email Card */}
               <div className="p-5 bg-[#050505] border border-white/10 flex items-center justify-between">
                 <div className="flex items-center space-x-4">

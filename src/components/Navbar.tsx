@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Menu, X, Sun, Moon } from 'lucide-react';
 import { CONTACT_INFO } from '../data/portfolioData';
 import { useTheme } from '../context/ThemeContext';
+import { useProfilePhoto } from '../context/ProfilePhotoContext';
 
 interface NavbarProps {
   onNavigate: (sectionId: string) => void;
@@ -12,6 +13,7 @@ export function Navbar({ onNavigate, activeSection }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const { photoUrl } = useProfilePhoto();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,6 +52,15 @@ export function Navbar({ onNavigate, activeSection }: NavbarProps) {
             onClick={() => handleLinkClick('home')}
             className="group flex items-center space-x-3 text-left focus:outline-none"
           >
+            <div className="relative w-8 h-8 rounded-full overflow-hidden border border-white/20 group-hover:border-white transition-all flex-shrink-0 bg-neutral-900 shadow-sm">
+              <img
+                src={photoUrl}
+                alt="Buike"
+                referrerPolicy="no-referrer"
+                className="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-300 scale-105"
+              />
+              <span className="absolute bottom-0 right-0 w-2 h-2 bg-emerald-400 rounded-full ring-1 ring-black"></span>
+            </div>
             <div className="text-2xl font-black tracking-tighter text-white">
               BUIKE<span className="text-white/30">.</span>
             </div>
