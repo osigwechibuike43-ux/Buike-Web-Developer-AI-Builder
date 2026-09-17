@@ -29,7 +29,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               <h3 className="font-display font-black text-lg sm:text-xl text-white uppercase tracking-tight">
                 {project.name}
               </h3>
-              <p className="text-[10px] font-mono text-white/50 uppercase tracking-widest">
+              <p className="text-[11px] font-mono text-white/50 uppercase tracking-widest">
                 {project.category}
               </p>
             </div>
@@ -37,11 +37,11 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
           <div className="flex items-center space-x-3">
             {/* Tab switcher */}
-            <div className="hidden sm:flex items-center bg-black border border-white/15 p-0.5">
+            <div className="hidden sm:flex items-center bg-black border border-white/10 p-0.5">
               <button
                 onClick={() => setActiveTab('case-study')}
                 className={`px-3 py-1.5 text-xs font-mono uppercase tracking-wider transition-colors ${
-                  activeTab === 'case-study' ? 'bg-white text-black font-bold' : 'text-white/40 hover:text-white'
+                  activeTab === 'case-study' ? 'bg-white text-black font-bold' : 'text-white/60 hover:text-white'
                 }`}
               >
                 Case Study
@@ -49,7 +49,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               <button
                 onClick={() => setActiveTab('live-demo')}
                 className={`px-3 py-1.5 text-xs font-mono uppercase tracking-wider transition-colors ${
-                  activeTab === 'live-demo' ? 'bg-white text-black font-bold' : 'text-white/40 hover:text-white'
+                  activeTab === 'live-demo' ? 'bg-white text-black font-bold' : 'text-white/60 hover:text-white'
                 }`}
               >
                 Live Frame
@@ -60,15 +60,15 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-white text-black font-mono text-xs font-bold uppercase tracking-wider hover:bg-white/90 transition-colors"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 bg-white text-black font-mono text-xs font-bold uppercase tracking-wider hover:invert transition-colors"
             >
-              <span>Visit</span>
+              <span>Visit Live</span>
               <ExternalLink className="w-3.5 h-3.5" />
             </a>
 
             <button
               onClick={onClose}
-              className="p-1.5 text-white/50 hover:text-white border border-white/10 hover:border-white/30 transition-colors"
+              className="p-1.5 text-white/60 hover:text-white border border-white/10 hover:border-white transition-colors cursor-pointer"
               aria-label="Close modal"
             >
               <X className="w-5 h-5" />
@@ -86,13 +86,13 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               {/* Project Title Banner */}
               <div className="p-8 bg-[#050505] border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-6">
                 <div className="space-y-2">
-                  <span className="text-[10px] font-mono text-white/40 uppercase tracking-[0.3em] font-bold">
+                  <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest">
                     {project.headline || project.category}
                   </span>
-                  <h4 className="text-2xl sm:text-3xl font-serif italic text-white/90 font-light">
+                  <h4 className="text-2xl sm:text-3xl font-serif italic text-white font-light">
                     {project.name}
                   </h4>
-                  <p className="text-xs sm:text-sm text-white/70 font-sans max-w-xl leading-relaxed">
+                  <p className="text-xs sm:text-sm text-white/60 font-sans max-w-xl leading-relaxed">
                     {project.description}
                   </p>
                 </div>
@@ -101,7 +101,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-3.5 bg-white text-black font-mono text-xs font-bold uppercase tracking-widest hover:invert transition-all self-start sm:self-center shrink-0 flex items-center gap-2"
+                  className="px-6 py-3 bg-white text-black font-mono text-xs font-bold uppercase tracking-widest hover:invert transition-all self-start sm:self-center shrink-0 flex items-center gap-2 cursor-pointer"
                 >
                   <span>{project.buttonText}</span>
                   <ArrowUpRight className="w-4 h-4" />
@@ -111,7 +111,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               {/* Grid: Overview & Objective */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="p-6 bg-[#050505] border border-white/10 space-y-3">
-                  <div className="flex items-center gap-2 text-xs font-mono text-white/50 uppercase tracking-widest font-bold">
+                  <div className="flex items-center gap-2 text-[10px] font-mono text-white/40 uppercase tracking-widest">
                     <span>01. Overview</span>
                   </div>
                   <p className="text-xs sm:text-sm text-white/70 font-sans leading-relaxed">
@@ -120,7 +120,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                 </div>
 
                 <div className="p-6 bg-[#050505] border border-white/10 space-y-3">
-                  <div className="flex items-center gap-2 text-xs font-mono text-white/50 uppercase tracking-widest font-bold">
+                  <div className="flex items-center gap-2 text-[10px] font-mono text-white/40 uppercase tracking-widest">
                     <span>02. Objective</span>
                   </div>
                   <p className="text-xs sm:text-sm text-white/70 font-sans leading-relaxed">
@@ -132,7 +132,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
               {/* Grid: Design & Development */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="p-6 bg-[#050505] border border-white/10 space-y-3">
-                  <div className="flex items-center gap-2 text-xs font-mono text-white/50 uppercase tracking-widest font-bold">
+                  <div className="flex items-center gap-2 text-[10px] font-mono text-white/40 uppercase tracking-widest">
                     <span>03. Design Direction</span>
                   </div>
                   <p className="text-xs sm:text-sm text-white/70 font-sans leading-relaxed">
@@ -141,7 +141,7 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                 </div>
 
                 <div className="p-6 bg-[#050505] border border-white/10 space-y-3">
-                  <div className="flex items-center gap-2 text-xs font-mono text-white/50 uppercase tracking-widest font-bold">
+                  <div className="flex items-center gap-2 text-[10px] font-mono text-white/40 uppercase tracking-widest">
                     <span>04. Development Approach</span>
                   </div>
                   <p className="text-xs sm:text-sm text-white/70 font-sans leading-relaxed">
@@ -152,13 +152,13 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
               {/* Key Features */}
               <div className="p-6 bg-[#050505] border border-white/10 space-y-4">
-                <div className="text-xs font-mono text-white/50 uppercase tracking-widest font-bold">
+                <div className="text-[10px] font-mono text-white/40 uppercase tracking-widest">
                   Key Visible &amp; Tested Features
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {project.caseStudy.keyFeatures.map((feat, idx) => (
                     <div key={idx} className="flex items-start gap-2 text-xs sm:text-sm text-white/80 font-sans">
-                      <Check className="w-4 h-4 text-white/40 shrink-0 mt-0.5" />
+                      <Check className="w-3.5 h-3.5 text-white/40 shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </div>
                   ))}
@@ -167,14 +167,14 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
               {/* Technologies */}
               <div className="space-y-3">
-                <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest block font-bold">
+                <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest block">
                   Technologies Used in This Project
                 </span>
                 <div className="flex flex-wrap gap-2">
                   {project.technologies.map((tech, idx) => (
                     <span
                       key={idx}
-                      className="px-3 py-1.5 bg-white/5 border border-white/15 text-white font-mono text-xs"
+                      className="px-2.5 py-1 bg-white/5 border border-white/10 text-white/70 font-mono text-[11px]"
                     >
                       {tech}
                     </span>

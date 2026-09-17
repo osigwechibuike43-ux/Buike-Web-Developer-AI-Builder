@@ -32,24 +32,24 @@ export function Footer({ onNavigate }: FooterProps) {
                 B
               </div>
               <span className="font-display font-black tracking-[0.2em] text-2xl text-white">
-                BUIKE
+                BUIKE<span className="text-white/40">.</span>
               </span>
             </div>
-            <p className="text-[10px] font-mono text-white/50 uppercase tracking-[0.25em] font-bold">
+            <p className="text-xs font-mono text-white/50 uppercase tracking-widest">
               Web Developer &amp; AI Builder
             </p>
-            <p className="text-xs text-white/60 font-sans max-w-sm leading-relaxed">
-              I build modern websites, digital experiences, and technology that brings ideas to life.
+            <p className="text-xs text-white/40 font-sans max-w-sm leading-relaxed">
+              I build modern websites, digital experiences, and technology that brings ideas to life for clients worldwide.
             </p>
           </div>
 
           {/* Navigation links */}
-          <div className="flex flex-wrap items-center gap-6 text-xs font-mono uppercase tracking-wider">
+          <div className="flex flex-wrap items-center gap-6 text-xs font-mono uppercase tracking-widest">
             {navLinks.map((link) => (
               <button
                 key={link.id}
                 onClick={() => onNavigate(link.id)}
-                className="text-white/50 hover:text-white transition-colors cursor-pointer"
+                className="text-white/40 hover:text-white transition-colors cursor-pointer"
               >
                 {link.name}
               </button>
@@ -59,41 +59,41 @@ export function Footer({ onNavigate }: FooterProps) {
           {/* Back to top */}
           <button
             onClick={scrollToTop}
-            className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-white px-4 py-2.5 bg-white/5 border border-white/15 hover:bg-white hover:text-black transition-all cursor-pointer"
+            className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-white/60 hover:text-white px-3 py-2 border border-white/10 hover:border-white/30 transition-all cursor-pointer"
           >
             <span>Back to top</span>
-            <ArrowUp className="w-3.5 h-3.5" />
+            <ArrowUp className="w-3 h-3" />
           </button>
         </div>
 
         {/* Bottom copyright & real channels */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-white/40">
-          <div className="uppercase tracking-wider text-[11px]">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] font-mono text-white/30">
+          <div className="uppercase tracking-widest">
             &copy; 2026 BUIKE. All rights reserved.
           </div>
 
-          <div className="flex items-center space-x-6 text-xs">
+          <div className="flex items-center space-x-6">
             <a
               href={`mailto:${CONTACT_INFO.email}`}
-              className="text-white/50 hover:text-white transition-colors flex items-center gap-1.5"
+              className="text-white/40 hover:text-white transition-colors flex items-center gap-1.5"
             >
-              <Mail className="w-3.5 h-3.5" />
+              <Mail className="w-3 h-3" />
               <span>{CONTACT_INFO.email}</span>
             </a>
             <a
               href={CONTACT_INFO.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/50 hover:text-white transition-colors flex items-center gap-1.5"
+              className="text-white/40 hover:text-white transition-colors flex items-center gap-1.5"
             >
-              <MessageSquare className="w-3.5 h-3.5" />
+              <MessageSquare className="w-3 h-3" />
               <span>WhatsApp</span>
             </a>
             <a
               href={GITHUB_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/50 hover:text-white transition-colors flex items-center gap-1.5"
+              className="text-white/40 hover:text-white transition-colors flex items-center gap-1.5"
             >
               <span>GitHub</span>
               <ExternalLink className="w-3 h-3" />

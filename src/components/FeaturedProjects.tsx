@@ -31,14 +31,14 @@ export function FeaturedProjects({ onSelectProject }: FeaturedProjectsProps) {
           <div className="space-y-3">
             <div className="flex items-center space-x-2">
               <span className="w-1.5 h-1.5 rounded-full bg-white"></span>
-              <h2 className="text-[10px] uppercase tracking-[0.5em] opacity-40 font-bold font-mono">
+              <h2 className="text-[10px] uppercase tracking-[0.3em] opacity-40 font-bold font-mono">
                 Selected Work
               </h2>
             </div>
             <p className="text-3xl sm:text-5xl lg:text-6xl font-serif italic font-light tracking-tight text-white">
               Real world deployments.
             </p>
-            <p className="text-xs sm:text-sm font-mono text-white/50 uppercase tracking-widest">
+            <p className="text-xs font-mono text-white/40 uppercase tracking-wider">
               6 live production websites built with modern web architecture
             </p>
           </div>
@@ -52,7 +52,7 @@ export function FeaturedProjects({ onSelectProject }: FeaturedProjectsProps) {
                 className={`px-4 py-2 text-xs uppercase tracking-wider font-mono transition-all cursor-pointer ${
                   activeFilter === cat
                     ? 'bg-white text-black font-bold'
-                    : 'border border-white/15 text-white/50 hover:text-white hover:border-white/30 bg-transparent'
+                    : 'border border-white/10 text-white/60 hover:text-white hover:border-white/30 bg-white/5'
                 }`}
               >
                 {cat}
@@ -83,10 +83,10 @@ export function FeaturedProjects({ onSelectProject }: FeaturedProjectsProps) {
                 <div className={`lg:col-span-5 space-y-6 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
                   {/* Number & Category */}
                   <div className="flex items-center justify-between pb-3 border-b border-white/10">
-                    <span className="font-mono text-3xl font-black text-white/40">
+                    <span className="font-mono text-2xl font-black text-white/30">
                       {project.number}
                     </span>
-                    <span className="text-[10px] font-mono uppercase tracking-[0.2em] text-white/60 px-3 py-1 border border-white/10 bg-white/5">
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-white/50 px-2 py-1 border border-white/10">
                       {project.category}
                     </span>
                   </div>
@@ -94,8 +94,8 @@ export function FeaturedProjects({ onSelectProject }: FeaturedProjectsProps) {
                   {/* Title & Headline */}
                   <div className="space-y-2">
                     {project.isFeatured && (
-                      <span className="text-[10px] bg-white text-black px-2.5 py-0.5 font-bold uppercase tracking-widest inline-block w-fit">
-                        Featured
+                      <span className="text-[9px] bg-white text-black px-2 py-0.5 font-bold uppercase tracking-widest inline-block">
+                        Featured Production
                       </span>
                     )}
                     <h3 className="font-display font-black text-3xl sm:text-4xl text-white tracking-tight uppercase">
@@ -109,19 +109,19 @@ export function FeaturedProjects({ onSelectProject }: FeaturedProjectsProps) {
                   </div>
 
                   {/* Description */}
-                  <p className="text-sm sm:text-base text-white/70 font-sans leading-relaxed">
+                  <p className="text-sm sm:text-base text-white/60 font-sans leading-relaxed">
                     {project.description}
                   </p>
 
                   {/* Highlights checklist */}
                   <div className="space-y-2 pt-2">
-                    <span className="text-[10px] font-mono uppercase text-white/40 tracking-[0.2em] block font-bold">
+                    <span className="text-[10px] font-mono uppercase text-white/40 tracking-widest block">
                       Key Highlights:
                     </span>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                       {project.highlights.slice(0, 4).map((h, hIdx) => (
-                        <div key={hIdx} className="flex items-center gap-2 text-xs text-white/80 font-sans">
-                          <span className="w-1 h-1 bg-white shrink-0"></span>
+                        <div key={hIdx} className="flex items-center gap-2 text-xs text-white/70 font-sans">
+                          <span className="w-1 h-1 bg-white/40 rounded-full shrink-0"></span>
                           <span className="truncate">{h}</span>
                         </div>
                       ))}
@@ -133,7 +133,7 @@ export function FeaturedProjects({ onSelectProject }: FeaturedProjectsProps) {
                     {project.technologies.map((t, tIdx) => (
                       <span
                         key={tIdx}
-                        className="px-2.5 py-1 bg-white/5 border border-white/10 text-white/70 font-mono text-[11px]"
+                        className="px-2.5 py-1 bg-white/5 border border-white/10 text-white/60 font-mono text-[11px]"
                       >
                         {t}
                       </span>
@@ -153,7 +153,7 @@ export function FeaturedProjects({ onSelectProject }: FeaturedProjectsProps) {
 
                     <button
                       onClick={() => onSelectProject(project)}
-                      className="px-6 py-3.5 border border-white/20 font-bold uppercase text-xs tracking-widest hover:bg-white/10 transition-all text-white flex items-center gap-2 cursor-pointer"
+                      className="px-6 py-3.5 border border-white/20 hover:border-white font-bold uppercase text-xs tracking-widest hover:bg-white/10 transition-all text-white flex items-center gap-2 cursor-pointer"
                     >
                       <span>Case Study</span>
                       <ArrowUpRight className="w-3.5 h-3.5" />

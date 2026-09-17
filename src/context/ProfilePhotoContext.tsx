@@ -8,7 +8,7 @@ interface ProfilePhotoContextType {
   resetToDefault: () => void;
 }
 
-const STORAGE_KEY = 'buike_profile_photo_v1';
+const STORAGE_KEY = 'buike_profile_photo_v2';
 const DEFAULT_PHOTO = '/profile.jpg';
 
 const ProfilePhotoContext = createContext<ProfilePhotoContextType | undefined>(undefined);
@@ -19,6 +19,8 @@ export function ProfilePhotoProvider({ children }: { children: React.ReactNode }
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
+      // Clear old v1 photo storage if any exists so official photo displays cleanly
+      localStorage.removeItem('buike_profile_photo_v1');
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved && saved.startsWith('data:image')) {
         setPhotoUrl(saved);
@@ -38,20 +40,8 @@ export function ProfilePhotoProvider({ children }: { children: React.ReactNode }
           try {
             localStorage.setItem(STORAGE_KEY, result);
           } catch (err) {
-            console.warn('Could not persist image to localStorage due to size limit:', err);
+            console.warn('Could not persist to localStorage:', err);
           }
-
-          // Persist directly to server disk at public/profile.jpg
-          try {
-            await fetch('/api/save-profile-photo', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ image: result }),
-            });
-          } catch (apiErr) {
-            console.warn('Server persist note:', apiErr);
-          }
-
           resolve();
         } else {
           reject(new Error('Failed to read image data'));
@@ -76,6 +66,7 @@ export function ProfilePhotoProvider({ children }: { children: React.ReactNode }
     setPhotoUrl(DEFAULT_PHOTO);
     setIsCustom(false);
     localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem('buike_profile_photo_v1');
   };
 
   return (

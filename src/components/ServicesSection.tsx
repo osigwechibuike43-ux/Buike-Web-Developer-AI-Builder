@@ -16,8 +16,8 @@ export function ServicesSection({ onContactClick }: ServicesSectionProps) {
         <div className="max-w-3xl mb-16 space-y-6">
           <div className="flex items-center space-x-2">
             <span className="w-1.5 h-1.5 rounded-full bg-white"></span>
-            <span className="text-[10px] uppercase tracking-[0.3em] opacity-50 font-bold font-mono">
-              Offerings &amp; Solutions
+            <span className="text-[10px] uppercase tracking-[0.3em] opacity-40 font-bold font-mono">
+              Offerings
             </span>
           </div>
 
@@ -29,7 +29,7 @@ export function ServicesSection({ onContactClick }: ServicesSectionProps) {
             "End-to-end engineering tailored to distinct brand identities."
           </p>
 
-          <p className="text-sm sm:text-base text-white/70 font-sans leading-relaxed">
+          <p className="text-sm sm:text-base text-white/60 font-sans leading-relaxed">
             From luxury brand portfolios and multi-category e-commerce stores to custom web applications and AI-enhanced interfaces.
           </p>
         </div>
@@ -48,7 +48,7 @@ export function ServicesSection({ onContactClick }: ServicesSectionProps) {
                     <div className="w-10 h-10 border border-white/20 bg-white/5 flex items-center justify-center text-white group-hover:bg-white group-hover:text-black transition-all">
                       <Icon className="w-5 h-5" />
                     </div>
-                    <span className="text-xs font-mono text-white/40">
+                    <span className="text-xs font-mono text-white/30">
                       0{idx + 1}
                     </span>
                   </div>
@@ -62,22 +62,22 @@ export function ServicesSection({ onContactClick }: ServicesSectionProps) {
                   </p>
 
                   <div className="space-y-2 pt-2">
-                    <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest block font-bold">
+                    <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest block">
                       Deliverables:
                     </span>
                     {service.deliverables.map((item, dIdx) => (
-                      <div key={dIdx} className="flex items-center gap-2 text-xs text-white/80 font-sans">
-                        <span className="w-1 h-1 bg-white shrink-0"></span>
+                      <div key={dIdx} className="flex items-center gap-2 text-xs text-white/70 font-sans">
+                        <span className="w-1 h-1 rounded-full bg-white/40"></span>
                         <span>{item}</span>
                       </div>
                     ))}
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-white/10">
+                <div className="pt-4 border-t border-white/5">
                   <button
                     onClick={onContactClick}
-                    className="w-full py-3 bg-white/5 border border-white/15 hover:border-white hover:bg-white hover:text-black text-white text-xs font-mono uppercase tracking-wider font-bold flex items-center justify-center gap-2 transition-all cursor-pointer"
+                    className="w-full py-3 bg-white/5 border border-white/10 hover:border-white hover:bg-white hover:text-black text-white text-xs font-mono uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer"
                   >
                     <span>Inquire About {service.title}</span>
                     <ArrowRight className="w-3.5 h-3.5" />

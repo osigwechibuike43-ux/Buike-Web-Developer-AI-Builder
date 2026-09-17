@@ -40,13 +40,13 @@ export function ContactSection() {
           <div className="lg:col-span-6 space-y-6">
             <div className="flex items-center space-x-2">
               <span className="w-1.5 h-1.5 rounded-full bg-white"></span>
-              <span className="text-[10px] uppercase tracking-[0.3em] opacity-50 font-bold font-mono">
-                Direct Collaboration
+              <span className="text-[10px] uppercase tracking-[0.3em] opacity-40 font-bold font-mono">
+                Contact
               </span>
             </div>
 
             <div className="space-y-2">
-              <h2 className="text-4xl sm:text-6xl font-black tracking-tighter uppercase leading-none">
+              <h2 className="text-4xl sm:text-6xl font-black tracking-tighter uppercase leading-none text-white">
                 Have an idea?
               </h2>
               <p className="text-4xl sm:text-6xl font-serif italic text-white/80 font-light leading-none">
@@ -54,29 +54,29 @@ export function ContactSection() {
               </p>
             </div>
 
-            <p className="text-sm sm:text-base text-white/70 font-sans leading-relaxed max-w-lg">
-              Whether it's a high-impact website, multi-tier digital product, or something experimental, I turn visions into durable, clean code.
+            <p className="text-sm sm:text-base text-white/60 font-sans leading-relaxed max-w-lg">
+              Whether it's a high-impact website, multi-tier digital product, or AI web application, I turn visions into durable, clean code from Owerri, Imo State for worldwide clients.
             </p>
 
             {/* Direct Contact Cards & Presence Badge */}
             <div className="space-y-3 pt-2">
               {/* Verified Developer Presence */}
-              <div className="flex items-center space-x-3.5 p-3.5 bg-white/5 border border-white/10">
-                <div className="relative w-10 h-10 rounded-full overflow-hidden border border-white/25 bg-neutral-900 flex-shrink-0">
+              <div className="flex items-center space-x-3.5 p-4 bg-[#050505] border border-white/10">
+                <div className="relative w-10 h-10 rounded-full overflow-hidden border border-white/20 bg-neutral-900 flex-shrink-0">
                   <img
                     src={photoUrl}
                     alt="Buike"
                     referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover object-center"
+                    className="w-full h-full object-cover object-center scale-105"
                   />
-                  <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 rounded-full ring-2 ring-black"></span>
+                  <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 rounded-full ring-1 ring-black"></span>
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-mono font-bold text-white uppercase tracking-wider">
                       Direct line with Buike
                     </span>
-                    <span className="text-[9px] font-mono px-1.5 py-0.5 bg-emerald-400/10 text-emerald-400 rounded border border-emerald-400/20 uppercase tracking-widest font-semibold">
+                    <span className="text-[9px] font-mono px-1.5 py-0.5 bg-emerald-500/10 text-emerald-400 rounded-full border border-emerald-500/20 uppercase tracking-widest">
                       Fast Response
                     </span>
                   </div>
@@ -87,16 +87,16 @@ export function ContactSection() {
               </div>
 
               {/* Email Card */}
-              <div className="p-5 bg-[#050505] border border-white/10 flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <div className="w-10 h-10 border border-white/20 bg-white/5 flex items-center justify-center text-white">
-                    <Mail className="w-4 h-4" />
+              <div className="p-4 bg-[#050505] border border-white/10 flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="w-8 h-8 border border-white/20 bg-white/5 flex items-center justify-center text-white">
+                    <Mail className="w-3.5 h-3.5" />
                   </div>
                   <div>
-                    <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest block font-bold">Email Address</span>
+                    <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest block">Email Address</span>
                     <a
                       href={`mailto:${CONTACT_INFO.email}`}
-                      className="text-sm sm:text-base font-mono font-medium text-white hover:underline"
+                      className="text-sm font-mono text-white/90 hover:underline"
                     >
                       {CONTACT_INFO.email}
                     </a>
@@ -104,26 +104,26 @@ export function ContactSection() {
                 </div>
                 <button
                   onClick={() => copyToClipboard(CONTACT_INFO.email, 'email')}
-                  className="p-2 border border-white/10 hover:border-white/30 text-white/60 hover:text-white transition-colors"
+                  className="p-2 border border-white/10 hover:border-white text-white/60 hover:text-white transition-colors cursor-pointer"
                   title="Copy email"
                 >
-                  {copiedEmail ? <Check className="w-4 h-4 text-white" /> : <Copy className="w-4 h-4" />}
+                  {copiedEmail ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                 </button>
               </div>
 
               {/* WhatsApp Card */}
-              <div className="p-5 bg-[#050505] border border-white/10 flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <div className="w-10 h-10 border border-white/20 bg-white/5 flex items-center justify-center text-white">
-                    <MessageSquare className="w-4 h-4" />
+              <div className="p-4 bg-[#050505] border border-white/10 flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="w-8 h-8 border border-white/20 bg-white/5 flex items-center justify-center text-white">
+                    <MessageSquare className="w-3.5 h-3.5" />
                   </div>
                   <div>
-                    <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest block font-bold">WhatsApp Direct</span>
+                    <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest block">WhatsApp Direct</span>
                     <a
                       href={CONTACT_INFO.whatsappUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm sm:text-base font-mono font-medium text-white hover:underline"
+                      className="text-sm font-mono text-white/90 hover:underline"
                     >
                       {CONTACT_INFO.phone} ({CONTACT_INFO.formattedPhone})
                     </a>
@@ -131,10 +131,10 @@ export function ContactSection() {
                 </div>
                 <button
                   onClick={() => copyToClipboard(CONTACT_INFO.phone, 'phone')}
-                  className="p-2 border border-white/10 hover:border-white/30 text-white/60 hover:text-white transition-colors"
+                  className="p-2 border border-white/10 hover:border-white text-white/60 hover:text-white transition-colors cursor-pointer"
                   title="Copy phone"
                 >
-                  {copiedPhone ? <Check className="w-4 h-4 text-white" /> : <Copy className="w-4 h-4" />}
+                  {copiedPhone ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                 </button>
               </div>
             </div>
@@ -146,7 +146,7 @@ export function ContactSection() {
                 className="px-8 py-4 bg-white text-black font-bold uppercase text-xs tracking-widest hover:invert transition-all flex items-center gap-2 shadow-xl active:scale-95 cursor-pointer"
               >
                 <Mail className="w-4 h-4" />
-                <span>EMAIL ME</span>
+                <span>EMAIL BUIKE</span>
               </a>
 
               <a
@@ -156,7 +156,7 @@ export function ContactSection() {
                 className="px-8 py-4 bg-transparent border border-white/20 text-white font-bold uppercase text-xs tracking-widest hover:bg-white hover:text-black transition-all flex items-center gap-2 active:scale-95 cursor-pointer"
               >
                 <MessageSquare className="w-4 h-4" />
-                <span>WHATSAPP</span>
+                <span>WHATSAPP CHAT</span>
               </a>
             </div>
           </div>
@@ -166,7 +166,7 @@ export function ContactSection() {
             <div className="p-8 bg-[#050505] border border-white/10 space-y-6">
               <div className="flex items-center justify-between pb-4 border-b border-white/10">
                 <div className="flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-white/50" />
+                  <Sparkles className="w-4 h-4 text-white/60" />
                   <h4 className="font-display font-bold text-lg text-white uppercase tracking-tight">
                     Quick Project Inquiry
                   </h4>
@@ -177,13 +177,13 @@ export function ContactSection() {
               <div className="space-y-5">
                 {/* Project Category Selection */}
                 <div className="space-y-2">
-                  <label className="text-[10px] font-mono text-white/50 block uppercase tracking-widest font-bold">
+                  <label className="text-[10px] font-mono text-white/40 block uppercase tracking-widest">
                     What are you looking to build?
                   </label>
                   <select
                     value={projectType}
                     onChange={(e) => setProjectType(e.target.value)}
-                    className="w-full px-4 py-3 bg-black border border-white/15 text-white font-sans text-sm outline-none focus:border-white transition-colors"
+                    className="w-full px-4 py-3 bg-black border border-white/10 text-white font-sans text-sm outline-none focus:border-white transition-colors"
                   >
                     <option value="E-Commerce Store">E-Commerce / Fashion Store</option>
                     <option value="Luxury Event Website">Luxury Event / Wedding Website</option>
@@ -196,7 +196,7 @@ export function ContactSection() {
 
                 {/* Optional Message Field */}
                 <div className="space-y-2">
-                  <label className="text-[10px] font-mono text-white/50 block uppercase tracking-widest font-bold">
+                  <label className="text-[10px] font-mono text-white/40 block uppercase tracking-widest">
                     Project details or goals (Optional)
                   </label>
                   <textarea
@@ -204,7 +204,7 @@ export function ContactSection() {
                     value={customMsg}
                     onChange={(e) => setCustomMsg(e.target.value)}
                     placeholder="Briefly describe your project, timeline, or vision..."
-                    className="w-full px-4 py-3 bg-black border border-white/15 text-white font-sans text-sm outline-none focus:border-white transition-colors resize-none placeholder-white/30"
+                    className="w-full px-4 py-3 bg-black border border-white/10 text-white font-sans text-sm outline-none focus:border-white transition-colors resize-none placeholder-white/20"
                   />
                 </div>
 
@@ -214,7 +214,7 @@ export function ContactSection() {
                     href={dynamicWhatsAppUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-3.5 bg-white text-black font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-white/90 transition-colors text-center cursor-pointer"
+                    className="w-full py-3.5 bg-white text-black font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:invert transition-colors text-center cursor-pointer shadow-md"
                   >
                     <MessageSquare className="w-4 h-4" />
                     <span>Send via WhatsApp</span>
@@ -222,15 +222,15 @@ export function ContactSection() {
 
                   <a
                     href={dynamicMailtoUrl}
-                    className="w-full py-3.5 bg-white/5 hover:bg-white hover:text-black border border-white/20 text-white font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all text-center cursor-pointer"
+                    className="w-full py-3.5 bg-white/5 hover:bg-white hover:text-black border border-white/10 text-white font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all text-center cursor-pointer"
                   >
                     <Mail className="w-4 h-4" />
                     <span>Send via Email</span>
                   </a>
                 </div>
 
-                <p className="text-[10px] font-mono text-white/40 text-center uppercase tracking-widest pt-1">
-                  Direct connection to Buike. No intermediaries.
+                <p className="text-[10px] font-mono text-white/30 text-center uppercase tracking-widest pt-1">
+                  Direct connection to Buike in Owerri, Imo State. No middlemen.
                 </p>
               </div>
             </div>

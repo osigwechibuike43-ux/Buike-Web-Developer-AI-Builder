@@ -20,9 +20,9 @@ export function Hero({ onNavigate }: HeroProps) {
           <div className="lg:col-span-7 flex flex-col justify-between text-left space-y-8">
             <div>
               {/* Eyebrow status with developer avatar */}
-              <div className="flex items-center space-x-3.5 mb-6">
+              <div className="flex items-center space-x-3 mb-6">
                 <div className="relative flex items-center">
-                  <div className="w-11 h-11 rounded-full overflow-hidden border border-white/30 shadow-md bg-neutral-900 flex-shrink-0">
+                  <div className="w-10 h-10 rounded-full overflow-hidden border border-white/30 shadow-md bg-neutral-900 flex-shrink-0">
                     <img
                       src={photoUrl}
                       alt="Buike - Web Developer & AI Builder"
@@ -30,16 +30,11 @@ export function Hero({ onNavigate }: HeroProps) {
                       className="w-full h-full object-cover object-center scale-105"
                     />
                   </div>
-                  <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 rounded-full ring-2 ring-black"></span>
+                  <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 rounded-full ring-1 ring-black"></span>
                 </div>
                 <div className="flex flex-col">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-xs font-mono font-bold tracking-wider text-white uppercase">Buike</span>
-                    <span className="text-[9px] font-mono px-1.5 py-0.5 bg-emerald-500/10 text-emerald-400 rounded border border-emerald-500/20 uppercase tracking-widest font-semibold">
-                      Open to Work
-                    </span>
-                  </div>
-                  <span className="text-[10px] uppercase tracking-[0.25em] opacity-60 font-mono font-medium text-white/80">
+                  <span className="text-xs font-mono font-bold tracking-wider text-white uppercase">Buike</span>
+                  <span className="text-[10px] uppercase tracking-[0.25em] opacity-60 font-mono">
                     Web Developer &amp; AI Builder
                   </span>
                 </div>
@@ -47,12 +42,12 @@ export function Hero({ onNavigate }: HeroProps) {
 
               {/* Editorial Giant Display Name */}
               <h1 className="text-6xl sm:text-8xl lg:text-[110px] leading-[0.85] font-black tracking-tighter mb-6 text-white uppercase">
-                BUIKE<span className="text-white/20">.</span>
+                BUIKE<span className="text-white/40">.</span>
               </h1>
 
               {/* Editorial Statement */}
-              <p className="text-lg sm:text-xl text-white/70 max-w-lg leading-relaxed mb-8 font-sans">
-                I build modern websites, digital experiences, and technology that brings ideas to life. Focused on clean, responsive, and AI-powered products.
+              <p className="text-base sm:text-lg text-white/70 max-w-xl leading-relaxed mb-8 font-sans font-normal">
+                I build modern websites, digital experiences, and technology that brings ideas to life.
               </p>
 
               {/* Action Buttons */}
@@ -65,9 +60,9 @@ export function Hero({ onNavigate }: HeroProps) {
                 </button>
                 <button
                   onClick={() => onNavigate('contact')}
-                  className="px-8 py-4 border border-white/20 font-bold uppercase text-xs tracking-widest hover:bg-white/10 transition-all text-white active:scale-95 cursor-pointer"
+                  className="px-8 py-4 border border-white/20 hover:border-white font-bold uppercase text-xs tracking-widest hover:bg-white/10 transition-all text-white active:scale-95 cursor-pointer"
                 >
-                  Collaborate
+                  Contact Me
                 </button>
               </div>
             </div>
@@ -75,16 +70,16 @@ export function Hero({ onNavigate }: HeroProps) {
             {/* Editorial micro statistics */}
             <div className="pt-8 border-t border-white/10 grid grid-cols-3 gap-6 max-w-lg font-mono">
               <div>
-                <div className="text-2xl sm:text-3xl font-black text-white">6+</div>
-                <div className="text-[10px] uppercase tracking-widest text-white/40 pt-1">Live Deployed Sites</div>
+                <div className="text-2xl sm:text-3xl font-black text-white">6</div>
+                <div className="text-[10px] uppercase tracking-widest text-white/40 pt-1">Production Sites</div>
               </div>
               <div>
                 <div className="text-2xl sm:text-3xl font-black text-white">100%</div>
-                <div className="text-[10px] uppercase tracking-widest text-white/40 pt-1">Real Code &amp; UX</div>
+                <div className="text-[10px] uppercase tracking-widest text-white/40 pt-1">Custom Built</div>
               </div>
               <div>
                 <div className="text-2xl sm:text-3xl font-black text-white">AI+Web</div>
-                <div className="text-[10px] uppercase tracking-widest text-white/40 pt-1">Modern Stack</div>
+                <div className="text-[10px] uppercase tracking-widest text-white/40 pt-1">Capabilities</div>
               </div>
             </div>
           </div>

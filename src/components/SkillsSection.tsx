@@ -12,8 +12,8 @@ export function SkillsSection() {
         <div className="max-w-3xl mb-16 space-y-6">
           <div className="flex items-center space-x-2">
             <span className="w-1.5 h-1.5 rounded-full bg-white"></span>
-            <span className="text-[10px] uppercase tracking-[0.3em] opacity-50 font-bold font-mono">
-              Capabilities &amp; Arsenal
+            <span className="text-[10px] uppercase tracking-[0.3em] opacity-40 font-bold font-mono">
+              Capabilities
             </span>
           </div>
 
@@ -25,7 +25,7 @@ export function SkillsSection() {
             "Tools chosen for speed, reliability, and precision."
           </p>
 
-          <p className="text-sm sm:text-base text-white/70 font-sans leading-relaxed">
+          <p className="text-sm sm:text-base text-white/60 font-sans leading-relaxed">
             A comprehensive overview of the modern toolset and programming languages I use to construct responsive, scalable, and intelligent web applications.
           </p>
         </div>
@@ -49,12 +49,12 @@ export function SkillsSection() {
                         {cat.title}
                       </h3>
                     </div>
-                    <span className="text-xs font-mono text-white/40">
+                    <span className="text-xs font-mono text-white/30">
                       0{idx + 1}
                     </span>
                   </div>
 
-                  <p className="text-xs text-white/60 font-sans leading-relaxed">
+                  <p className="text-xs sm:text-sm text-white/60 font-sans leading-relaxed">
                     {cat.description}
                   </p>
 
@@ -62,9 +62,9 @@ export function SkillsSection() {
                     {cat.skills.map((skill, sIdx) => (
                       <div
                         key={sIdx}
-                        className="flex items-center justify-between px-3.5 py-2.5 bg-white/5 border border-white/5 hover:border-white/20 transition-colors"
+                        className="flex items-center justify-between px-3 py-2 bg-white/5 border border-white/5"
                       >
-                        <span className="text-xs font-mono text-white/90 font-medium">
+                        <span className="text-xs font-mono text-white/90">
                           {skill.name}
                         </span>
                         <Check className="w-3.5 h-3.5 text-white/40 group-hover:text-white transition-colors" />

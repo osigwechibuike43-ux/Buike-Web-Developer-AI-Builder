@@ -50,37 +50,36 @@ export function Navbar({ onNavigate, activeSection }: NavbarProps) {
           {/* Logo */}
           <button
             onClick={() => handleLinkClick('home')}
-            className="group flex items-center space-x-3 text-left focus:outline-none"
+            className="group flex items-center space-x-3 text-left focus:outline-none cursor-pointer"
           >
-            <div className="relative w-8 h-8 rounded-full overflow-hidden border border-white/20 group-hover:border-white transition-all flex-shrink-0 bg-neutral-900 shadow-sm">
+            <div className="relative w-8 h-8 rounded-full overflow-hidden border border-white/20 group-hover:border-white transition-all flex-shrink-0 bg-neutral-900">
               <img
                 src={photoUrl}
                 alt="Buike"
                 referrerPolicy="no-referrer"
-                className="w-full h-full object-cover object-center grayscale group-hover:grayscale-0 transition-all duration-300 scale-105"
+                className="w-full h-full object-cover object-center scale-105"
               />
-              <span className="absolute bottom-0 right-0 w-2 h-2 bg-emerald-400 rounded-full ring-1 ring-black"></span>
             </div>
             <div className="text-2xl font-black tracking-tighter text-white">
-              BUIKE<span className="text-white/30">.</span>
+              BUIKE<span className="text-white/40">.</span>
             </div>
-            <span className="hidden sm:inline-block text-[10px] uppercase tracking-[0.25em] opacity-40 font-bold border-l border-white/10 pl-3">
-              Web & AI
+            <span className="hidden sm:inline-block text-[10px] uppercase tracking-[0.25em] text-white/50 font-mono font-medium border-l border-white/20 pl-3">
+              Web &amp; AI
             </span>
           </button>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center space-x-8 text-xs font-medium uppercase tracking-[0.2em]">
+          <nav className="hidden md:flex items-center space-x-7 text-xs font-medium uppercase tracking-[0.2em]">
             {navLinks.map((link) => {
               const isActive = activeSection === link.href;
               return (
                 <button
                   key={link.name}
                   onClick={() => handleLinkClick(link.href)}
-                  className={`transition-all ${
+                  className={`transition-all py-1 cursor-pointer ${
                     isActive
-                      ? 'text-white opacity-100 font-bold'
-                      : 'text-white opacity-50 hover:opacity-100'
+                      ? 'text-white font-bold border-b border-white'
+                      : 'text-white/60 hover:text-white'
                   }`}
                 >
                   {link.name}
@@ -93,7 +92,7 @@ export function Navbar({ onNavigate, activeSection }: NavbarProps) {
           <div className="hidden md:flex items-center space-x-3">
             <button
               onClick={toggleTheme}
-              className="px-3 py-2 border border-white/20 hover:border-white/40 rounded-full text-xs font-mono uppercase tracking-wider flex items-center gap-1.5 transition-all text-white bg-white/5 hover:bg-white/10 active:scale-95 cursor-pointer"
+              className="px-3 py-2 border border-white/10 hover:border-white/30 rounded-full text-xs font-mono uppercase tracking-wider flex items-center gap-1.5 transition-all text-white bg-white/5 hover:bg-white/10 active:scale-95 cursor-pointer"
               title={theme === 'dark' ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
               aria-label="Toggle color theme"
             >
@@ -112,7 +111,7 @@ export function Navbar({ onNavigate, activeSection }: NavbarProps) {
 
             <button
               onClick={() => handleLinkClick('contact')}
-              className="px-5 py-2 border border-white/20 rounded-full text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-all active:scale-95 text-white"
+              className="px-5 py-2 border border-white/20 hover:border-white rounded-full text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-all active:scale-95 text-white cursor-pointer"
             >
               Let's Talk &rarr;
             </button>
