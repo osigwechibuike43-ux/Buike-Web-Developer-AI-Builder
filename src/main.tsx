@@ -3,13 +3,16 @@ import {createRoot} from 'react-dom/client';
 import App from './App.tsx';
 import { ThemeProvider } from './context/ThemeContext.tsx';
 import { ProfilePhotoProvider } from './context/ProfilePhotoContext.tsx';
+import { SoundProvider } from './context/SoundContext.tsx';
 import './index.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider>
       <ProfilePhotoProvider>
-        <App />
+        <SoundProvider>
+          <App />
+        </SoundProvider>
       </ProfilePhotoProvider>
     </ThemeProvider>
   </StrictMode>,

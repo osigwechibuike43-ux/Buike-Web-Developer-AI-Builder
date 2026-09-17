@@ -1,10 +1,11 @@
-import React, { useRef, useEffect } from 'react';
-import { ShoppingBag, Calendar, Sparkles, Building2, Car, Compass, Bot, MapPin, Terminal, Code2, ArrowUpRight } from 'lucide-react';
+import React, { useRef, useEffect, useState } from 'react';
+import { ShoppingBag, Calendar, Sparkles, Building2, Car, Compass, Bot, MapPin, Terminal, Code2, ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import { useProfilePhoto } from '../context/ProfilePhotoContext';
 
 export function About() {
   const { photoUrl, uploadPhoto } = useProfilePhoto();
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [savedNotice, setSavedNotice] = useState(false);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -21,6 +22,8 @@ export function About() {
     const file = e.target.files?.[0];
     if (file) {
       await uploadPhoto(file);
+      setSavedNotice(true);
+      setTimeout(() => setSavedNotice(false), 4000);
     }
   };
 
@@ -166,13 +169,25 @@ export function About() {
               />
 
               {/* Photo Card Frame */}
-              <div className="relative overflow-hidden bg-neutral-950 aspect-[4/5] border border-white/10">
+              <div
+                onClick={() => fileInputRef.current?.click()}
+                className="relative overflow-hidden bg-neutral-950 aspect-[4/5] border border-white/10 cursor-pointer group/frame"
+                title="Click to update with your exact original camera photo"
+              >
                 <img
                   src={photoUrl}
                   alt="Buike - Web Developer & AI Builder"
                   referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover object-top sm:object-center"
+                  className="w-full h-full object-cover object-top sm:object-center transition-transform duration-500 group-hover/frame:scale-[1.02]"
                 />
+
+                {/* Saved Notification Banner */}
+                {savedNotice && (
+                  <div className="absolute top-12 left-3 right-3 bg-emerald-500 text-black font-mono text-[10px] font-bold py-2 px-3 rounded-sm flex items-center justify-center gap-2 z-30 shadow-2xl animate-fade-in">
+                    <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
+                    <span>Exact Original Photo Saved Permanently!</span>
+                  </div>
+                )}
 
                 {/* Top Overlay Badges */}
                 <div className="absolute top-3 left-3 right-3 flex items-center justify-between text-[9px] font-mono uppercase tracking-widest text-white/80 pointer-events-auto">

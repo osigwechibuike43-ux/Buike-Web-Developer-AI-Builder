@@ -19,12 +19,16 @@ export function ProfilePhotoProvider({ children }: { children: React.ReactNode }
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      // Clear old v1 photo storage if any exists so official photo displays cleanly
-      localStorage.removeItem('buike_profile_photo_v1');
-      const saved = localStorage.getItem(STORAGE_KEY);
+      const saved = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('buike_profile_photo_v1');
       if (saved && saved.startsWith('data:image')) {
         setPhotoUrl(saved);
         setIsCustom(true);
+        // Persist permanently to disk so future reloads use the exact raw camera photo
+        fetch('/api/save-profile-photo', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ image: saved }),
+        }).catch((err) => console.warn('Could not sync photo to server disk:', err));
       }
     }
   }, []);
@@ -39,9 +43,22 @@ export function ProfilePhotoProvider({ children }: { children: React.ReactNode }
           setIsCustom(true);
           try {
             localStorage.setItem(STORAGE_KEY, result);
+            localStorage.setItem('buike_profile_photo_v1', result);
           } catch (err) {
             console.warn('Could not persist to localStorage:', err);
           }
+
+          // Persist directly to server disk at public/profile.jpg
+          try {
+            await fetch('/api/save-profile-photo', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ image: result }),
+            });
+          } catch (apiErr) {
+            console.warn('Server persist note:', apiErr);
+          }
+
           resolve();
         } else {
           reject(new Error('Failed to read image data'));

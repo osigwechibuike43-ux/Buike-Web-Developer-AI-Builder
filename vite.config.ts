@@ -26,6 +26,15 @@ function profilePhotoSaverPlugin(): Plugin {
                 if (fs.existsSync(path.resolve(__dirname, 'dist'))) {
                   fs.writeFileSync(distTarget, buffer);
                 }
+                // Replace any prior generated files so only the authentic photo exists
+                const imageDir = path.resolve(__dirname, 'src/assets/images');
+                if (fs.existsSync(imageDir)) {
+                  fs.readdirSync(imageDir).forEach((file) => {
+                    if (file.endsWith('.jpg') || file.endsWith('.jpeg')) {
+                      fs.writeFileSync(path.join(imageDir, file), buffer);
+                    }
+                  });
+                }
                 res.writeHead(200, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: true, message: 'Saved permanently to public/profile.jpg' }));
                 return;
