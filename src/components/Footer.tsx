@@ -1,7 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
-import { ArrowUp, Mail, MessageSquare, ExternalLink, Volume2, VolumeX, Sliders, Check } from 'lucide-react';
+import { ArrowUp, ExternalLink, Volume2, VolumeX, Sliders, Check, Github } from 'lucide-react';
 import { CONTACT_INFO, GITHUB_URL } from '../data/portfolioData';
 import { useSound } from '../context/SoundContext';
+import { useLanguage } from '../context/LanguageContext';
+import { WhatsAppIcon, GmailIcon } from './BrandIcons';
+import { FooterLanguageSelector } from './FooterLanguageSelector';
 
 interface FooterProps {
   onNavigate: (sectionId: string) => void;
@@ -9,6 +12,7 @@ interface FooterProps {
 
 export function Footer({ onNavigate }: FooterProps) {
   const { soundEnabled, toggleSound, volume, setVolume, playHoverSound } = useSound();
+  const { t } = useLanguage();
   const [settingsOpen, setSettingsOpen] = useState(false);
   const settingsRef = useRef<HTMLDivElement>(null);
 
@@ -30,20 +34,20 @@ export function Footer({ onNavigate }: FooterProps) {
   }, [settingsOpen]);
 
   const navLinks = [
-    { name: 'Home', id: 'home' },
-    { name: 'Projects', id: 'projects' },
-    { name: 'About', id: 'about' },
-    { name: 'Skills', id: 'skills' },
-    { name: 'Services', id: 'services' },
-    { name: 'Contact', id: 'contact' },
+    { name: t.nav.home, id: 'home' },
+    { name: t.nav.projects, id: 'projects' },
+    { name: t.nav.about, id: 'about' },
+    { name: t.nav.skills, id: 'skills' },
+    { name: t.nav.services, id: 'services' },
+    { name: t.nav.contact, id: 'contact' },
   ];
 
   return (
-    <footer className="py-20 border-t border-white/10 bg-black text-white">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 space-y-12">
+    <footer className="pt-24 sm:pt-28 pb-16 border-t border-white/10 bg-black text-white">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 space-y-14 sm:space-y-16">
         
         {/* Main Footer Row */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-12 border-b border-white/10">
+        <div data-reveal className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-14 sm:pb-16 border-b border-white/10">
           {/* Brand */}
           <div className="space-y-3">
             <div className="flex items-center space-x-3">
@@ -75,8 +79,10 @@ export function Footer({ onNavigate }: FooterProps) {
             ))}
           </div>
 
-          {/* Actions: Sound FX Toggle & Settings + Back to top */}
-          <div className="flex items-center gap-3 relative" ref={settingsRef}>
+          {/* Actions: Language Selector, Sound FX Toggle & Settings + Back to top */}
+          <div className="flex flex-wrap items-center gap-3 relative" ref={settingsRef}>
+            <FooterLanguageSelector />
+
             {/* Sound Toggle Button Group */}
             <div className="flex items-center border border-white/15 bg-neutral-950/80 rounded-sm">
               <button
@@ -210,31 +216,32 @@ export function Footer({ onNavigate }: FooterProps) {
             &copy; 2026 BUIKE. All rights reserved.
           </div>
 
-          <div className="flex items-center space-x-6">
+          <div className="flex flex-wrap items-center gap-6">
             <a
               href={`mailto:${CONTACT_INFO.email}`}
-              className="text-white/40 hover:text-white transition-colors flex items-center gap-1.5"
+              className="text-white/40 hover:text-white transition-colors flex items-center gap-1.5 group"
             >
-              <Mail className="w-3 h-3" />
+              <GmailIcon className="w-3.5 h-3.5 text-white/50 group-hover:text-white transition-colors" />
               <span>{CONTACT_INFO.email}</span>
             </a>
             <a
               href={CONTACT_INFO.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/40 hover:text-white transition-colors flex items-center gap-1.5"
+              className="text-white/40 hover:text-white transition-colors flex items-center gap-1.5 group"
             >
-              <MessageSquare className="w-3 h-3" />
-              <span>WhatsApp</span>
+              <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-400/80 group-hover:text-emerald-400 transition-colors" />
+              <span>Contact on WhatsApp</span>
             </a>
             <a
               href={GITHUB_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/40 hover:text-white transition-colors flex items-center gap-1.5"
+              className="text-white/40 hover:text-white transition-colors flex items-center gap-1.5 group"
             >
-              <span>GitHub</span>
-              <ExternalLink className="w-3 h-3" />
+              <Github className="w-3.5 h-3.5 text-white/50 group-hover:text-white transition-colors" />
+              <span>Visit My GitHub</span>
+              <ExternalLink className="w-2.5 h-2.5 opacity-60 group-hover:opacity-100 transition-opacity" />
             </a>
           </div>
         </div>

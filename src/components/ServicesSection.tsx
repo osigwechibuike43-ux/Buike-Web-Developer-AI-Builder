@@ -9,11 +9,11 @@ export function ServicesSection({ onContactClick }: ServicesSectionProps) {
   const icons = [Code, Briefcase, ShoppingBag, Rocket, Bot];
 
   return (
-    <section id="services" className="py-28 relative border-t border-white/10 bg-black text-white">
+    <section id="services" className="py-32 sm:py-36 lg:py-40 relative border-t border-white/10 bg-black text-white">
       <div className="max-w-7xl mx-auto px-6 sm:px-10">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-16 space-y-6">
+        <div data-reveal className="max-w-3xl mb-20 sm:mb-24 space-y-6">
           <div className="flex items-center space-x-2">
             <span className="w-1.5 h-1.5 rounded-full bg-white"></span>
             <span className="text-[10px] uppercase tracking-[0.3em] opacity-40 font-bold font-mono">
@@ -35,13 +35,14 @@ export function ServicesSection({ onContactClick }: ServicesSectionProps) {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {SERVICES.map((service, idx) => {
             const Icon = icons[idx % icons.length];
             return (
               <div
                 key={service.id}
-                className="p-8 bg-[#050505] border border-white/10 hover:border-white/30 transition-all duration-300 flex flex-col justify-between space-y-6 group"
+                data-reveal
+                className={`p-8 bg-[#050505] border border-white/10 hover:border-white/30 transition-all duration-300 flex flex-col justify-between space-y-6 group reveal-delay-${(idx % 3) * 100 + 100}`}
               >
                 <div className="space-y-5">
                   <div className="flex items-center justify-between pb-4 border-b border-white/10">

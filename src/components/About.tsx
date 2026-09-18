@@ -67,14 +67,14 @@ export function About() {
   ];
 
   return (
-    <section id="about" className="py-28 relative border-t border-white/10 bg-black text-white">
+    <section id="about" className="py-32 sm:py-36 lg:py-40 relative border-t border-white/10 bg-black text-white">
       <div className="max-w-7xl mx-auto px-6 sm:px-10">
         
         {/* Editorial Developer Profile Showcase */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start mb-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start mb-28 sm:mb-36">
           
           {/* Left Column: Biography & Technical Profile */}
-          <div className="lg:col-span-7 space-y-8">
+          <div data-reveal="fade-right" className="lg:col-span-7 space-y-8">
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
                 <span className="w-1.5 h-1.5 rounded-full bg-white"></span>
@@ -103,7 +103,7 @@ export function About() {
 
             {/* Quick Developer Passport Metrics */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4 font-mono">
-              <div className="p-4 border border-white/10 bg-[#050505] space-y-1">
+              <div data-reveal className="p-4 border border-white/10 bg-[#050505] space-y-1">
                 <div className="flex items-center gap-1.5 text-white/40 text-[10px] uppercase tracking-widest">
                   <MapPin className="w-3.5 h-3.5 text-white/60" />
                   <span>Base Location</span>
@@ -112,7 +112,7 @@ export function About() {
                 <div className="text-[10px] text-white/40">Nigeria // Global Remote</div>
               </div>
 
-              <div className="p-4 border border-white/10 bg-[#050505] space-y-1">
+              <div data-reveal className="p-4 border border-white/10 bg-[#050505] space-y-1 reveal-delay-100">
                 <div className="flex items-center gap-1.5 text-white/40 text-[10px] uppercase tracking-widest">
                   <Terminal className="w-3.5 h-3.5 text-white/60" />
                   <span>Discipline</span>
@@ -121,7 +121,7 @@ export function About() {
                 <div className="text-[10px] text-white/40">Web &amp; AI Builder</div>
               </div>
 
-              <div className="p-4 border border-white/10 bg-[#050505] space-y-1 col-span-2 sm:col-span-1">
+              <div data-reveal className="p-4 border border-white/10 bg-[#050505] space-y-1 col-span-2 sm:col-span-1 reveal-delay-200">
                 <div className="flex items-center gap-1.5 text-white/40 text-[10px] uppercase tracking-widest">
                   <Code2 className="w-3.5 h-3.5 text-white/60" />
                   <span>Track Record</span>
@@ -131,7 +131,7 @@ export function About() {
               </div>
             </div>
 
-            <div className="pt-2 flex items-center gap-4">
+            <div data-reveal className="pt-2 flex items-center gap-4">
               <a
                 href="#projects"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black font-mono text-xs font-bold uppercase tracking-wider hover:invert transition-all active:scale-95"
@@ -149,7 +149,7 @@ export function About() {
           </div>
 
           {/* Right Column: Editorial Developer Portrait Card */}
-          <div className="lg:col-span-5 w-full">
+          <div data-reveal="fade-left" className="lg:col-span-5 w-full">
             <div className="relative p-3 bg-[#060606] border border-white/15 shadow-2xl group">
               
               {/* Corner Architectural Crosshairs */}
@@ -273,8 +273,8 @@ export function About() {
         </div>
 
         {/* Real Domain Experience Grid */}
-        <div className="space-y-6">
-          <div className="flex items-center justify-between pb-4 border-b border-white/10">
+        <div className="space-y-10 pt-16 sm:pt-20 border-t border-white/10">
+          <div data-reveal className="flex items-center justify-between pb-4 border-b border-white/10">
             <span className="text-[10px] uppercase tracking-[0.3em] opacity-40 font-bold font-mono">
               Proven Project Domains
             </span>
@@ -283,13 +283,14 @@ export function About() {
             </span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {domains.map((item, idx) => {
               const Icon = item.icon;
               return (
                 <div
                   key={idx}
-                  className="p-8 bg-[#050505] border border-white/10 hover:border-white/30 transition-all duration-300 flex flex-col justify-between group space-y-6"
+                  data-reveal
+                  className={`p-8 bg-[#050505] border border-white/10 hover:border-white/30 transition-all duration-300 flex flex-col justify-between group space-y-6 reveal-delay-${(idx % 3) * 100 + 100}`}
                 >
                   <div className="space-y-4">
                     <div className="w-11 h-11 border border-white/20 bg-white/5 flex items-center justify-center text-white group-hover:bg-white group-hover:text-black transition-all">
@@ -312,7 +313,7 @@ export function About() {
             })}
 
             {/* Philosophy Card */}
-            <div className="p-8 bg-white/5 border border-white/20 flex flex-col justify-between space-y-6">
+            <div data-reveal className="p-8 bg-white/5 border border-white/20 flex flex-col justify-between space-y-6 reveal-delay-200">
               <div className="space-y-4">
                 <div className="w-10 h-10 bg-white text-black flex items-center justify-center font-bold">
                   <Compass className="w-5 h-5" />

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ArrowUpRight, Check, Copy } from 'lucide-react';
+import { Github, ArrowUpRight, Check, Copy } from 'lucide-react';
 import { GITHUB_URL } from '../data/portfolioData';
 
 export function OpenSourceSection() {
@@ -26,13 +26,13 @@ export function useResponsiveView() {
   };
 
   return (
-    <section className="py-28 relative border-t border-white/10 bg-black text-white">
+    <section className="py-32 sm:py-36 lg:py-40 relative border-t border-white/10 bg-black text-white">
       <div className="max-w-7xl mx-auto px-6 sm:px-10">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* Left Text & CTA */}
-          <div className="lg:col-span-6 space-y-6">
+          <div data-reveal="fade-right" className="lg:col-span-6 space-y-6">
             <div className="flex items-center space-x-2">
               <span className="w-1.5 h-1.5 rounded-full bg-white"></span>
               <span className="text-[10px] uppercase tracking-[0.3em] opacity-50 font-bold font-mono">
@@ -77,16 +77,17 @@ export function useResponsiveView() {
                 href={GITHUB_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-4 bg-white text-black font-bold uppercase text-xs tracking-widest hover:invert transition-all inline-flex items-center gap-2 shadow-xl active:scale-95 cursor-pointer"
+                className="px-8 py-4 bg-white text-black font-bold uppercase text-xs tracking-widest hover:invert transition-all inline-flex items-center gap-2.5 shadow-xl active:scale-95 cursor-pointer group"
               >
-                <span>View GitHub Profile &rarr;</span>
-                <ArrowUpRight className="w-4 h-4" />
+                <Github className="w-4 h-4 text-black group-hover:scale-110 transition-transform" />
+                <span>Visit My GitHub &rarr;</span>
+                <ArrowUpRight className="w-3.5 h-3.5 opacity-60 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </a>
             </div>
           </div>
 
           {/* Right Code Architecture Window */}
-          <div className="lg:col-span-6 w-full">
+          <div data-reveal="fade-left" className="lg:col-span-6 w-full">
             <div className="border border-white/10 bg-[#070707] shadow-2xl overflow-hidden">
               {/* Code window chrome */}
               <div className="flex items-center justify-between px-5 py-3.5 bg-[#0e0e0e] border-b border-white/10">

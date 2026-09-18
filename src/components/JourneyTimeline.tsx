@@ -2,11 +2,11 @@ import { JOURNEY_STEPS } from '../data/portfolioData';
 
 export function JourneyTimeline() {
   return (
-    <section className="py-28 relative border-t border-white/10 bg-black text-white">
+    <section className="py-32 sm:py-36 lg:py-40 relative border-t border-white/10 bg-black text-white">
       <div className="max-w-7xl mx-auto px-6 sm:px-10">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-16 space-y-6">
+        <div data-reveal className="max-w-3xl mb-20 sm:mb-24 space-y-6">
           <div className="flex items-center space-x-2">
             <span className="w-1.5 h-1.5 rounded-full bg-white"></span>
             <span className="text-[10px] uppercase tracking-[0.3em] opacity-50 font-bold font-mono">
@@ -28,9 +28,9 @@ export function JourneyTimeline() {
         </div>
 
         {/* Visual Timeline Steps */}
-        <div className="relative border-l border-white/10 ml-4 sm:ml-6 space-y-12 pb-6">
+        <div className="relative border-l border-white/10 ml-4 sm:ml-6 space-y-14 sm:space-y-16 pb-6">
           {JOURNEY_STEPS.map((step) => (
-            <div key={step.number} className="relative pl-8 sm:pl-12 group">
+            <div key={step.number} data-reveal="fade-left" className="relative pl-8 sm:pl-12 group">
               {/* Timeline marker node */}
               <div className="absolute -left-[17px] top-1 w-8 h-8 bg-black border border-white/20 flex items-center justify-center font-mono text-xs font-bold text-white group-hover:border-white group-hover:bg-white group-hover:text-black transition-all">
                 {step.number}

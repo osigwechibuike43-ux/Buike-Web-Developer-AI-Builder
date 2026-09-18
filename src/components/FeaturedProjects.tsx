@@ -23,11 +23,11 @@ export function FeaturedProjects({ onSelectProject }: FeaturedProjectsProps) {
   });
 
   return (
-    <section id="projects" className="py-28 relative border-t border-white/10 bg-[#000000] text-white">
+    <section id="projects" className="py-32 sm:py-36 lg:py-40 relative border-t border-white/10 bg-[#000000] text-white">
       <div className="max-w-7xl mx-auto px-6 sm:px-10">
         
         {/* Section Heading */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8 pb-8 border-b border-white/10">
+        <div data-reveal className="flex flex-col md:flex-row md:items-end justify-between mb-24 sm:mb-28 gap-8 pb-10 border-b border-white/10">
           <div className="space-y-3">
             <div className="flex items-center space-x-2">
               <span className="w-1.5 h-1.5 rounded-full bg-white"></span>
@@ -69,10 +69,11 @@ export function FeaturedProjects({ onSelectProject }: FeaturedProjectsProps) {
             return (
               <div
                 key={project.id}
+                data-reveal
                 className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center"
               >
                 {/* Visual Preview Side */}
-                <div className={`lg:col-span-7 ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
+                <div data-reveal={isEven ? "fade-left" : "fade-right"} className={`lg:col-span-7 ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
                   <ProjectMockup
                     project={project}
                     onOpenCaseStudy={() => onSelectProject(project)}
@@ -80,7 +81,7 @@ export function FeaturedProjects({ onSelectProject }: FeaturedProjectsProps) {
                 </div>
 
                 {/* Information / Description Side */}
-                <div className={`lg:col-span-5 space-y-6 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
+                <div data-reveal={isEven ? "fade-right" : "fade-left"} className={`lg:col-span-5 space-y-6 ${isEven ? 'lg:order-2' : 'lg:order-1'}`}>
                   {/* Number & Category */}
                   <div className="flex items-center justify-between pb-3 border-b border-white/10">
                     <span className="font-mono text-2xl font-black text-white/30">

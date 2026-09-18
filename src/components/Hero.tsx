@@ -9,7 +9,7 @@ export function Hero({ onNavigate }: HeroProps) {
   const { photoUrl } = useProfilePhoto();
 
   return (
-    <section id="home" className="relative min-h-screen pt-32 pb-20 flex items-center justify-center overflow-hidden bg-black text-white">
+    <section id="home" className="relative min-h-[92vh] pt-36 sm:pt-44 lg:pt-48 pb-24 sm:pb-32 lg:pb-36 flex items-center justify-center overflow-hidden bg-black text-white">
       {/* Background technical accents */}
       <div className="absolute inset-0 bg-tech-grid opacity-25 pointer-events-none"></div>
 
@@ -17,24 +17,27 @@ export function Hero({ onNavigate }: HeroProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
           
           {/* Left Hero Content */}
-          <div className="lg:col-span-7 flex flex-col justify-between text-left space-y-8">
+          <div data-reveal="fade-right" className="lg:col-span-7 flex flex-col justify-between text-left space-y-8">
             <div>
-              {/* Eyebrow status with developer avatar */}
-              <div className="flex items-center space-x-3 mb-6">
+              {/* Eyebrow status with developer profile photo */}
+              <div className="flex items-center space-x-3.5 mb-6">
                 <div className="relative flex items-center">
-                  <div className="w-10 h-10 rounded-full overflow-hidden border border-white/30 shadow-md bg-neutral-900 flex-shrink-0 flex items-center justify-center text-white">
-                    {photoUrl ? (
-                      <img
-                        src={photoUrl}
-                        alt="Buike - Web Developer & AI Builder"
-                        referrerPolicy="no-referrer"
-                        className="w-full h-full object-cover object-center scale-105"
-                      />
-                    ) : (
-                      <span className="font-display font-black text-sm">B</span>
-                    )}
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 border-white/30 shadow-lg bg-neutral-900 flex-shrink-0 flex items-center justify-center text-white">
+                    <img
+                      src="/images/buike-profile.jpg"
+                      alt="Buike - Web Developer"
+                      className="w-full h-full object-cover object-center rounded-full"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                        const fallback = e.currentTarget.parentElement?.querySelector('.avatar-fallback');
+                        if (fallback) (fallback as HTMLElement).style.display = 'flex';
+                      }}
+                    />
+                    <div className="avatar-fallback hidden w-full h-full items-center justify-center bg-neutral-900 text-white font-display font-black text-sm">
+                      B
+                    </div>
                   </div>
-                  <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 rounded-full ring-1 ring-black"></span>
+                  <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 rounded-full ring-2 ring-black" title="Available for projects"></span>
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xs font-mono font-bold tracking-wider text-white uppercase">Buike</span>
@@ -89,7 +92,7 @@ export function Hero({ onNavigate }: HeroProps) {
           </div>
 
           {/* Right Hero Visual: Developer Terminal */}
-          <div className="lg:col-span-5 w-full">
+          <div data-reveal="fade-left" className="lg:col-span-5 w-full">
             <div className="relative">
               <InteractiveTerminal />
             </div>

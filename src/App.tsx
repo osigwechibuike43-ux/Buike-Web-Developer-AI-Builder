@@ -12,6 +12,7 @@ import { ServicesSection } from './components/ServicesSection';
 import { OpenSourceSection } from './components/OpenSourceSection';
 import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
+import { initGlobalIntersectionObserver } from './hooks/useScrollReveal';
 
 export default function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -24,6 +25,12 @@ export default function App() {
       element.scrollIntoView({ behavior: 'smooth' });
     }
   };
+
+  // Initialize IntersectionObserver to animate elements as they enter the viewport during scrolling
+  useEffect(() => {
+    const cleanupObserver = initGlobalIntersectionObserver();
+    return () => cleanupObserver();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,22 +67,22 @@ export default function App() {
         {/* 2. Authentic About Section */}
         <About />
 
-        {/* 3. Featured Work / Selected Work (5 Deployed Websites) */}
+        {/* 3. Featured Work / Selected Work (6 Deployed Websites) */}
         <FeaturedProjects onSelectProject={(project) => setSelectedProject(project)} />
 
-        {/* 4. Skills & Technical Stacks */}
+        {/* 4. Skills & Technical Capabilities */}
         <SkillsSection />
 
         {/* 5. Technology Ecosystem Wall */}
         <TechnologyWall />
 
-        {/* 6. Development Journey Timeline */}
-        <JourneyTimeline />
-
-        {/* 7. Professional Services */}
+        {/* 6. Professional Services & Offerings */}
         <ServicesSection onContactClick={() => scrollToSection('contact')} />
 
-        {/* 8. Open Source & Code */}
+        {/* 7. Development Journey Timeline */}
+        <JourneyTimeline />
+
+        {/* 8. Open Source & Architecture */}
         <OpenSourceSection />
 
         {/* 9. Strong Final CTA & Contact Section */}

@@ -3,6 +3,7 @@ import { Menu, X, Sun, Moon } from 'lucide-react';
 import { CONTACT_INFO } from '../data/portfolioData';
 import { useTheme } from '../context/ThemeContext';
 import { useProfilePhoto } from '../context/ProfilePhotoContext';
+import { useLanguage } from '../context/LanguageContext';
 
 interface NavbarProps {
   onNavigate: (sectionId: string) => void;
@@ -14,6 +15,7 @@ export function Navbar({ onNavigate, activeSection }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const { photoUrl } = useProfilePhoto();
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,12 +26,12 @@ export function Navbar({ onNavigate, activeSection }: NavbarProps) {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: 'home' },
-    { name: 'About', href: 'about' },
-    { name: 'Projects', href: 'projects' },
-    { name: 'Skills', href: 'skills' },
-    { name: 'Services', href: 'services' },
-    { name: 'Contact', href: 'contact' },
+    { name: t.nav.home, href: 'home' },
+    { name: t.nav.about, href: 'about' },
+    { name: t.nav.projects, href: 'projects' },
+    { name: t.nav.skills, href: 'skills' },
+    { name: t.nav.services, href: 'services' },
+    { name: t.nav.contact, href: 'contact' },
   ];
 
   const handleLinkClick = (id: string) => {
@@ -78,7 +80,7 @@ export function Navbar({ onNavigate, activeSection }: NavbarProps) {
               const isActive = activeSection === link.href;
               return (
                 <button
-                  key={link.name}
+                  key={link.href}
                   onClick={() => handleLinkClick(link.href)}
                   className={`transition-all py-1 cursor-pointer ${
                     isActive
@@ -115,9 +117,9 @@ export function Navbar({ onNavigate, activeSection }: NavbarProps) {
 
             <button
               onClick={() => handleLinkClick('contact')}
-              className="px-5 py-2 border border-white/20 hover:border-white rounded-full text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-all active:scale-95 text-white cursor-pointer"
+              className="px-5 py-2 border border-white/20 hover:border-white rounded-full text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-all active:scale-95 text-white cursor-pointer font-medium"
             >
-              Let's Talk &rarr;
+              {t.nav.letsTalk}
             </button>
           </div>
 
@@ -152,7 +154,7 @@ export function Navbar({ onNavigate, activeSection }: NavbarProps) {
           <div className="space-y-6">
             <div className="flex items-center justify-between pb-3 border-b border-white/10">
               <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-white/40 font-bold">
-                Menu Index
+                {t.nav.menuIndex}
               </span>
               <button
                 onClick={toggleTheme}
@@ -161,12 +163,12 @@ export function Navbar({ onNavigate, activeSection }: NavbarProps) {
                 {theme === 'dark' ? (
                   <>
                     <Sun className="w-3 h-3 text-amber-300" />
-                    <span>LIGHT MODE</span>
+                    <span>LIGHT</span>
                   </>
                 ) : (
                   <>
                     <Moon className="w-3 h-3 text-blue-600" />
-                    <span>DARK MODE</span>
+                    <span>DARK</span>
                   </>
                 )}
               </button>
@@ -176,7 +178,7 @@ export function Navbar({ onNavigate, activeSection }: NavbarProps) {
                 const isActive = activeSection === link.href;
                 return (
                   <button
-                    key={link.name}
+                    key={link.href}
                     onClick={() => handleLinkClick(link.href)}
                     className={`flex items-center justify-between text-left py-2 text-xl font-display uppercase tracking-wider transition-colors ${
                       isActive ? 'text-white font-black' : 'text-white/50 hover:text-white'
@@ -192,14 +194,14 @@ export function Navbar({ onNavigate, activeSection }: NavbarProps) {
 
           <div className="space-y-4 pt-6 border-t border-white/10">
             <div className="text-xs font-mono text-white/50">
-              <span className="block text-white font-medium mb-1">Available for new projects</span>
+              <span className="block text-white font-medium mb-1">{t.nav.available}</span>
               <span>{CONTACT_INFO.email}</span>
             </div>
             <button
               onClick={() => handleLinkClick('contact')}
               className="w-full py-3.5 bg-white text-black uppercase text-xs tracking-widest font-bold flex items-center justify-center gap-2 hover:invert transition-all"
             >
-              <span>Let's Talk &rarr;</span>
+              <span>{t.nav.letsTalk}</span>
             </button>
           </div>
         </div>
