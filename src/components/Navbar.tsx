@@ -52,13 +52,17 @@ export function Navbar({ onNavigate, activeSection }: NavbarProps) {
             onClick={() => handleLinkClick('home')}
             className="group flex items-center space-x-3 text-left focus:outline-none cursor-pointer"
           >
-            <div className="relative w-8 h-8 rounded-full overflow-hidden border border-white/20 group-hover:border-white transition-all flex-shrink-0 bg-neutral-900">
-              <img
-                src={photoUrl}
-                alt="Buike"
-                referrerPolicy="no-referrer"
-                className="w-full h-full object-cover object-center scale-105"
-              />
+            <div className="relative w-8 h-8 rounded-full overflow-hidden border border-white/20 group-hover:border-white transition-all flex-shrink-0 bg-neutral-900 flex items-center justify-center text-white">
+              {photoUrl ? (
+                <img
+                  src={photoUrl}
+                  alt="Buike"
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover object-center scale-105"
+                />
+              ) : (
+                <span className="font-display font-black text-xs">B</span>
+              )}
             </div>
             <div className="text-2xl font-black tracking-tighter text-white">
               BUIKE<span className="text-white/40">.</span>

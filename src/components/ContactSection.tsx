@@ -62,13 +62,17 @@ export function ContactSection() {
             <div className="space-y-3 pt-2">
               {/* Verified Developer Presence */}
               <div className="flex items-center space-x-3.5 p-4 bg-[#050505] border border-white/10">
-                <div className="relative w-10 h-10 rounded-full overflow-hidden border border-white/20 bg-neutral-900 flex-shrink-0">
-                  <img
-                    src={photoUrl}
-                    alt="Buike"
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover object-center scale-105"
-                  />
+                <div className="relative w-10 h-10 rounded-full overflow-hidden border border-white/20 bg-neutral-900 flex-shrink-0 flex items-center justify-center text-white">
+                  {photoUrl ? (
+                    <img
+                      src={photoUrl}
+                      alt="Buike"
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover object-center scale-105"
+                    />
+                  ) : (
+                    <span className="font-display font-black text-sm">B</span>
+                  )}
                   <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 rounded-full ring-1 ring-black"></span>
                 </div>
                 <div className="flex-1 min-w-0">

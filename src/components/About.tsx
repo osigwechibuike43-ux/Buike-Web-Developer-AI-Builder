@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { ShoppingBag, Calendar, Sparkles, Building2, Car, Compass, Bot, MapPin, Terminal, Code2, ArrowUpRight, CheckCircle2 } from 'lucide-react';
+import { ShoppingBag, Calendar, Sparkles, Building2, Car, Compass, Bot, MapPin, Terminal, Code2, ArrowUpRight, CheckCircle2, Camera } from 'lucide-react';
 import { useProfilePhoto } from '../context/ProfilePhotoContext';
 
 export function About() {
@@ -174,12 +174,28 @@ export function About() {
                 className="relative overflow-hidden bg-neutral-950 aspect-[4/5] border border-white/10 cursor-pointer group/frame"
                 title="Click to update with your exact original camera photo"
               >
-                <img
-                  src={photoUrl}
-                  alt="Buike - Web Developer & AI Builder"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover object-top sm:object-center transition-transform duration-500 group-hover/frame:scale-[1.02]"
-                />
+                {photoUrl ? (
+                  <img
+                    src={photoUrl}
+                    alt="Buike - Web Developer & AI Builder"
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover object-top sm:object-center transition-transform duration-500 group-hover/frame:scale-[1.02]"
+                  />
+                ) : (
+                  <div className="w-full h-full flex flex-col items-center justify-center p-6 bg-neutral-900 text-center space-y-4">
+                    <div className="w-20 h-20 rounded-full border border-white/20 bg-neutral-800 flex items-center justify-center shadow-inner">
+                      <span className="font-display font-black text-3xl text-white tracking-wider">B</span>
+                    </div>
+                    <div className="space-y-1 max-w-[200px]">
+                      <span className="text-xs font-mono font-bold tracking-wider text-white uppercase block">
+                        Buike &bull; Developer
+                      </span>
+                      <span className="text-[10px] font-mono text-emerald-400 block uppercase tracking-wider">
+                        Select profile (2).jpeg
+                      </span>
+                    </div>
+                  </div>
+                )}
 
                 {/* Saved Notification Banner */}
                 {savedNotice && (
@@ -188,6 +204,19 @@ export function About() {
                     <span>Exact Original Photo Saved Permanently!</span>
                   </div>
                 )}
+
+                {/* Hover overlay hint */}
+                <div className="absolute inset-0 bg-black/60 opacity-0 group-hover/frame:opacity-100 transition-opacity flex flex-col items-center justify-center gap-2 text-white z-20 pointer-events-none p-4 text-center backdrop-blur-[2px]">
+                  <div className="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center">
+                    <Camera className="w-5 h-5 text-emerald-400" />
+                  </div>
+                  <span className="text-xs font-mono uppercase tracking-wider font-bold">
+                    Click to select profile (2).jpeg
+                  </span>
+                  <span className="text-[10px] font-mono text-emerald-400">
+                    Direct raw camera photo &bull; Zero edits
+                  </span>
+                </div>
 
                 {/* Top Overlay Badges */}
                 <div className="absolute top-3 left-3 right-3 flex items-center justify-between text-[9px] font-mono uppercase tracking-widest text-white/80 pointer-events-auto">
@@ -227,6 +256,16 @@ export function About() {
                 <span>Frontend &amp; Full-Stack Specialist</span>
                 <span className="text-white/60 font-semibold">Owerri, Nigeria</span>
               </div>
+
+              {/* Direct selection button for the owner */}
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="w-full mt-3 py-2.5 px-3 bg-white/5 hover:bg-white/10 border border-white/20 hover:border-emerald-400/50 text-xs font-mono uppercase tracking-widest text-white transition-all flex items-center justify-center gap-2 cursor-pointer rounded-sm group/btn"
+              >
+                <Camera className="w-4 h-4 text-emerald-400 group-hover/btn:scale-110 transition-transform" />
+                <span>Select &amp; Apply profile (2).jpeg</span>
+              </button>
 
             </div>
           </div>

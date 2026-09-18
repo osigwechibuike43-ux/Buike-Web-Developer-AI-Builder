@@ -22,13 +22,17 @@ export function Hero({ onNavigate }: HeroProps) {
               {/* Eyebrow status with developer avatar */}
               <div className="flex items-center space-x-3 mb-6">
                 <div className="relative flex items-center">
-                  <div className="w-10 h-10 rounded-full overflow-hidden border border-white/30 shadow-md bg-neutral-900 flex-shrink-0">
-                    <img
-                      src={photoUrl}
-                      alt="Buike - Web Developer & AI Builder"
-                      referrerPolicy="no-referrer"
-                      className="w-full h-full object-cover object-center scale-105"
-                    />
+                  <div className="w-10 h-10 rounded-full overflow-hidden border border-white/30 shadow-md bg-neutral-900 flex-shrink-0 flex items-center justify-center text-white">
+                    {photoUrl ? (
+                      <img
+                        src={photoUrl}
+                        alt="Buike - Web Developer & AI Builder"
+                        referrerPolicy="no-referrer"
+                        className="w-full h-full object-cover object-center scale-105"
+                      />
+                    ) : (
+                      <span className="font-display font-black text-sm">B</span>
+                    )}
                   </div>
                   <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 rounded-full ring-1 ring-black"></span>
                 </div>
