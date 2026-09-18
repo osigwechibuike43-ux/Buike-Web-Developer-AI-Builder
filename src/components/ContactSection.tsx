@@ -22,7 +22,7 @@ export function ContactSection() {
     }
   };
 
-  const dynamicWhatsAppUrl = `https://wa.me/2349168144059?text=${encodeURIComponent(
+  const dynamicWhatsAppUrl = `https://wa.me/+2349168144059?text=${encodeURIComponent(
     customMsg || `Hi Buike, I am interested in building a ${projectType} project with you.`
   )}`;
 
