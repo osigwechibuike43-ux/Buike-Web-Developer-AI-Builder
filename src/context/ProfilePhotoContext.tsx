@@ -39,10 +39,14 @@ export function ProfilePhotoProvider({ children }: { children: React.ReactNode }
     if (photoUrl) return;
 
     const candidates = [
-      '/profile (2).jpeg',
-      '/profile%20(2).jpeg',
+      '/my profile.jpg',
+      '/my%20profile.jpg',
+      '/my-profile.jpg',
+      '/my_profile.jpg',
       '/profile.jpg',
       '/profile.jpeg',
+      '/profile (2).jpeg',
+      '/profile%20(2).jpeg',
       '/profile (2).jpg',
     ];
 
