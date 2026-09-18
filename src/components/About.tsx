@@ -174,34 +174,45 @@ export function About() {
                 className="relative overflow-hidden bg-neutral-950 aspect-[4/5] border border-white/10 cursor-pointer group/frame"
                 title="Click to update with your exact original camera photo"
               >
-                {photoUrl ? (
-                  <img
-                    src={photoUrl}
-                    alt="Buike - Web Developer & AI Builder"
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover object-top sm:object-center transition-transform duration-500 group-hover/frame:scale-[1.02]"
-                  />
-                ) : (
-                  <div className="w-full h-full flex flex-col items-center justify-center p-6 bg-neutral-900 text-center space-y-4">
-                    <div className="w-20 h-20 rounded-full border border-white/20 bg-neutral-800 flex items-center justify-center shadow-inner">
-                      <span className="font-display font-black text-3xl text-white tracking-wider">B</span>
-                    </div>
-                    <div className="space-y-1 max-w-[200px]">
-                      <span className="text-xs font-mono font-bold tracking-wider text-white uppercase block">
-                        Buike &bull; Developer
-                      </span>
-                      <span className="text-[10px] font-mono text-emerald-400 block uppercase tracking-wider">
-                        Select profile (2).jpeg
-                      </span>
-                    </div>
+                <img
+                  src={photoUrl || "/images/buike-portfolio-profile.jpg"}
+                  alt="Buike - Web Developer"
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover object-top sm:object-center transition-transform duration-500 group-hover/frame:scale-[1.02]"
+                  onError={(e) => {
+                    const target = e.currentTarget;
+                    if (!target.dataset.tried) {
+                      target.dataset.tried = '1';
+                      target.src = '/buike-portfolio-profile.jpg';
+                    } else if (target.dataset.tried === '1') {
+                      target.dataset.tried = '2';
+                      target.src = '/images/buike-profile.jpg';
+                    } else {
+                      target.style.display = 'none';
+                      const fallback = target.parentElement?.querySelector('.avatar-placeholder');
+                      if (fallback) (fallback as HTMLElement).style.display = 'flex';
+                    }
+                  }}
+                />
+                <div className="avatar-placeholder hidden w-full h-full flex-col items-center justify-center p-6 bg-neutral-900 text-center space-y-4">
+                  <div className="w-20 h-20 rounded-full border border-white/20 bg-neutral-800 flex items-center justify-center shadow-inner">
+                    <span className="font-display font-black text-3xl text-white tracking-wider">B</span>
                   </div>
-                )}
+                  <div className="space-y-1 max-w-[200px]">
+                    <span className="text-xs font-mono font-bold tracking-wider text-white uppercase block">
+                      Buike &bull; Developer
+                    </span>
+                    <span className="text-[10px] font-mono text-emerald-400 block uppercase tracking-wider">
+                      buike-portfolio-profile.jpg
+                    </span>
+                  </div>
+                </div>
 
                 {/* Saved Notification Banner */}
                 {savedNotice && (
                   <div className="absolute top-12 left-3 right-3 bg-emerald-500 text-black font-mono text-[10px] font-bold py-2 px-3 rounded-sm flex items-center justify-center gap-2 z-30 shadow-2xl animate-fade-in">
                     <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
-                    <span>Exact Original Photo Saved Permanently!</span>
+                    <span>Profile Photo Updated &amp; Saved Permanently!</span>
                   </div>
                 )}
 
@@ -211,10 +222,10 @@ export function About() {
                     <Camera className="w-5 h-5 text-emerald-400" />
                   </div>
                   <span className="text-xs font-mono uppercase tracking-wider font-bold">
-                    Click to select profile (2).jpeg
+                    Click to update photo
                   </span>
                   <span className="text-[10px] font-mono text-emerald-400">
-                    Direct raw camera photo &bull; Zero edits
+                    buike-portfolio-profile.jpg &bull; Zero distortions
                   </span>
                 </div>
 

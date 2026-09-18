@@ -39,7 +39,10 @@ export function ProfilePhotoProvider({ children }: { children: React.ReactNode }
     if (photoUrl) return;
 
     const candidates = [
+      '/images/buike-portfolio-profile.jpg',
+      '/buike-portfolio-profile.jpg',
       '/images/buike-profile.jpg',
+      '/buike-profile.jpg',
       '/my profile.jpg',
       '/my%20profile.jpg',
       '/my-profile.jpg',

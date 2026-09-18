@@ -5,6 +5,7 @@ import { SkillCategory, JourneyStep, ServiceItem } from '../types';
  * Set this to Buike's actual GitHub profile URL when available.
  */
 export const GITHUB_URL = 'https://github.com'; // Configure with Buike's real GitHub username (e.g., https://github.com/buike)
+export const LINKEDIN_URL = 'https://www.linkedin.com/in/osigwe-chibuike-b48964426';
 
 export const CONTACT_INFO = {
   name: 'Buike',
@@ -12,7 +13,8 @@ export const CONTACT_INFO = {
   email: 'buikedev27@gmail.com',
   phone: '09168144059',
   formattedPhone: '+234 916 814 4059',
-  whatsappUrl: 'https://wa.me/2349168144059?text=Hi%20Buike,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project.',
+  whatsappUrl: 'https://api.whatsapp.com/send?phone=2349168144059',
+  linkedinUrl: 'https://www.linkedin.com/in/osigwe-chibuike-b48964426',
   location: 'Owerri, Imo State, Nigeria',
   baseLocation: 'Owerri, Imo State',
   status: 'Available for Web & AI Projects',

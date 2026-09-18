@@ -228,10 +228,17 @@ export function Footer({ onNavigate }: FooterProps) {
               href={CONTACT_INFO.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() => {
+                try {
+                  window.open(CONTACT_INFO.whatsappUrl, '_blank', 'noopener,noreferrer');
+                } catch {
+                  // fallback
+                }
+              }}
               className="text-white/40 hover:text-white transition-colors flex items-center gap-1.5 group"
             >
               <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-400/80 group-hover:text-emerald-400 transition-colors" />
-              <span>Contact on WhatsApp</span>
+              <span>Chat on WhatsApp</span>
             </a>
             <a
               href={GITHUB_URL}

@@ -24,13 +24,22 @@ export function Hero({ onNavigate }: HeroProps) {
                 <div className="relative flex items-center">
                   <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full overflow-hidden border-2 border-white/30 shadow-lg bg-neutral-900 flex-shrink-0 flex items-center justify-center text-white">
                     <img
-                      src="/images/buike-profile.jpg"
+                      src={photoUrl || "/images/buike-portfolio-profile.jpg"}
                       alt="Buike - Web Developer"
                       className="w-full h-full object-cover object-center rounded-full"
                       onError={(e) => {
-                        e.currentTarget.style.display = 'none';
-                        const fallback = e.currentTarget.parentElement?.querySelector('.avatar-fallback');
-                        if (fallback) (fallback as HTMLElement).style.display = 'flex';
+                        const target = e.currentTarget;
+                        if (!target.dataset.triedFallback) {
+                          target.dataset.triedFallback = '1';
+                          target.src = '/buike-portfolio-profile.jpg';
+                        } else if (target.dataset.triedFallback === '1') {
+                          target.dataset.triedFallback = '2';
+                          target.src = '/images/buike-profile.jpg';
+                        } else {
+                          target.style.display = 'none';
+                          const fallback = target.parentElement?.querySelector('.avatar-fallback');
+                          if (fallback) (fallback as HTMLElement).style.display = 'flex';
+                        }
                       }}
                     />
                     <div className="avatar-fallback hidden w-full h-full items-center justify-center bg-neutral-900 text-white font-display font-black text-sm">

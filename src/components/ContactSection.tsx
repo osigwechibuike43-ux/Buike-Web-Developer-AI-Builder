@@ -123,11 +123,18 @@ export function ContactSection() {
                     <WhatsAppIcon className="w-4 h-4 text-emerald-400" />
                   </div>
                   <div>
-                    <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest block">Contact on WhatsApp</span>
+                    <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest block">Chat on WhatsApp</span>
                     <a
                       href={CONTACT_INFO.whatsappUrl}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={() => {
+                        try {
+                          window.open(CONTACT_INFO.whatsappUrl, '_blank', 'noopener,noreferrer');
+                        } catch {
+                          // fallback to standard href
+                        }
+                      }}
                       className="text-sm font-mono text-white/90 hover:underline"
                     >
                       {CONTACT_INFO.phone} ({CONTACT_INFO.formattedPhone})
@@ -158,10 +165,17 @@ export function ContactSection() {
                 href={CONTACT_INFO.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-4 bg-transparent border border-white/20 text-white font-bold uppercase text-xs tracking-widest hover:bg-white hover:text-black transition-all flex items-center gap-2.5 active:scale-95 cursor-pointer group"
+                onClick={() => {
+                  try {
+                    window.open(CONTACT_INFO.whatsappUrl, '_blank', 'noopener,noreferrer');
+                  } catch {
+                    // fallback
+                  }
+                }}
+                className="px-8 py-4 bg-[#25D366] hover:bg-[#20ba5a] text-black font-bold uppercase text-xs tracking-widest transition-all flex items-center gap-2.5 active:scale-95 cursor-pointer group shadow-xl"
               >
-                <WhatsAppIcon className="w-4 h-4 text-emerald-400 group-hover:text-black transition-colors" />
-                <span>CONTACT ON WHATSAPP</span>
+                <WhatsAppIcon className="w-4 h-4 text-black" />
+                <span>CHAT ON WHATSAPP</span>
               </a>
             </div>
           </div>
@@ -219,10 +233,17 @@ export function ContactSection() {
                     href={dynamicWhatsAppUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-3.5 bg-white text-black font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:invert transition-colors text-center cursor-pointer shadow-md group"
+                    onClick={() => {
+                      try {
+                        window.open(dynamicWhatsAppUrl, '_blank', 'noopener,noreferrer');
+                      } catch {
+                        // fallback
+                      }
+                    }}
+                    className="w-full py-3.5 bg-[#25D366] hover:bg-[#20ba5a] text-black font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors text-center cursor-pointer shadow-md group"
                   >
-                    <WhatsAppIcon className="w-4 h-4 text-emerald-600 group-hover:text-white transition-colors" />
-                    <span>Send via WhatsApp</span>
+                    <WhatsAppIcon className="w-4 h-4 text-black" />
+                    <span>Chat on WhatsApp</span>
                   </a>
 
                   <a

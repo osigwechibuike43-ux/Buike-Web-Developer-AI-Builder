@@ -55,16 +55,29 @@ export function Navbar({ onNavigate, activeSection }: NavbarProps) {
             className="group flex items-center space-x-3 text-left focus:outline-none cursor-pointer"
           >
             <div className="relative w-8 h-8 rounded-full overflow-hidden border border-white/20 group-hover:border-white transition-all flex-shrink-0 bg-neutral-900 flex items-center justify-center text-white">
-              {photoUrl ? (
-                <img
-                  src={photoUrl}
-                  alt="Buike"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover object-center scale-105"
-                />
-              ) : (
-                <span className="font-display font-black text-xs">B</span>
-              )}
+              <img
+                src={photoUrl || "/images/buike-portfolio-profile.jpg"}
+                alt="Buike"
+                referrerPolicy="no-referrer"
+                className="w-full h-full object-cover object-center scale-105"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (!target.dataset.tried) {
+                    target.dataset.tried = '1';
+                    target.src = '/buike-portfolio-profile.jpg';
+                  } else if (target.dataset.tried === '1') {
+                    target.dataset.tried = '2';
+                    target.src = '/images/buike-profile.jpg';
+                  } else {
+                    target.style.display = 'none';
+                    const fallback = target.parentElement?.querySelector('.logo-fallback');
+                    if (fallback) (fallback as HTMLElement).style.display = 'flex';
+                  }
+                }}
+              />
+              <div className="logo-fallback hidden w-full h-full items-center justify-center font-display font-black text-xs">
+                B
+              </div>
             </div>
             <div className="text-2xl font-black tracking-tighter text-white">
               BUIKE<span className="text-white/40">.</span>
@@ -199,7 +212,7 @@ export function Navbar({ onNavigate, activeSection }: NavbarProps) {
             </div>
             <button
               onClick={() => handleLinkClick('contact')}
-              className="w-full py-3.5 bg-white text-black uppercase text-xs tracking-widest font-bold flex items-center justify-center gap-2 hover:invert transition-all"
+              className="w-full py-3.5 bg-white text-black uppercase text-xs tracking-widest font-bold flex items-center justify-center gap-2 hover:invert transition-all cursor-pointer"
             >
               <span>{t.nav.letsTalk}</span>
             </button>
