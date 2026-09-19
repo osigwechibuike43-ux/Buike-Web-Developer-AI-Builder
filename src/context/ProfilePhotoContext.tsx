@@ -10,6 +10,7 @@ interface ProfilePhotoContextType {
 }
 
 const STORAGE_KEY = 'buike_profile_photo_v3';
+const DEFAULT_PROFILE_PHOTO = '/images/buike-portfolio-profile.jpg';
 
 const ProfilePhotoContext = createContext<ProfilePhotoContextType | undefined>(undefined);
 
@@ -21,7 +22,7 @@ export function ProfilePhotoProvider({ children }: { children: React.ReactNode }
         return saved;
       }
     }
-    return null;
+    return DEFAULT_PROFILE_PHOTO;
   });
 
   const [isCustom, setIsCustom] = useState<boolean>(() => {
@@ -34,12 +35,11 @@ export function ProfilePhotoProvider({ children }: { children: React.ReactNode }
 
   const [isDraggingOver, setIsDraggingOver] = useState(false);
 
-  // Check candidate server paths if localStorage is empty
+  // Keep the bundled portrait available immediately when no uploaded photo exists.
   useEffect(() => {
-    if (photoUrl) return;
+    if (photoUrl !== DEFAULT_PROFILE_PHOTO) return;
 
     const candidates = [
-      '/images/buike-portfolio-profile.jpg',
       '/buike-portfolio-profile.jpg',
       '/images/buike-profile.jpg',
       '/buike-profile.jpg',
@@ -61,8 +61,10 @@ export function ProfilePhotoProvider({ children }: { children: React.ReactNode }
           if (res.ok) {
             const contentType = res.headers.get('content-type') || '';
             if (contentType.includes('image') || res.status === 200) {
-              setPhotoUrl(url);
-              setIsCustom(true);
+              if (url !== DEFAULT_PROFILE_PHOTO) {
+                setPhotoUrl(url);
+                setIsCustom(true);
+              }
               break;
             }
           }
@@ -122,7 +124,7 @@ export function ProfilePhotoProvider({ children }: { children: React.ReactNode }
   };
 
   const resetToDefault = () => {
-    setPhotoUrl(null);
+    setPhotoUrl(DEFAULT_PROFILE_PHOTO);
     setIsCustom(false);
     localStorage.removeItem(STORAGE_KEY);
     localStorage.removeItem('buike_profile_photo_v2');
