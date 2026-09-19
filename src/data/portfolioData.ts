@@ -13,7 +13,7 @@ export const CONTACT_INFO = {
   email: 'buikedev27@gmail.com',
   phone: '09168144059',
   formattedPhone: '+234 916 814 4059',
-  whatsappUrl: 'https://api.whatsapp.com/send?phone=2349168144059',
+  whatsappUrl: 'https://wa.me/2349168144059',
   linkedinUrl: 'https://www.linkedin.com/in/osigwe-chibuike-b48964426',
   location: 'Owerri, Imo State, Nigeria',
   baseLocation: 'Owerri, Imo State',

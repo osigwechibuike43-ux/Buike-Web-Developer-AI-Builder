@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from 'react';
 import { ArrowUp, ExternalLink, Volume2, VolumeX, Sliders, Check, Github } from 'lucide-react';
-import { CONTACT_INFO, GITHUB_URL } from '../data/portfolioData';
+import { CONTACT_INFO, GITHUB_URL, LINKEDIN_URL } from '../data/portfolioData';
 import { useSound } from '../context/SoundContext';
 import { useLanguage } from '../context/LanguageContext';
-import { WhatsAppIcon, GmailIcon } from './BrandIcons';
+import { WhatsAppIcon, GmailIcon, LinkedInIcon } from './BrandIcons';
+import { openDirectWhatsApp } from '../utils/whatsapp';
 import { FooterLanguageSelector } from './FooterLanguageSelector';
 
 interface FooterProps {
@@ -225,26 +226,30 @@ export function Footer({ onNavigate }: FooterProps) {
               <span>{CONTACT_INFO.email}</span>
             </a>
             <a
-              href={CONTACT_INFO.whatsappUrl}
+              href="https://wa.me/2349168144059"
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => {
-                try {
-                  window.open(CONTACT_INFO.whatsappUrl, '_blank', 'noopener,noreferrer');
-                } catch {
-                  // fallback
-                }
-              }}
-              className="text-white/40 hover:text-white transition-colors flex items-center gap-1.5 group"
+              onClick={(e) => openDirectWhatsApp(e)}
+              className="text-white/40 hover:text-white transition-colors flex items-center gap-1.5 group cursor-pointer"
             >
               <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-400/80 group-hover:text-emerald-400 transition-colors" />
-              <span>Chat on WhatsApp</span>
+              <span>Contact on WhatsApp</span>
+            </a>
+            <a
+              href={LINKEDIN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/40 hover:text-white transition-colors flex items-center gap-1.5 group cursor-pointer"
+            >
+              <LinkedInIcon className="w-3.5 h-3.5 text-[#0A66C2] group-hover:text-white transition-colors" />
+              <span>LinkedIn</span>
+              <ExternalLink className="w-2.5 h-2.5 opacity-60 group-hover:opacity-100 transition-opacity" />
             </a>
             <a
               href={GITHUB_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white/40 hover:text-white transition-colors flex items-center gap-1.5 group"
+              className="text-white/40 hover:text-white transition-colors flex items-center gap-1.5 group cursor-pointer"
             >
               <Github className="w-3.5 h-3.5 text-white/50 group-hover:text-white transition-colors" />
               <span>Visit My GitHub</span>

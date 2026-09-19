@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Copy, Check, Sparkles } from 'lucide-react';
-import { CONTACT_INFO } from '../data/portfolioData';
+import { Copy, Check, Sparkles, ExternalLink, ArrowUpRight } from 'lucide-react';
+import { CONTACT_INFO, LINKEDIN_URL } from '../data/portfolioData';
 import { useProfilePhoto } from '../context/ProfilePhotoContext';
-import { WhatsAppIcon, GmailIcon } from './BrandIcons';
+import { WhatsAppIcon, GmailIcon, LinkedInIcon } from './BrandIcons';
+import { openDirectWhatsApp } from '../utils/whatsapp';
 
 export function ContactSection() {
   const [copiedEmail, setCopiedEmail] = useState(false);
@@ -123,18 +124,12 @@ export function ContactSection() {
                     <WhatsAppIcon className="w-4 h-4 text-emerald-400" />
                   </div>
                   <div>
-                    <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest block">Chat on WhatsApp</span>
+                    <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest block">WhatsApp Contact</span>
                     <a
-                      href={CONTACT_INFO.whatsappUrl}
+                      href="https://wa.me/2349168144059"
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={() => {
-                        try {
-                          window.open(CONTACT_INFO.whatsappUrl, '_blank', 'noopener,noreferrer');
-                        } catch {
-                          // fallback to standard href
-                        }
-                      }}
+                      onClick={(e) => openDirectWhatsApp(e)}
                       className="text-sm font-mono text-white/90 hover:underline"
                     >
                       {CONTACT_INFO.phone} ({CONTACT_INFO.formattedPhone})
@@ -149,33 +144,67 @@ export function ContactSection() {
                   {copiedPhone ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                 </button>
               </div>
+
+              {/* LinkedIn Card */}
+              <div data-reveal className="p-4 bg-[#050505] border border-white/10 flex items-center justify-between group reveal-delay-300">
+                <div className="flex items-center space-x-3">
+                  <div className="w-8 h-8 border border-white/20 bg-white/5 flex items-center justify-center text-white group-hover:border-[#0A66C2]/60 transition-colors">
+                    <LinkedInIcon className="w-4 h-4 text-[#0A66C2]" />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-mono text-white/40 uppercase tracking-widest block">LinkedIn Profile</span>
+                    <a
+                      href={LINKEDIN_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-mono text-white/90 hover:underline flex items-center gap-1.5"
+                    >
+                      <span>Osigwe Chibuike</span>
+                      <ArrowUpRight className="w-3 h-3 text-white/40 group-hover:text-white" />
+                    </a>
+                  </div>
+                </div>
+                <a
+                  href={LINKEDIN_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-2 border border-white/10 hover:border-white text-white/60 hover:text-white transition-colors cursor-pointer"
+                  title="Open LinkedIn profile"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              </div>
             </div>
 
             {/* Direct Action Buttons */}
-            <div data-reveal className="flex flex-wrap items-center gap-4 pt-4">
+            <div data-reveal className="flex flex-wrap items-center gap-3 pt-4">
               <a
                 href={`mailto:${CONTACT_INFO.email}`}
-                className="px-8 py-4 bg-white text-black font-bold uppercase text-xs tracking-widest hover:invert transition-all flex items-center gap-2.5 shadow-xl active:scale-95 cursor-pointer group"
+                className="px-6 py-3.5 bg-white text-black font-bold uppercase text-xs tracking-widest hover:invert transition-all flex items-center gap-2 shadow-xl active:scale-95 cursor-pointer group"
               >
                 <GmailIcon className="w-4 h-4 text-black" />
                 <span>EMAIL BUIKE</span>
               </a>
 
               <a
-                href={CONTACT_INFO.whatsappUrl}
+                href="https://wa.me/2349168144059"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => {
-                  try {
-                    window.open(CONTACT_INFO.whatsappUrl, '_blank', 'noopener,noreferrer');
-                  } catch {
-                    // fallback
-                  }
-                }}
-                className="px-8 py-4 bg-[#25D366] hover:bg-[#20ba5a] text-black font-bold uppercase text-xs tracking-widest transition-all flex items-center gap-2.5 active:scale-95 cursor-pointer group shadow-xl"
+                onClick={(e) => openDirectWhatsApp(e)}
+                className="px-6 py-3.5 bg-[#25D366] hover:bg-[#20ba5a] text-black font-bold uppercase text-xs tracking-widest transition-all flex items-center gap-2 active:scale-95 cursor-pointer group shadow-xl"
               >
                 <WhatsAppIcon className="w-4 h-4 text-black" />
-                <span>CHAT ON WHATSAPP</span>
+                <span>CONTACT ON WHATSAPP</span>
+              </a>
+
+              <a
+                href={LINKEDIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-6 py-3.5 bg-[#0A66C2] hover:bg-[#004182] text-white font-bold uppercase text-xs tracking-widest transition-all flex items-center gap-2 active:scale-95 cursor-pointer group shadow-xl"
+              >
+                <LinkedInIcon className="w-4 h-4 text-white" />
+                <span>LINKEDIN</span>
               </a>
             </div>
           </div>
@@ -233,17 +262,16 @@ export function ContactSection() {
                     href={dynamicWhatsAppUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    onClick={() => {
-                      try {
-                        window.open(dynamicWhatsAppUrl, '_blank', 'noopener,noreferrer');
-                      } catch {
-                        // fallback
-                      }
+                    onClick={(e) => {
+                      openDirectWhatsApp(
+                        e,
+                        customMsg || `Hi Buike, I am interested in building a ${projectType} project with you.`
+                      );
                     }}
                     className="w-full py-3.5 bg-[#25D366] hover:bg-[#20ba5a] text-black font-mono text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors text-center cursor-pointer shadow-md group"
                   >
                     <WhatsAppIcon className="w-4 h-4 text-black" />
-                    <span>Chat on WhatsApp</span>
+                    <span>Send via WhatsApp</span>
                   </a>
 
                   <a
