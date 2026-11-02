@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    .t{fill:#14120f}.b{fill:#f4efe6}.d{fill:#e4470f}
+    @media (prefers-color-scheme:dark){.t{fill:#f2ede3}.b{fill:#0f0e0c}.d{fill:#ff6a3d}}
+  </style>
+  <rect class="t" width="64" height="64" rx="16"/>
+  <path class="b" fill-rule="evenodd" d="M16 14H33C40 14 44 18 44 23.5C44 27 42.3 29.6 39.5 31C43.2 32.3 45.5 35.4 45.5 39.5C45.5 46 40.5 50 33.5 50H16Z M24 21V28H32C34.8 28 36 26.6 36 24.5C36 22.4 34.8 21 32 21Z M24 35V43H33C36 43 37.5 41.5 37.5 39C37.5 36.5 36 35 33 35Z"/>
+  <circle class="d" cx="53" cy="47" r="3.6"/>
+</svg>

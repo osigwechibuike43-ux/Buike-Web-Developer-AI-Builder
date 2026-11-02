@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://buike-web-developer-ai-builder.vercel.app/sitemap.xml
