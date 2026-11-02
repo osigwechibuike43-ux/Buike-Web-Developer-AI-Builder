@@ -1,37 +1,44 @@
+export type ProjectKind = 'personal' | 'client';
+
+export type VisualVariant = 'learning' | 'chat' | 'fashion' | 'wedding' | 'events' | 'discover' | 'auto';
+
 export interface Project {
   id: string;
   number: string;
   name: string;
+  /** Short category line shown on the card. */
   category: string;
-  headline?: string;
+  tagline: string;
   description: string;
+  /** "personal" = built for myself / as a portfolio piece. "client" = built for someone else. */
+  kind: ProjectKind;
   liveUrl: string;
-  buttonText: string;
-  isFeatured?: boolean;
-  theme: {
-    accent: string;
-    bgStyle: string;
-    badge: string;
-  };
+  featured?: boolean;
+  stack: string[];
   highlights: string[];
-  technologies: string[];
-  caseStudy: {
-    overview: string;
-    objective: string;
-    design: string;
-    development: string;
-    keyFeatures: string[];
-    desktopMockupType: 'fashion' | 'amara' | 'aurelia' | 'eventera' | 'cars' | 'chatbi';
-  };
+  /** What I focused on while building it. */
+  focus: string;
+  visual: VisualVariant;
+  /** Palette for the generated preview panel. */
+  palette: { bg: string; fg: string; accent: string };
+  /** Optional real screenshot in /public/projects (e.g. "/projects/nuvora.webp"). */
+  image?: string;
 }
 
-export interface SkillCategory {
+export interface SkillGroup {
+  id: string;
+  title: string;
+  blurb: string;
+  items: string[];
+}
+
+export interface Service {
+  id: string;
   title: string;
   description: string;
-  skills: {
-    name: string;
-    iconName?: string;
-  }[];
+  includes: string[];
+  /** Value used to pre-select the contact form. */
+  projectType: string;
 }
 
 export interface JourneyStep {
@@ -39,12 +46,5 @@ export interface JourneyStep {
   title: string;
   tagline: string;
   description: string;
-  techStack: string[];
-}
-
-export interface ServiceItem {
-  id: string;
-  title: string;
-  description: string;
-  deliverables: string[];
+  tags: string[];
 }

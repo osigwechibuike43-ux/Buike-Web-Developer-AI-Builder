@@ -1,73 +1,44 @@
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import fs from 'fs';
-import {defineConfig, Plugin} from 'vite';
+import { defineConfig, type Plugin } from 'vite';
+import { SITE, SOCIALS } from './src/data/site';
+import { FAQ } from './src/data/content';
 
-function profilePhotoSaverPlugin(): Plugin {
+/** Injects structured data (Person, WebSite, FAQPage) into index.html at build time. */
+function structuredData(): Plugin {
   return {
-    name: 'profile-photo-saver',
-    configureServer(server) {
-      server.middlewares.use('/api/save-profile-photo', (req, res) => {
-        if (req.method === 'POST') {
-          let body = '';
-          req.on('data', (chunk) => {
-            body += chunk;
-          });
-          req.on('end', () => {
-            try {
-              const data = JSON.parse(body);
-              if (data.image && typeof data.image === 'string' && data.image.startsWith('data:image')) {
-                const base64Data = data.image.replace(/^data:image\/\w+;base64,/, '');
-                const buffer = Buffer.from(base64Data, 'base64');
-                const publicTarget = path.resolve(__dirname, 'public/profile.jpg');
-                fs.writeFileSync(publicTarget, buffer);
-                const distTarget = path.resolve(__dirname, 'dist/profile.jpg');
-                if (fs.existsSync(path.resolve(__dirname, 'dist'))) {
-                  fs.writeFileSync(distTarget, buffer);
-                }
-                // Replace any prior generated files so only the authentic photo exists
-                const imageDir = path.resolve(__dirname, 'src/assets/images');
-                if (fs.existsSync(imageDir)) {
-                  fs.readdirSync(imageDir).forEach((file) => {
-                    if (file.endsWith('.jpg') || file.endsWith('.jpeg')) {
-                      fs.writeFileSync(path.join(imageDir, file), buffer);
-                    }
-                  });
-                }
-                res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true, message: 'Saved permanently to public/profile.jpg' }));
-                return;
-              }
-            } catch (err) {
-              console.error('Failed to save profile photo to disk:', err);
-            }
-            res.writeHead(400, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ success: false, error: 'Invalid image payload' }));
-          });
-        } else {
-          res.writeHead(405);
-          res.end();
-        }
-      });
+    name: 'structured-data',
+    transformIndexHtml(html) {
+      const graph = [
+        {
+          '@type': 'Person',
+          '@id': `${SITE.url}/#person`,
+          name: SITE.name,
+          alternateName: SITE.brand,
+          jobTitle: SITE.role,
+          description: SITE.description,
+          url: SITE.url,
+          image: `${SITE.url}/og-image.png`,
+          email: `mailto:${SITE.email}`,
+          address: { '@type': 'PostalAddress', addressLocality: 'Owerri', addressRegion: 'Imo State', addressCountry: 'NG' },
+          sameAs: SOCIALS.filter((s) => s.id !== 'whatsapp').map((s) => s.href),
+          knowsAbout: ['Web development', 'React', 'TypeScript', 'Tailwind CSS', 'Supabase', 'AI application development'],
+        },
+        { '@type': 'WebSite', '@id': `${SITE.url}/#website`, url: SITE.url, name: `${SITE.brand} — ${SITE.role}`, inLanguage: 'en', publisher: { '@id': `${SITE.url}/#person` } },
+        {
+          '@type': 'FAQPage',
+          mainEntity: FAQ.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+        },
+      ];
+      const tag = `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>`;
+      return html.replace('<!--STRUCTURED_DATA-->', tag);
     },
   };
 }
 
-export default defineConfig(() => {
-  return {
-    plugins: [react(), tailwindcss(), profilePhotoSaverPlugin()],
-    resolve: {
-      alias: {
-        '@': path.resolve(__dirname, '.'),
-      },
-    },
-    server: {
-      // HMR is disabled in AI Studio via DISABLE_HMR env var.
-      // Do not modifyâfile watching is disabled to prevent flickering during agent edits.
-      hmr: process.env.DISABLE_HMR !== 'true',
-      // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
-      watch: process.env.DISABLE_HMR === 'true' ? null : {},
-    },
-  };
+export default defineConfig({
+  plugins: [react(), tailwindcss(), structuredData()],
+  resolve: { alias: { '@': path.resolve(__dirname, 'src') } },
+  build: { target: 'es2022', sourcemap: false },
 });
