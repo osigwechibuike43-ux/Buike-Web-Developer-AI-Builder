@@ -19,12 +19,17 @@ export const LinkedinIcon = (p: P) => (<svg viewBox="0 0 24 24" fill="currentCol
 export const TiktokIcon = (p: P) => (<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden focusable="false" {...p}><path d="M19.6 6.7a5.4 5.4 0 0 1-3.3-1.1 5.4 5.4 0 0 1-2-3.1h-3.4v12.8a2.4 2.4 0 1 1-2.4-2.4c.2 0 .5 0 .7.1V9.5a5.8 5.8 0 1 0 5.1 5.8V9a8.8 8.8 0 0 0 5.3 1.7V6.7Z" /></svg>);
 export const WhatsappIcon = (p: P) => (<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden focusable="false" {...p}><path d="M20.5 3.5A11.4 11.4 0 0 0 2 17.3L.6 23.4l6.2-1.6A11.4 11.4 0 0 0 20.5 3.5ZM12 21.2a9.4 9.4 0 0 1-4.8-1.3l-.34-.2-3.7.97 1-3.6-.22-.37A9.4 9.4 0 1 1 12 21.2Zm5.2-7c-.28-.14-1.68-.83-1.94-.92-.26-.1-.45-.14-.64.14-.19.28-.73.92-.9 1.1-.16.2-.33.21-.6.07a7.7 7.7 0 0 1-3.8-3.32c-.29-.5.29-.46.83-1.54.09-.19.05-.35-.02-.5l-.88-2.1c-.23-.55-.47-.48-.64-.49h-.55c-.19 0-.5.07-.76.36-.26.28-1 .98-1 2.4s1.03 2.78 1.17 2.97c.14.19 2.03 3.1 4.92 4.35 1.83.79 2.55.86 3.47.72.56-.08 1.68-.69 1.92-1.35.24-.66.24-1.23.17-1.35-.07-.12-.26-.19-.54-.33Z" /></svg>);
 
+export const InstagramIcon = (p: P) => (<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden focusable="false" {...p}><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 4 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2ZM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.2 4.4 2.6 6.8 7 7C8.3 24 8.7 24 12 24s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.2-4.4-2.6-6.8-7-7C15.7 0 15.3 0 12 0Zm0 5.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.4-11.8a1.4 1.4 0 1 0 0 2.9 1.4 1.4 0 0 0 0-2.9Z" /></svg>);
+export const XIcon = (p: P) => (<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden focusable="false" {...p}><path d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.4l-5.8-7.58-6.63 7.58H.49l8.6-9.83L0 1.15h7.59l5.24 6.93 6.07-6.93Zm-1.29 19.5h2.04L6.48 3.24H4.3l13.31 17.41Z" /></svg>);
+
 export const SocialIcon = ({ id, ...p }: { id: string } & P) => {
   switch (id) {
     case 'github': return <GithubIcon {...p} />;
     case 'linkedin': return <LinkedinIcon {...p} />;
     case 'tiktok': return <TiktokIcon {...p} />;
     case 'whatsapp': return <WhatsappIcon {...p} />;
+    case 'instagram': return <InstagramIcon {...p} />;
+    case 'x': return <XIcon {...p} />;
     default: return <ArrowUpRight {...p} />;
   }
 };

@@ -17,6 +17,48 @@ function KindBadge({ kind }: { kind: Project['kind'] }) {
   );
 }
 
+function ProjectLogo({ project, className }: { project: Project; className?: string }) {
+  const { bg, accent } = project.palette;
+  return (
+    <span
+      aria-hidden
+      className={cn('inline-flex shrink-0 items-center justify-center rounded-xl border font-display font-bold', className)}
+      style={{ background: bg, color: accent, borderColor: `color-mix(in srgb, ${accent} 45%, transparent)` }}
+    >
+      {project.name.slice(0, 1)}
+    </span>
+  );
+}
+
+function GithubGlyph() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor" aria-hidden focusable="false">
+      <path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.04-.71.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a10.9 10.9 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.42-2.7 5.4-5.27 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5Z" />
+    </svg>
+  );
+}
+
+function ProjectLinks({ project, compact = false }: { project: Project; compact?: boolean }) {
+  const size = compact ? '!min-h-11 !px-5 !text-sm' : '';
+  const primaryUrl = project.liveUrl ?? project.repoUrl;
+  return (
+    <>
+      {primaryUrl && (
+        <a href={primaryUrl} target="_blank" rel="noopener noreferrer" className={cn('btn btn-primary', size)}>
+          {project.liveUrl ? 'Visit live site' : 'View on GitHub'} <ArrowUpRight className="h-4 w-4" />
+          <span className="sr-only">({project.name}, opens in a new tab)</span>
+        </a>
+      )}
+      {project.liveUrl && project.repoUrl && (
+        <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" className={cn('btn btn-ghost', size)}>
+          <GithubGlyph /> GitHub
+          <span className="sr-only">({project.name} source code, opens in a new tab)</span>
+        </a>
+      )}
+    </>
+  );
+}
+
 function ProjectCard({ project, onOpen, large = false }: { project: Project; onOpen: (p: Project) => void; large?: boolean }) {
   return (
     <article className={cn('card group flex h-full flex-col overflow-hidden p-3 transition-shadow hover:shadow-[0_24px_50px_-28px_rgb(20_18_15/0.5)]', large && 'lg:grid lg:grid-cols-12 lg:gap-8 lg:p-5')}>
@@ -31,7 +73,10 @@ function ProjectCard({ project, onOpen, large = false }: { project: Project; onO
 
       <div className={cn('flex flex-1 flex-col px-3 pb-3 pt-5', large && 'lg:col-span-5 lg:justify-center lg:px-2 lg:py-4')}>
         <div className="mb-4 flex items-center justify-between gap-3">
-          <span className="font-mono text-xs text-ink-3">{project.number}</span>
+          <span className="flex items-center gap-3">
+            <ProjectLogo project={project} className="h-10 w-10 text-lg" />
+            <span className="font-mono text-xs text-ink-3">{project.number}</span>
+          </span>
           <KindBadge kind={project.kind} />
         </div>
         <p className="eyebrow">{project.category}</p>
@@ -47,10 +92,7 @@ function ProjectCard({ project, onOpen, large = false }: { project: Project; onO
         </ul>
 
         <div className="mt-auto flex flex-wrap items-center gap-3 pt-6">
-          <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary !min-h-11 !px-5 !text-sm">
-            Visit live site <ArrowUpRight className="h-4 w-4" />
-            <span className="sr-only">({project.name}, opens in a new tab)</span>
-          </a>
+          <ProjectLinks project={project} compact />
           <button type="button" onClick={() => onOpen(project)} className="btn btn-ghost !min-h-11 !px-5 !text-sm">
             Project details
           </button>
@@ -109,6 +151,7 @@ function ProjectDialog({ project, onClose }: { project: Project | null; onClose:
               </div>
               <div className="lg:col-span-6 lg:pr-10">
                 <div className="mb-4 flex items-center gap-3">
+                  <ProjectLogo project={project} className="h-12 w-12 text-xl" />
                   <span className="font-mono text-xs text-ink-3">{project.number}</span>
                   <KindBadge kind={project.kind} />
                 </div>
@@ -130,10 +173,9 @@ function ProjectDialog({ project, onClose }: { project: Project | null; onClose:
                   ))}
                 </ul>
 
-                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary mt-8">
-                  Visit live site <ArrowUpRight className="h-4 w-4" />
-                  <span className="sr-only">(opens in a new tab)</span>
-                </a>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <ProjectLinks project={project} />
+                </div>
               </div>
             </div>
           </div>
@@ -159,7 +201,7 @@ export function Work() {
               Live projects, <span className="accent-serif text-accent-text">built end to end.</span>
             </>
           }
-          intro="Every project below is deployed and clickable. They are all personal or concept builds, and each one is labelled so you always know what you are looking at."
+          intro="Every project below links to a live site or its source code. They are all personal or concept builds, and each one is labelled so you always know what you are looking at."
         />
 
         <Reveal>

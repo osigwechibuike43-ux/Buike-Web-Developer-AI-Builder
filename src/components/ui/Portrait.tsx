@@ -6,15 +6,15 @@ interface Props {
   sizes?: string;
 }
 
-export function Portrait({ className, priority = false, sizes = '(min-width: 1024px) 480px, 90vw' }: Props) {
+export function Portrait({ className, priority = false, sizes = '(min-width: 1024px) 400px, 90vw' }: Props) {
   return (
     <img
-      src={`${SITE.portrait}-1000.webp`}
-      srcSet={`${SITE.portrait}-640.webp 640w, ${SITE.portrait}-1000.webp 1000w`}
+      src={`${SITE.portrait}-720.webp`}
+      srcSet={`${SITE.portrait}-480.webp 480w, ${SITE.portrait}-720.webp 720w`}
       sizes={sizes}
-      width={1000}
-      height={1000}
-      alt="Portrait of Buike, a web developer, wearing dark-framed glasses"
+      width={720}
+      height={900}
+      alt="Black-and-white portrait of Buike, a web developer, wearing dark-framed glasses"
       loading={priority ? 'eager' : 'lazy'}
       decoding="async"
       fetchPriority={priority ? 'high' : 'auto'}

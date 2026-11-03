@@ -1,31 +1,4 @@
-import type { JourneyStep, Service, SkillGroup } from '../types';
-
-export const SKILL_GROUPS: SkillGroup[] = [
-  {
-    id: 'frontend',
-    title: 'Frontend',
-    blurb: 'Fast, accessible interfaces with a strong sense of craft.',
-    items: ['HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'React', 'Tailwind CSS', 'Vite', 'Motion'],
-  },
-  {
-    id: 'backend',
-    title: 'Backend & data',
-    blurb: 'Reliable APIs, auth and storage behind the interface.',
-    items: ['Node.js', 'Express', 'REST APIs', 'Supabase', 'PostgreSQL', 'Firebase', 'Firestore', 'MongoDB'],
-  },
-  {
-    id: 'ai',
-    title: 'AI engineering',
-    blurb: 'Putting language models to work inside real products.',
-    items: ['LLM API integration', 'Groq', 'Gemini', 'Prompt engineering', 'AI-powered interfaces', 'Automation'],
-  },
-  {
-    id: 'tooling',
-    title: 'Tooling & delivery',
-    blurb: 'Version control and deployment that keep shipping safe.',
-    items: ['Git', 'GitHub', 'VS Code', 'Vercel', 'Netlify'],
-  },
-];
+import type { JourneyStep, Service } from '../types';
 
 export const SERVICES: Service[] = [
   {

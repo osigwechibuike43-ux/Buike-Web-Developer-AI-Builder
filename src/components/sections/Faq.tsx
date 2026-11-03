@@ -9,7 +9,7 @@ export function Faq() {
         <div className="lg:col-span-5">
           <SectionHeading
             id="faq-title"
-            index="06"
+            index="07"
             label="Good questions"
             title={
               <>
