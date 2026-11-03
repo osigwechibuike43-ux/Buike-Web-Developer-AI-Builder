@@ -177,21 +177,4 @@ export const PROJECTS: Project[] = [
     visual: 'learning',
     palette: { bg: '#0E1020', fg: '#ECEBFA', accent: '#8B7CFF' },
   },
-  {
-    id: 'ai-website-builder',
-    number: '09',
-    name: 'AI Website Builder',
-    category: 'AI-assisted builder',
-    tagline: 'Describe it. Get a website.',
-    description:
-      'An AI-assisted website-building project, and the first version of this portfolio. It explores how a model can help turn a description into a working site.',
-    kind: 'personal',
-    liveUrl: 'https://buike-web-developer-ai-builder.vercel.app',
-    repoUrl: 'https://github.com/osigwechibuike43-ux/Buike-Web-Developer-AI-Builder',
-    stack: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Vercel'],
-    highlights: ['AI-assisted site building', 'This portfolio started here', 'Source code on GitHub'],
-    focus: 'Learning how language models can speed up the first draft of a website.',
-    visual: 'builder',
-    palette: { bg: '#241B16', fg: '#F4EFEA', accent: '#B48A6C' },
-  },
 ];
