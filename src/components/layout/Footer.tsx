@@ -10,7 +10,7 @@ export function Footer() {
           <div className="lg:col-span-6">
             <Logo />
             <p className="mt-6 max-w-sm text-pretty text-ink-2">
-              Websites with taste. Products that ship. Based in {SITE.location}, building for clients and ideas anywhere.
+              Building. Learning. Engineering. Based in {SITE.location}, turning ideas into digital experiences.
             </p>
             <a href="#contact" className="btn btn-primary mt-8">
               Start a conversation <ArrowUpRight className="h-4 w-4" />
@@ -55,7 +55,9 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col items-start justify-between gap-4 border-t border-line pt-6 text-sm text-ink-3 sm:flex-row sm:items-center">
+        <p aria-hidden data-text="BUiKE." className="mt-16 select-none overflow-hidden whitespace-nowrap text-center font-display text-[clamp(4.5rem,23vw,17rem)] font-bold leading-[0.8] tracking-[-0.05em] text-brown/25 before:content-[attr(data-text)]" />
+
+        <div className="mt-10 flex flex-col items-start justify-between gap-4 border-t border-line pt-6 text-sm text-ink-3 sm:flex-row sm:items-center">
           <p className="flex items-center gap-3">
             <LogoMark className="h-6 w-6" />
             <span>© {new Date().getFullYear()} {SITE.name}. All rights reserved.</span>

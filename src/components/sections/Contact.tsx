@@ -132,7 +132,7 @@ export function Contact() {
       <div className="container-x">
         <SectionHeading
           id="contact-title"
-          index="07"
+          index="08"
           label="Contact"
           title={
             <>
@@ -300,9 +300,9 @@ export function Contact() {
               </div>
 
               {SOCIALS.map((s) => (
-                <a key={s.id} href={s.href} target="_blank" rel="noopener noreferrer" className="card group flex items-center justify-between gap-4 p-5 transition-colors hover:border-ink">
+                <a key={s.id} href={s.href} target="_blank" rel="noopener noreferrer" style={{ '--brand': s.brand } as React.CSSProperties} className="card group flex items-center justify-between gap-4 p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--brand)] hover:shadow-[0_14px_30px_-20px_var(--brand)]">
                   <span className="flex items-center gap-4">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-full border border-line-strong transition-colors group-hover:bg-ink group-hover:text-bg">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-full border border-line-strong transition-colors group-hover:border-[var(--brand)] group-hover:bg-[var(--brand)] group-hover:text-white">
                       <SocialIcon id={s.id} className="h-5 w-5" />
                     </span>
                     <span>

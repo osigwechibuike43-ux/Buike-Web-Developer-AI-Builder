@@ -7,7 +7,9 @@ import { About } from '@/components/sections/About';
 import { Toolbox } from '@/components/sections/Toolbox';
 import { Services } from '@/components/sections/Services';
 import { Journey } from '@/components/sections/Journey';
+import { Exploring } from '@/components/sections/Exploring';
 import { Faq } from '@/components/sections/Faq';
+import { BackToTop } from '@/components/ui/BackToTop';
 import { Contact } from '@/components/sections/Contact';
 
 export default function App() {
@@ -24,10 +26,12 @@ export default function App() {
         <Toolbox />
         <Services />
         <Journey />
+        <Exploring />
         <Faq />
         <Contact />
       </main>
       <Footer />
+      <BackToTop />
     </LazyMotion>
   );
 }

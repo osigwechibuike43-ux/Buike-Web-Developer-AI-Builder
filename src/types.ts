@@ -1,6 +1,6 @@
 export type ProjectKind = 'personal' | 'client';
 
-export type VisualVariant = 'learning' | 'chat' | 'fashion' | 'wedding' | 'events' | 'discover' | 'auto';
+export type VisualVariant = 'learning' | 'chat' | 'fashion' | 'wedding' | 'events' | 'discover' | 'auto' | 'swap' | 'estate' | 'builder';
 
 export interface Project {
   id: string;
@@ -12,7 +12,10 @@ export interface Project {
   description: string;
   /** "personal" = built for myself / as a portfolio piece. "client" = built for someone else. */
   kind: ProjectKind;
-  liveUrl: string;
+  /** Live website. Optional for projects that only have a public repository. */
+  liveUrl?: string;
+  /** Public GitHub repository, only where one is known to exist. */
+  repoUrl?: string;
   featured?: boolean;
   stack: string[];
   highlights: string[];
@@ -25,11 +28,21 @@ export interface Project {
   image?: string;
 }
 
-export interface SkillGroup {
+export type TechGroup = 'frontend' | 'backend' | 'database' | 'ai' | 'tools' | 'cloud';
+
+export interface Tech {
   id: string;
-  title: string;
-  blurb: string;
-  items: string[];
+  name: string;
+  groups: TechGroup[];
+  /** Short category label shown on the card. */
+  category: string;
+  description: string;
+  /** Key into BRAND_ICONS. Omit for concepts and for brands without an available official logo. */
+  icon?: string;
+  /** Lucide-style glyph name for concepts (REST, SQL...). */
+  glyph?: 'api' | 'sql' | 'agent' | 'prompt';
+  /** Official brand colour (used for the card accent). */
+  brand: string;
 }
 
 export interface Service {

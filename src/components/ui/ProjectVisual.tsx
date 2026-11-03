@@ -2,7 +2,7 @@ import type { CSSProperties } from 'react';
 import type { Project } from '@/types';
 import { cn } from '@/lib/cn';
 
-const host = (url: string) => url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+const host = (url?: string) => (url ? url.replace(/^https?:\/\//, '').replace(/\/$/, '') : 'github.com');
 
 /** Generated preview panel in each project's own palette. Swap in a real screenshot via `project.image`. */
 export function ProjectVisual({ project, className }: { project: Project; className?: string }) {
@@ -137,6 +137,65 @@ export function ProjectVisual({ project, className }: { project: Project; classN
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        );
+      case 'swap':
+        return (
+          <div className="flex h-full flex-col items-center justify-center gap-4">
+            <div className="relative h-14 w-40">
+              <span className="absolute left-0 top-0 h-14 w-14 rounded-full border-2" style={{ borderColor: accent, background: faint }} />
+              <span className="absolute right-0 top-0 h-14 w-14 rounded-full" style={{ background: accent }} />
+              <svg viewBox="0 0 40 20" className="absolute left-1/2 top-1/2 h-5 w-10 -translate-x-1/2 -translate-y-1/2" aria-hidden>
+                <path d="M4 7h28m0 0-5-5m5 5-5 5M36 14H8m0 0 5-5m-5 5 5 5" fill="none" stroke={fg} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </div>
+            <p className="font-display text-[clamp(1.1rem,3.4vw,1.8rem)] font-bold tracking-tight">
+              Skill<span style={{ color: accent }}>Swapr</span>
+            </p>
+            <div className="flex gap-2">
+              {['Design', 'Code', 'Music'].map((t) => (
+                <span key={t} className="rounded-full border px-2.5 py-1 font-mono text-[0.55rem]" style={{ borderColor: soft }}>
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+        );
+      case 'estate':
+        return (
+          <div className="relative flex h-full flex-col justify-between">
+            <p className="font-serif text-[clamp(1.6rem,6vw,3rem)] leading-none tracking-wide">
+              NOIR <span style={{ color: accent }}>ESTATE</span>
+            </p>
+            <div className="flex flex-1 items-end gap-2 pt-3">
+              {[0.45, 0.8, 0.6, 1, 0.7, 0.5].map((h, i) => (
+                <div key={i} className="flex-1 rounded-t-sm" style={{ height: `${h * 100}%`, background: i === 3 ? accent : faint, border: `1px solid ${faint}` }} />
+              ))}
+            </div>
+          </div>
+        );
+      case 'builder':
+        return (
+          <div className="grid h-full grid-cols-[1fr_1.4fr] gap-3">
+            <div className="flex flex-col gap-2 rounded-lg border p-2.5" style={{ borderColor: faint }}>
+              <div style={bar('60%', accent, '0.4rem')} />
+              <div style={bar('100%', soft)} />
+              <div style={bar('85%', faint)} />
+              <div style={bar('92%', faint)} />
+              <div className="mt-auto rounded-md px-2 py-1.5 text-center font-mono text-[0.5rem]" style={{ background: accent, color: bg }}>
+                Generate
+              </div>
+            </div>
+            <div className="relative flex flex-col gap-2 rounded-lg border p-2.5" style={{ borderColor: faint }}>
+              <div className="h-1/3 rounded-md" style={{ background: faint }} />
+              <div className="grid flex-1 grid-cols-2 gap-2">
+                <div className="rounded-md" style={{ background: soft }} />
+                <div className="rounded-md" style={{ background: faint }} />
+              </div>
+              <svg viewBox="0 0 16 16" className="absolute bottom-3 right-4 h-5 w-5" aria-hidden>
+                <path d="M2 1.5 13 7l-4.6 1.4L6.5 13 2 1.5Z" fill={accent} stroke={bg} strokeWidth="1" />
+              </svg>
             </div>
           </div>
         );
