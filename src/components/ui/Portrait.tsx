@@ -14,7 +14,7 @@ export function Portrait({ className, priority = false, sizes = '(min-width: 102
       sizes={sizes}
       width={720}
       height={900}
-      alt="Black-and-white portrait of Buike, a web developer, wearing dark-framed glasses"
+      alt={SITE.photoAlt}
       loading={priority ? 'eager' : 'lazy'}
       decoding="async"
       fetchPriority={priority ? 'high' : 'auto'}
