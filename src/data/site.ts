@@ -10,7 +10,7 @@ export const SITE = {
   /** Page <title>. */
   title: 'Osigwe Chibuike Joseph — Web Developer in Nigeria | Buike',
   shortTitle: 'Osigwe Chibuike Joseph — Web Developer in Nigeria',
-  url: 'https://buike-web-developer-ai-builder.vercel.app',
+  url: 'https://buikeweb.name.ng',
   location: 'Owerri, Imo State, Nigeria',
   timezone: 'WAT (UTC+1)',
   status: 'Open to web & AI projects',
