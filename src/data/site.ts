@@ -2,9 +2,14 @@ export const SITE = {
   name: 'Osigwe Chibuike Joseph',
   brand: 'Buike',
   role: 'Web Developer',
+  /** Full professional title, used in metadata and structured data. */
+  roleFull: 'Web Developer / Software Developer',
   tagline: 'Websites with taste. Products that ship.',
   description:
-    'Buike is Osigwe Chibuike Joseph, a web developer in Nigeria building fast, polished websites and AI-powered products with React, TypeScript and Tailwind CSS.',
+    'Osigwe Chibuike Joseph is a Nigerian web developer passionate about software engineering, artificial intelligence and building innovative digital experiences.',
+  /** Page <title>. */
+  title: 'Osigwe Chibuike Joseph — Web Developer in Nigeria | Buike',
+  shortTitle: 'Osigwe Chibuike Joseph — Web Developer in Nigeria',
   url: 'https://buike-web-developer-ai-builder.vercel.app',
   location: 'Owerri, Imo State, Nigeria',
   timezone: 'WAT (UTC+1)',
@@ -19,7 +24,11 @@ export const SITE = {
   /** Add real profile URLs to switch these on. Empty values are not shown. */
   instagram: '',
   x: '',
-  portrait: '/images/buike-portrait',
+  portrait: '/images/osigwe-chibuike-joseph-web-developer-nigeria',
+  /** Profile photo files (crawlable JPEGs for metadata and structured data). */
+  photo: '/images/osigwe-chibuike-joseph-web-developer-nigeria.jpg',
+  photoSquare: '/images/osigwe-chibuike-joseph-web-developer-nigeria-square.jpg',
+  photoAlt: 'Osigwe Chibuike Joseph, a Nigerian web developer, in a black-and-white portrait wearing dark-framed glasses',
 } as const;
 
 export const NAV = [
