@@ -1,16 +1,26 @@
 import { m, useReducedMotion } from 'motion/react';
-import { SITE } from '@/data/site';
+import { SITE, SOCIALS } from '@/data/site';
+import { BrandLogo } from '@/components/ui/BrandLogo';
+import { SocialIcon } from '@/components/ui/Icons';
 import { PROJECTS } from '@/data/projects';
 import { LogoMark } from '@/components/ui/Logo';
 import { Portrait } from '@/components/ui/Portrait';
 import { ArrowRight, ArrowUpRight } from '@/components/ui/Icons';
 import { Hero3D } from '@/components/three/Hero3D';
 
+const FLOATERS = [
+  { icon: 'react', name: 'React', pos: '-left-4 top-[18%] sm:-left-8', delay: '0s' },
+  { icon: 'typescript', name: 'TypeScript', pos: '-right-3 top-[44%] sm:-right-7', delay: '-1.6s' },
+  { icon: 'tailwind', name: 'Tailwind CSS', pos: '-left-3 bottom-[22%] sm:-left-9', delay: '-3.1s' },
+  { icon: 'supabase', name: 'Supabase', pos: '-right-2 bottom-[8%] sm:-right-6', delay: '-4.4s' },
+] as const;
+const HERO_SOCIALS = SOCIALS.filter((x) => ['github', 'linkedin', 'tiktok'].includes(x.id));
+
 const STACK = ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Supabase', 'Node.js', 'PostgreSQL', 'Firebase', 'Groq', 'Gemini', 'Vercel', 'Git'];
 
 export function Hero() {
   const reduce = useReducedMotion();
-  const aiCount = PROJECTS.filter((p) => p.category.toLowerCase().includes('ai')).length;
+  const aiCount = PROJECTS.filter((p) => p.filters.includes('ai')).length;
   const rise = (delay: number) =>
     reduce
       ? {}
@@ -29,30 +39,49 @@ export function Hero() {
               <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
             </span>
             {SITE.status}
+            <span aria-hidden className="h-4 w-px bg-line-strong" />
+            <span>Nigeria</span>
           </m.p>
 
           <m.h1 {...rise(0.08)} id="hero-title" className="h-display text-balance text-[clamp(2.9rem,8.4vw,5.4rem)] lg:text-[clamp(3.6rem,6.2vw,5.6rem)]">
-            I build websites <span className="accent-serif text-accent-text">people remember.</span>
+            Hello, I’m <span className="accent-serif text-accent-text">Osigwe Chibuike Joseph</span>
           </m.h1>
 
-          <m.p {...rise(0.18)} className="mt-8 max-w-xl text-pretty text-lg text-ink-2 sm:text-xl">
-            I’m <strong className="font-semibold text-ink">Buike</strong>, a web developer in Nigeria. I design and build fast, polished websites and AI-powered products with React, TypeScript and Tailwind CSS. Exploring software engineering, artificial intelligence and the technologies shaping tomorrow.
+          <m.p {...rise(0.14)} className="h-display mt-5 text-3xl text-ink sm:text-4xl">
+            Software Developer
           </m.p>
 
-          <m.p {...rise(0.22)} className="mt-5 font-mono text-xs uppercase tracking-[0.16em] text-ink-3 sm:text-[0.78rem]">
-            Software Developer <span className="mx-1.5 text-brown">|</span> AI Enthusiast <span className="mx-1.5 text-brown">|</span> Technology Builder
+          <m.p {...rise(0.18)} className="mt-5 max-w-xl text-pretty text-lg text-ink-2 sm:text-xl">
+            I design and develop digital products that solve real problems, from modern websites to AI-powered applications.
           </m.p>
 
           <m.div {...rise(0.28)} className="mt-10 flex flex-wrap items-center gap-3">
             <a href="#work" className="btn btn-primary">
-              See selected work <ArrowRight className="h-4 w-4" />
+              Explore my work <ArrowRight className="h-4 w-4" />
             </a>
             <a href="#contact" className="btn btn-ghost">
-              Start a project <ArrowUpRight className="h-4 w-4" />
+              Let’s work together <ArrowUpRight className="h-4 w-4" />
             </a>
           </m.div>
 
-          <m.dl {...rise(0.38)} className="mt-14 grid max-w-xl grid-cols-3 gap-6 border-t border-line pt-6">
+          <m.ul {...rise(0.33)} aria-label="Social profiles" className="mt-6 flex items-center gap-3">
+            {HERO_SOCIALS.map((x) => (
+              <li key={x.id}>
+                <a
+                  href={x.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ '--brand': x.brand } as React.CSSProperties}
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-line-strong text-ink-2 transition-colors hover:border-[var(--brand)] hover:bg-[var(--brand)] hover:text-white"
+                >
+                  <SocialIcon id={x.id} className="h-5 w-5" />
+                  <span className="sr-only">{x.label} (opens in a new tab)</span>
+                </a>
+              </li>
+            ))}
+          </m.ul>
+
+          <m.dl {...rise(0.38)} className="mt-12 grid max-w-xl grid-cols-3 gap-6 border-t border-line pt-6">
             {[
               { k: String(PROJECTS.length), v: 'Projects built' },
               { k: String(aiCount), v: 'AI products' },
@@ -87,6 +116,16 @@ export function Hero() {
               <span aria-hidden className="font-serif text-3xl italic text-accent-text">Hi!</span>
             </figcaption>
           </figure>
+          {FLOATERS.map((f) => (
+            <span
+              key={f.icon}
+              aria-hidden
+              style={{ animationDelay: f.delay }}
+              className={`float-chip absolute z-20 flex h-12 w-12 items-center justify-center rounded-2xl border border-line-strong bg-surface shadow-[0_14px_28px_-14px_rgb(20_18_15/0.5)] sm:h-14 sm:w-14 ${f.pos}`}
+            >
+              <BrandLogo icon={f.icon} name={f.name} className="h-6 w-6 sm:h-7 sm:w-7" />
+            </span>
+          ))}
           <LogoMark className="absolute -right-3 -top-5 z-20 h-16 w-16 rotate-[8deg] drop-shadow-lg sm:-right-6" />
           <span aria-hidden className="absolute -bottom-4 -left-2 z-20 rotate-[-4deg] rounded-md bg-note px-3 py-2 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-ink shadow-md sm:-left-8">
             React · TS · Tailwind

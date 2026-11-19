@@ -1,5 +1,15 @@
 export type ProjectKind = 'personal' | 'client';
 
+export type ProjectFilter = 'web' | 'ai' | 'ecommerce' | 'education';
+
+export const PROJECT_FILTERS: { id: ProjectFilter | 'all'; label: string }[] = [
+  { id: 'all', label: 'All projects' },
+  { id: 'web', label: 'Web applications' },
+  { id: 'ai', label: 'AI projects' },
+  { id: 'ecommerce', label: 'E-commerce' },
+  { id: 'education', label: 'Educational platforms' },
+];
+
 export type VisualVariant = 'learning' | 'chat' | 'fashion' | 'wedding' | 'events' | 'discover' | 'auto' | 'swap' | 'estate' | 'builder';
 
 export interface Project {
@@ -17,6 +27,8 @@ export interface Project {
   /** Public GitHub repository, only where one is known to exist. */
   repoUrl?: string;
   featured?: boolean;
+  /** Filter groups this project belongs to. */
+  filters: ProjectFilter[];
   stack: string[];
   highlights: string[];
   /** What I focused on while building it. */
@@ -50,6 +62,8 @@ export interface Service {
   title: string;
   description: string;
   includes: string[];
+  /** Icon key rendered on the card. */
+  icon: 'globe' | 'app' | 'cart' | 'ai' | 'redesign' | 'rocket';
   /** Value used to pre-select the contact form. */
   projectType: string;
 }

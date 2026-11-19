@@ -3,6 +3,7 @@
     { "source": "/(.*)", "has": [{ "type": "host", "value": "www.buikeweb.name.ng" }], "destination": "https://buikeweb.name.ng/$1", "permanent": true },
     { "source": "/(.*)", "has": [{ "type": "host", "value": "buike-web-developer-ai-builder.vercel.app" }], "destination": "https://buikeweb.name.ng/$1", "permanent": true }
   ],
+  "rewrites": [{ "source": "/blog/:slug", "destination": "/blog/:slug/index.html" }],
   "headers": [
     {
       "source": "/(.*)",

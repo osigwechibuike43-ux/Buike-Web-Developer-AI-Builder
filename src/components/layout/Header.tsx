@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { m, useReducedMotion, useScroll, useSpring } from 'motion/react';
-import { NAV, SITE } from '@/data/site';
+import { CV, NAV, SITE } from '@/data/site';
+import { linkClick } from '@/lib/router';
 import { useActiveSection } from '@/hooks/useActiveSection';
 import { Logo } from '@/components/ui/Logo';
 import { ThemeToggle } from './ThemeToggle';
-import { ArrowUpRight, Close, Menu } from '@/components/ui/Icons';
+import { Close, Download, Menu } from '@/components/ui/Icons';
 import { cn } from '@/lib/cn';
 
-const SECTION_IDS = NAV.map((n) => n.id);
+const SECTION_IDS = NAV.map((n) => n.id).filter((id) => id !== 'top');
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -76,7 +77,7 @@ export function Header() {
       )}
     >
       <div className="container-x flex h-[4.5rem] items-center justify-between gap-4">
-        <a href="#top" aria-label="Buike, web developer. Back to top" className="rounded-lg">
+        <a href="/#top" onClick={linkClick} aria-label="Buike Web Developer. Back to top" className="rounded-lg">
           <Logo />
         </a>
 
@@ -84,7 +85,8 @@ export function Header() {
           {NAV.map((item) => (
             <a
               key={item.id}
-              href={`#${item.id}`}
+              href={`/#${item.id}`}
+              onClick={linkClick}
               aria-current={active === item.id ? 'true' : undefined}
               className={cn(
                 'relative rounded-full px-4 py-2 text-[0.95rem] font-medium transition-colors',
@@ -99,8 +101,8 @@ export function Header() {
 
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          <a href="#contact" className="btn btn-primary hidden !min-h-11 !px-5 sm:inline-flex">
-            Let’s talk <ArrowUpRight className="h-4 w-4" />
+          <a href={CV.href} download={CV.filename} className="btn btn-primary hidden !min-h-11 !px-5 md:inline-flex">
+            Download CV <Download className="h-4 w-4" />
           </a>
           <button
             ref={toggleRef}
@@ -132,8 +134,8 @@ export function Header() {
             {NAV.map((item, i) => (
               <li key={item.id}>
                 <a
-                  href={`#${item.id}`}
-                  onClick={() => setOpen(false)}
+                  href={`/#${item.id}`}
+                  onClick={(e) => linkClick(e, () => setOpen(false))}
                   aria-current={active === item.id ? 'true' : undefined}
                   className="flex items-baseline justify-between py-5"
                 >
@@ -144,8 +146,8 @@ export function Header() {
             ))}
           </ul>
           <div className="mt-10 space-y-4">
-            <a href="#contact" onClick={() => setOpen(false)} className="btn btn-primary w-full">
-              Start a project <ArrowUpRight className="h-4 w-4" />
+            <a href={CV.href} download={CV.filename} onClick={() => setOpen(false)} className="btn btn-primary w-full">
+              Download CV <Download className="h-4 w-4" />
             </a>
             <p className="eyebrow text-center">{SITE.location}</p>
           </div>

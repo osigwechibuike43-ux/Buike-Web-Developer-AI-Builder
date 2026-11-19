@@ -8,6 +8,7 @@ import type { Project } from '../types';
 export const PROJECTS: Project[] = [
   {
     id: 'nuvora',
+    filters: ['ai', 'education', 'web'],
     number: '01',
     name: 'NUVORA',
     category: 'AI learning platform',
@@ -32,6 +33,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'chatbi',
+    filters: ['ai', 'web'],
     number: '02',
     name: 'ChatBI',
     category: 'AI assistant',
@@ -55,6 +57,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'buike-clothing',
+    filters: ['ecommerce', 'web'],
     number: '03',
     name: 'BUIKÉ',
     category: 'E-commerce / fashion',
@@ -77,6 +80,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'aurelia-events',
+    filters: ['web'],
     number: '04',
     name: 'Aurelia Events',
     category: 'Luxury weddings & events',
@@ -99,6 +103,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'amara-events',
+    filters: ['web'],
     number: '05',
     name: 'Amara Events',
     category: 'Event planning',
@@ -121,6 +126,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'eventera',
+    filters: ['web'],
     number: '06',
     name: 'Eventera',
     category: 'Event discovery',
@@ -142,6 +148,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'luxury-cars',
+    filters: ['web'],
     number: '07',
     name: 'Luxury Cars',
     category: 'Automotive landing page',
@@ -162,19 +169,20 @@ export const PROJECTS: Project[] = [
     palette: { bg: '#100F0E', fg: '#F1EEEA', accent: '#E4470F' },
   },
   {
-    id: 'brainova',
+    id: 'nexus',
+    filters: ['ai', 'web'],
     number: '08',
-    name: 'Brainova',
-    category: 'AI learning platform',
-    tagline: 'Learn with AI by your side.',
+    name: 'NEXUS',
+    category: 'AI knowledge engine',
+    tagline: 'Your knowledge, connected.',
     description:
-      'An intelligent learning platform focused on digital education and AI-assisted learning, built to help people understand new skills at their own pace.',
+      'An AI-powered personal knowledge engine for keeping notes, documents and projects in one place and asking questions across them.',
     kind: 'personal',
-    liveUrl: 'https://brainova-chi.vercel.app',
-    stack: ['React', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Vercel'],
-    highlights: ['AI-assisted learning', 'Digital education focus', 'Auth and data with Supabase', 'Responsive interface'],
-    focus: 'A focused learning interface where the AI helps explain material instead of getting in the way of it.',
-    visual: 'learning',
-    palette: { bg: '#0E1020', fg: '#ECEBFA', accent: '#8B7CFF' },
+    liveUrl: 'https://nexus-ai-sand-zeta.vercel.app/',
+    stack: ['React', 'TypeScript', 'Vite', 'Tailwind CSS'],
+    highlights: ['AI-assisted answers', 'Notes, documents and projects together', 'Designed to work offline-first'],
+    focus: 'Keeping a personal knowledge tool fast and calm, with AI as a helper rather than the centre of attention.',
+    visual: 'chat',
+    palette: { bg: '#0B1220', fg: '#E8EEF9', accent: '#4DA3FF' },
   },
 ];
