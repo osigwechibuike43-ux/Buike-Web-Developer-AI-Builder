@@ -6,14 +6,15 @@
  * Without RESEND_API_KEY it answers 503 and the site falls back to email / WhatsApp links.
  */
 
-const LIMITS = { name: 80, email: 120, projectType: 80, message: 2000, minMessage: 20 };
+const LIMITS = { name: 80, email: 120, projectType: 80, subject: 120, message: 2000, minMessage: 20 };
 const EMAIL_RE = /^[^\s@<>()[\]\\,;:"]+@[^\s@<>()[\]\\,;:"]+\.[A-Za-z]{2,}$/;
 const ALLOWED_TYPES = [
-  'Website or web application',
-  'Business website',
+  'Website development',
+  'Web application',
   'E-commerce store',
+  'AI integration',
+  'Website redesign',
   'Landing page',
-  'AI-powered product',
   'Something else',
 ];
 
@@ -67,11 +68,13 @@ export async function POST(request: Request): Promise<Response> {
   const name = oneLine(String(data.name ?? ''));
   const email = oneLine(String(data.email ?? ''));
   const projectType = oneLine(String(data.projectType ?? ''));
+  const subject = oneLine(String(data.subject ?? ''));
   const message = String(data.message ?? '').replace(/\r\n/g, '\n').trim();
 
   const fields: Record<string, string> = {};
   if (!name || name.length > LIMITS.name) fields.name = 'Please enter your name.';
   if (!email || email.length > LIMITS.email || !EMAIL_RE.test(email)) fields.email = 'Please enter a valid email address.';
+  if (!subject || subject.length > LIMITS.subject) fields.subject = 'Please add a short subject.';
   if (!ALLOWED_TYPES.includes(projectType) || projectType.length > LIMITS.projectType) fields.projectType = 'Choose what you would like to build.';
   if (message.length < LIMITS.minMessage || message.length > LIMITS.message) fields.message = `Message must be ${LIMITS.minMessage}-${LIMITS.message} characters.`;
   if (Object.keys(fields).length) return json({ error: 'validation', fields }, 422);
@@ -87,7 +90,7 @@ export async function POST(request: Request): Promise<Response> {
 
   const html = `<div style="font-family:system-ui,sans-serif;line-height:1.6;color:#14120f">
 <h2 style="margin:0 0 12px">New portfolio enquiry</h2>
-<p><strong>Name:</strong> ${escapeHtml(name)}<br><strong>Email:</strong> ${escapeHtml(email)}<br><strong>Project:</strong> ${escapeHtml(projectType)}</p>
+<p><strong>Name:</strong> ${escapeHtml(name)}<br><strong>Email:</strong> ${escapeHtml(email)}<br><strong>Project:</strong> ${escapeHtml(projectType)}<br><strong>Subject:</strong> ${escapeHtml(subject)}</p>
 <p style="white-space:pre-wrap;border-left:3px solid #e4470f;padding-left:12px">${escapeHtml(message)}</p></div>`;
 
   try {
@@ -98,8 +101,8 @@ export async function POST(request: Request): Promise<Response> {
         from,
         to: [to],
         reply_to: email,
-        subject: `Portfolio enquiry: ${projectType} from ${name}`.slice(0, 200),
-        text: `Name: ${name}\nEmail: ${email}\nProject: ${projectType}\n\n${message}`,
+        subject: `${subject} (${projectType}) from ${name}`.slice(0, 200),
+        text: `Name: ${name}\nEmail: ${email}\nProject: ${projectType}\nSubject: ${subject}\n\n${message}`,
         html,
       }),
     });

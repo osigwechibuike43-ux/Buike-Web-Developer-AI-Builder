@@ -1,8 +1,9 @@
-import { SITE } from '@/data/site';
+import { CV, SITE } from '@/data/site';
+import { Portrait } from '@/components/ui/Portrait';
 import { PROJECTS } from '@/data/projects';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Reveal } from '@/components/ui/Reveal';
-import { ArrowUpRight, Check } from '@/components/ui/Icons';
+import { ArrowUpRight, Check, Download } from '@/components/ui/Icons';
 
 const FACTS = [
   ['Based in', SITE.location],
@@ -47,11 +48,12 @@ export function About() {
         <div className="grid gap-14 lg:grid-cols-12">
           <Reveal className="space-y-6 text-pretty text-lg text-ink-2 lg:col-span-7">
             <p>
-              I’m <strong className="font-semibold text-ink">Osigwe Chibuike Joseph</strong>, known online as Buike. I’m a web developer from Owerri, Nigeria, and I like to ship websites that real people can open, use and share.
+              I’m <strong className="font-semibold text-ink">Osigwe Chibuike Joseph</strong>, a software developer from Nigeria with a passion for technology, innovation and building useful digital products.
             </p>
             <p>
-              My work sits where clean design meets solid engineering: storefronts, event and luxury-brand websites, and lately AI assistants and learning tools built on language-model APIs. I care about the details people feel but rarely notice, like spacing, speed and a layout that works on a small phone.
+              My journey started with curiosity about how websites and applications work. That curiosity has grown into a commitment to learning software engineering, exploring artificial intelligence and developing products that solve real-world problems.
             </p>
+            <p>I believe technology should make people’s lives easier.</p>
             <p>
               I’m self-driven and always building something new. My latest project is{' '}
               <a href={latest.liveUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-ink underline decoration-accent decoration-2 underline-offset-4">
@@ -73,14 +75,22 @@ export function About() {
 
           <Reveal delay={0.1} className="lg:col-span-5">
             <div className="relative mx-auto max-w-md space-y-5 lg:mt-6">
+              <figure className="mx-auto w-3/4 rotate-[2deg] rounded-[1.5rem] border border-line-strong bg-surface p-2.5 shadow-[0_24px_50px_-28px_rgb(20_18_15/0.5)]">
+                <Portrait className="aspect-[4/5] w-full rounded-[1.1rem] object-cover object-[50%_30%]" />
+              </figure>
               {NOTES.map((n) => (
                 <p key={n.text} className={`${n.tone} ${n.tilt} rounded-xl px-6 py-5 font-display text-2xl font-semibold leading-tight shadow-[0_14px_30px_-18px_rgb(20_18_15/0.5)] transition-transform hover:rotate-0`}>
                   {n.text}
                 </p>
               ))}
-              <a href="#work" className="mt-6 inline-flex items-center gap-2 pl-2 font-mono text-sm uppercase tracking-[0.16em] text-ink-2 hover:text-ink">
-                See what I’ve built <ArrowUpRight className="h-4 w-4" />
-              </a>
+              <div className="mt-6 flex flex-wrap items-center gap-4 pl-2">
+                <a href={CV.href} download={CV.filename} className="btn btn-primary !min-h-11 !px-5 !text-sm">
+                  Download CV <Download className="h-4 w-4" />
+                </a>
+                <a href="#work" className="inline-flex items-center gap-2 font-mono text-sm uppercase tracking-[0.16em] text-ink-2 hover:text-ink">
+                  See what I’ve built <ArrowUpRight className="h-4 w-4" />
+                </a>
+              </div>
             </div>
           </Reveal>
         </div>

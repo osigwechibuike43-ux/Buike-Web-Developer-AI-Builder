@@ -2,12 +2,13 @@ export interface ContactValues {
   name: string;
   email: string;
   projectType: string;
+  subject: string;
   message: string;
 }
 
 export type ContactErrors = Partial<Record<keyof ContactValues, string>>;
 
-export const LIMITS = { name: 80, email: 120, message: 2000, minMessage: 20 } as const;
+export const LIMITS = { name: 80, email: 120, subject: 120, message: 2000, minMessage: 20 } as const;
 
 // Pragmatic email check; the server re-validates.
 const EMAIL_RE = /^[^\s@<>()[\]\\,;:"]+@[^\s@<>()[\]\\,;:"]+\.[A-Za-z]{2,}$/;
@@ -23,6 +24,10 @@ export function validateContact(v: ContactValues): ContactErrors {
 
   if (!email) errors.email = 'Please enter your email address.';
   else if (email.length > LIMITS.email || !EMAIL_RE.test(email)) errors.email = 'That email address looks incomplete.';
+
+  const subject = v.subject.trim();
+  if (!subject) errors.subject = 'Add a short subject.';
+  else if (subject.length > LIMITS.subject) errors.subject = `Keep the subject under ${LIMITS.subject} characters.`;
 
   if (!v.projectType) errors.projectType = 'Choose what you would like to build.';
 

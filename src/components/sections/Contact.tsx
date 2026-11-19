@@ -11,7 +11,7 @@ type Status = 'idle' | 'sending' | 'sent' | 'unavailable' | 'error';
 
 const OTHER = 'Something else';
 const PROJECT_TYPES = [...SERVICES.map((s) => s.projectType), OTHER];
-const EMPTY: ContactValues = { name: '', email: '', projectType: '', message: '' };
+const EMPTY: ContactValues = { name: '', email: '', projectType: '', subject: '', message: '' };
 
 function Field({ id, label, error, children, hint }: { id: string; label: string; error?: string; hint?: string; children: React.ReactNode }) {
   return (
@@ -62,7 +62,7 @@ export function Contact() {
   };
 
   const mailto = () =>
-    `mailto:${SITE.email}?subject=${encodeURIComponent(`Project enquiry: ${values.projectType || 'Website'}`)}&body=${encodeURIComponent(`Hi Buike,\n\n${values.message}\n\n${values.name}\n${values.email}`)}`;
+    `mailto:${SITE.email}?subject=${encodeURIComponent(values.subject || `Project enquiry: ${values.projectType || 'Website'}`)}&body=${encodeURIComponent(`Hi Buike,\n\n${values.message}\n\n${values.name}\n${values.email}`)}`;
   const whatsapp = () =>
     `${SITE.whatsapp}?text=${encodeURIComponent(`Hi Buike, I'm ${values.name}. I'd like to talk about a ${values.projectType || 'project'}.\n\n${values.message}`)}`;
 
@@ -72,7 +72,7 @@ export function Contact() {
 
     const found = validateContact(values);
     setErrors(found);
-    const firstInvalid = (['name', 'email', 'projectType', 'message'] as const).find((k) => found[k]);
+    const firstInvalid = (['name', 'email', 'projectType', 'subject', 'message'] as const).find((k) => found[k]);
     if (firstInvalid) {
       document.getElementById(id(firstInvalid))?.focus();
       return;
@@ -132,11 +132,11 @@ export function Contact() {
       <div className="container-x">
         <SectionHeading
           id="contact-title"
-          index="08"
+          index="09"
           label="Contact"
           title={
             <>
-              Got a project? <span className="accent-serif text-accent-text">Let’s build it right.</span>
+              Have an idea? <span className="accent-serif text-accent-text">Let’s build something meaningful.</span>
             </>
           }
           intro="Tell me what you’re working on. I’ll read every message and get back to you as soon as I can. WhatsApp is usually quickest."
@@ -212,6 +212,23 @@ export function Contact() {
                           </option>
                         ))}
                       </select>
+                    </Field>
+                  </div>
+
+                  <div className="mt-6">
+                    <Field id={id('subject')} label="Subject" error={errors.subject}>
+                      <input
+                        id={id('subject')}
+                        name="subject"
+                        className="field"
+                        maxLength={LIMITS.subject}
+                        placeholder="e.g. A website for my business"
+                        value={values.subject}
+                        onChange={(e) => set('subject', e.target.value)}
+                        aria-invalid={!!errors.subject}
+                        aria-describedby={describedBy('subject')}
+                        required
+                      />
                     </Field>
                   </div>
 

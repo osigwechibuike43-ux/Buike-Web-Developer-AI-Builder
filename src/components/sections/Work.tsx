@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { PROJECTS } from '@/data/projects';
-import type { Project } from '@/types';
+import { PROJECT_FILTERS, type Project, type ProjectFilter } from '@/types';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Reveal } from '@/components/ui/Reveal';
 import { ProjectVisual } from '@/components/ui/ProjectVisual';
@@ -187,7 +187,11 @@ function ProjectDialog({ project, onClose }: { project: Project | null; onClose:
 
 export function Work() {
   const [selected, setSelected] = useState<Project | null>(null);
-  const [featured, ...rest] = PROJECTS;
+  const [filter, setFilter] = useState<ProjectFilter | 'all'>('all');
+  const list = filter === 'all' ? PROJECTS : PROJECTS.filter((p) => p.filters.includes(filter));
+  const showFeatured = filter === 'all';
+  const [featured, ...rest] = list;
+  const grid = showFeatured ? rest : list;
 
   return (
     <section id="work" aria-labelledby="work-title" className="scroll-mt-20 py-24 sm:py-32">
@@ -195,7 +199,7 @@ export function Work() {
         <SectionHeading
           id="work-title"
           index="01"
-          label="Selected work"
+          label="Featured projects"
           title={
             <>
               Live projects, <span className="accent-serif text-accent-text">built end to end.</span>
@@ -204,12 +208,34 @@ export function Work() {
           intro="Every project below links to a live site or its source code. They are all personal or concept builds, and each one is labelled so you always know what you are looking at."
         />
 
-        <Reveal>
-          <ProjectCard project={featured} onOpen={setSelected} large />
-        </Reveal>
+        <div role="group" aria-label="Filter projects" className="mb-10 flex flex-wrap gap-2">
+          {PROJECT_FILTERS.map((f) => (
+            <button
+              key={f.id}
+              type="button"
+              aria-pressed={filter === f.id}
+              onClick={() => setFilter(f.id)}
+              className={cn(
+                'min-h-11 rounded-full border px-4 text-sm font-medium transition-colors',
+                filter === f.id ? 'border-ink bg-ink text-bg' : 'border-line-strong text-ink-2 hover:border-ink hover:text-ink',
+              )}
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
+        <p role="status" className="sr-only">
+          Showing {list.length} {list.length === 1 ? 'project' : 'projects'}
+        </p>
 
-        <div className="mt-6 grid gap-6 md:grid-cols-2">
-          {rest.map((p, i) => (
+        {showFeatured && (
+          <Reveal>
+            <ProjectCard project={featured} onOpen={setSelected} large />
+          </Reveal>
+        )}
+
+        <div key={filter} className={cn('grid gap-6 md:grid-cols-2', showFeatured && 'mt-6')}>
+          {grid.map((p, i) => (
             <Reveal key={p.id} delay={(i % 2) * 0.08}>
               <ProjectCard project={p} onOpen={setSelected} />
             </Reveal>

@@ -13,7 +13,7 @@ export const SITE = {
   url: 'https://buikeweb.name.ng',
   location: 'Owerri, Imo State, Nigeria',
   timezone: 'WAT (UTC+1)',
-  status: 'Open to web & AI projects',
+  status: 'Available for work',
   email: 'buikedev27@gmail.com',
   phone: '+234 916 814 4059',
   whatsapp: 'https://wa.me/2349168144059',
@@ -32,13 +32,16 @@ export const SITE = {
 } as const;
 
 export const NAV = [
-  { id: 'work', label: 'Work' },
-  { id: 'about', label: 'About' },
-  { id: 'toolbox', label: 'Toolbox' },
+  { id: 'top', label: 'Home' },
+  { id: 'work', label: 'Projects' },
   { id: 'services', label: 'Services' },
-  { id: 'journey', label: 'Journey' },
+  { id: 'blog', label: 'Blog' },
+  { id: 'about', label: 'About' },
   { id: 'contact', label: 'Contact' },
 ] as const;
+
+/** Résumé served from /public. Replace the file to update it. */
+export const CV = { href: '/Osigwe-Chibuike-Joseph-CV.pdf', filename: 'Osigwe-Chibuike-Joseph-CV.pdf' } as const;
 
 export const SOCIALS = [
   { id: 'github', label: 'GitHub', hint: 'Code and experiments', href: SITE.github, brand: '#181717' },
