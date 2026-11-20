@@ -30,26 +30,33 @@ export function Services() {
           intro="From a first sketch to a deployed, responsive product. Pick a starting point and it will be pre-selected in the contact form."
         />
 
-        <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((s, i) => {
             const Icon = ICONS[s.icon];
             return (
               <Reveal as="li" key={s.id} delay={(i % 3) * 0.06} className="h-full">
-                <div className="card group flex h-full flex-col p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_24px_50px_-28px_rgb(20_18_15/0.5)]">
-                  <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brown/15 text-brown transition-colors group-hover:bg-brown group-hover:text-beige">
-                    <Icon className="h-7 w-7" aria-hidden strokeWidth={1.6} />
-                  </span>
-                  <h3 className="h-display mt-6 text-2xl">{s.title}</h3>
-                  <p className="mt-3 text-pretty text-ink-2">{s.description}</p>
-                  <ul className="mt-5 flex flex-wrap gap-2">
-                    {s.includes.map((x) => (
-                      <li key={x} className="chip">{x}</li>
+                <div
+                  style={{ '--c': s.color } as React.CSSProperties}
+                  className="card group flex h-full flex-col p-5 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--c)] hover:shadow-[0_20px_40px_-26px_var(--c)]"
+                >
+                  <div className="flex items-center gap-3.5">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[color-mix(in_srgb,var(--c)_14%,transparent)] text-[var(--c)] transition-colors duration-300 group-hover:bg-[var(--c)] group-hover:text-white">
+                      <Icon className="h-5 w-5" aria-hidden strokeWidth={1.8} />
+                    </span>
+                    <h3 className="h-display text-lg leading-tight">{s.title}</h3>
+                  </div>
+                  <p className="mt-3.5 line-clamp-3 text-pretty text-sm text-ink-2">{s.description}</p>
+                  <ul className="mt-3.5 flex flex-wrap gap-1.5">
+                    {s.includes.slice(0, 3).map((x) => (
+                      <li key={x} className="chip !px-2.5 !py-0.5 !text-[0.68rem]">{x}</li>
                     ))}
                   </ul>
-                  <div className="mt-auto pt-7"><button type="button" onClick={() => choose(s.projectType)} className="btn btn-ghost !min-h-11 !px-5 !text-sm self-start">
-                    Contact me <ArrowRight className="h-4 w-4" />
-                    <span className="sr-only">about {s.title}</span>
-                  </button></div>
+                  <div className="mt-auto pt-5">
+                    <button type="button" onClick={() => choose(s.projectType)} className="btn btn-ghost !min-h-11 !px-4 !text-sm">
+                      Contact me <ArrowRight className="h-4 w-4" />
+                      <span className="sr-only">about {s.title}</span>
+                    </button>
+                  </div>
                 </div>
               </Reveal>
             );
