@@ -3,16 +3,17 @@ import { SITE, SOCIALS } from '@/data/site';
 import { BrandLogo } from '@/components/ui/BrandLogo';
 import { SocialIcon } from '@/components/ui/Icons';
 import { PROJECTS } from '@/data/projects';
-import { LogoMark } from '@/components/ui/Logo';
 import { Portrait } from '@/components/ui/Portrait';
 import { ArrowRight, ArrowUpRight } from '@/components/ui/Icons';
 import { Hero3D } from '@/components/three/Hero3D';
 
 const FLOATERS = [
-  { icon: 'react', name: 'React', pos: '-left-4 top-[18%] sm:-left-8', delay: '0s' },
-  { icon: 'typescript', name: 'TypeScript', pos: '-right-3 top-[44%] sm:-right-7', delay: '-1.6s' },
-  { icon: 'tailwind', name: 'Tailwind CSS', pos: '-left-3 bottom-[22%] sm:-left-9', delay: '-3.1s' },
-  { icon: 'supabase', name: 'Supabase', pos: '-right-2 bottom-[8%] sm:-right-6', delay: '-4.4s' },
+  { icon: 'javascript', name: 'JavaScript', pos: '-left-4 top-[14%] sm:-left-8', delay: '0s' },
+  { icon: 'typescript', name: 'TypeScript', pos: '-right-3 top-[30%] sm:-right-7', delay: '-1.2s' },
+  { icon: 'python', name: 'Python', pos: '-left-3 top-[52%] sm:-left-9', delay: '-2.4s' },
+  { icon: 'html5', name: 'HTML5', pos: '-right-3 top-[60%] sm:-right-8', delay: '-3.4s' },
+  { icon: 'css3', name: 'CSS3', pos: '-left-2 bottom-[16%] sm:-left-7', delay: '-4.4s' },
+  { icon: 'nodejs', name: 'Node.js', pos: '-right-2 bottom-[6%] sm:-right-6', delay: '-5.2s' },
 ] as const;
 const HERO_SOCIALS = SOCIALS.filter((x) => ['github', 'linkedin', 'tiktok'].includes(x.id));
 
@@ -126,9 +127,8 @@ export function Hero() {
               <BrandLogo icon={f.icon} name={f.name} className="h-6 w-6 sm:h-7 sm:w-7" />
             </span>
           ))}
-          <LogoMark className="absolute -right-3 -top-5 z-20 h-16 w-16 rotate-[8deg] drop-shadow-lg sm:-right-6" />
-          <span aria-hidden className="absolute -bottom-4 -left-2 z-20 rotate-[-4deg] rounded-md bg-note px-3 py-2 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-ink shadow-md sm:-left-8">
-            React · TS · Tailwind
+          <span aria-hidden className="absolute -bottom-4 -left-2 z-20 rotate-[-4deg] rounded-md whitespace-nowrap bg-note px-3 py-2 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-ink shadow-md sm:-left-8">
+            JS · TS · Python
           </span>
         </m.div>
       </div>
