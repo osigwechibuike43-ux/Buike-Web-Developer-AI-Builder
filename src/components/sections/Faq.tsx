@@ -4,7 +4,7 @@ import { Plus } from '@/components/ui/Icons';
 
 export function Faq() {
   return (
-    <section id="faq" aria-labelledby="faq-title" className="scroll-mt-20 border-t border-line bg-bg-2/60 py-24 sm:py-28">
+    <section id="faq" aria-labelledby="faq-title" className="scroll-mt-20 border-t border-line bg-bg-2/60 py-12 sm:py-24 lg:py-28">
       <div className="container-x grid gap-12 lg:grid-cols-12">
         <div className="lg:col-span-5">
           <SectionHeading
