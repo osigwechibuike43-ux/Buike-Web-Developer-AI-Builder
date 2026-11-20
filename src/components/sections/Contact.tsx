@@ -128,7 +128,7 @@ export function Contact() {
     [errors[k] ? `${id(k)}-error` : null, hint && !errors[k] ? `${id(k)}-hint` : null].filter(Boolean).join(' ') || undefined;
 
   return (
-    <section id="contact" aria-labelledby="contact-title" className="scroll-mt-20 py-24 sm:py-32">
+    <section id="contact" aria-labelledby="contact-title" className="scroll-mt-20 py-14 sm:py-24 lg:py-32">
       <div className="container-x">
         <SectionHeading
           id="contact-title"
@@ -144,7 +144,7 @@ export function Contact() {
 
         <div className="grid gap-8 lg:grid-cols-12 lg:gap-12">
           <Reveal className="lg:col-span-7">
-            <div className="card p-6 sm:p-9">
+            <div className="card p-4 sm:p-9">
               {status === 'sent' ? (
                 <div ref={resultRef} tabIndex={-1} role="status" className="py-8 text-center outline-none">
                   <span className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-accent text-on-accent">
@@ -297,10 +297,10 @@ export function Contact() {
           </Reveal>
 
           <Reveal delay={0.1} className="lg:col-span-5">
-            <div className="space-y-4">
-              <div className="card flex items-center justify-between gap-4 p-5">
+            <div className="grid grid-cols-2 gap-2.5 sm:gap-4 lg:grid-cols-1">
+              <div style={{ '--brand': '#8B654A' } as React.CSSProperties} className="card col-span-2 flex items-center justify-between gap-3 p-3.5 sm:p-5 lg:col-span-1">
                 <div className="flex min-w-0 items-center gap-4">
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-line-strong">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[color-mix(in_srgb,var(--brand)_16%,transparent)] text-[var(--brand)] sm:h-11 sm:w-11">
                     <Mail className="h-5 w-5" />
                   </span>
                   <div className="min-w-0">
@@ -317,22 +317,22 @@ export function Contact() {
               </div>
 
               {SOCIALS.map((s) => (
-                <a key={s.id} href={s.href} target="_blank" rel="noopener noreferrer" style={{ '--brand': s.brand } as React.CSSProperties} className="card group flex items-center justify-between gap-4 p-5 transition-all duration-200 hover:-translate-y-0.5 hover:border-[var(--brand)] hover:shadow-[0_14px_30px_-20px_var(--brand)]">
-                  <span className="flex items-center gap-4">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-full border border-line-strong transition-colors group-hover:border-[var(--brand)] group-hover:bg-[var(--brand)] group-hover:text-white">
+                <a key={s.id} href={s.href} target="_blank" rel="noopener noreferrer" style={{ '--brand': s.brand.toUpperCase() === '#181717' ? 'var(--ink)' : s.brand } as React.CSSProperties} className="card group flex items-center justify-between gap-2 p-3 transition-all sm:gap-4 sm:p-5 duration-200 hover:-translate-y-0.5 hover:border-[var(--brand)] hover:shadow-[0_14px_30px_-20px_var(--brand)]">
+                  <span className="flex min-w-0 items-center gap-2.5 sm:gap-4">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[color-mix(in_srgb,var(--brand)_14%,transparent)] text-[var(--brand)] transition-colors group-hover:bg-[var(--brand)] group-hover:text-white sm:h-11 sm:w-11">
                       <SocialIcon id={s.id} className="h-5 w-5" />
                     </span>
-                    <span>
-                      <span className="block font-semibold">{s.label}</span>
-                      <span className="font-mono text-xs text-ink-3">{s.hint}</span>
+                    <span className="min-w-0">
+                      <span className="block truncate text-sm font-semibold sm:text-base">{s.label}</span>
+                      <span className="hidden font-mono text-xs text-ink-3 sm:inline">{s.hint}</span>
                     </span>
                   </span>
-                  <ArrowUpRight className="h-5 w-5 text-ink-3 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ink" />
+                  <ArrowUpRight className="hidden h-5 w-5 text-ink-3 transition-transform sm:block group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-ink" />
                   <span className="sr-only">(opens in a new tab)</span>
                 </a>
               ))}
 
-              <p className="px-1 pt-2 font-mono text-xs uppercase tracking-[0.16em] text-ink-3">
+              <p className="col-span-2 px-1 pt-1 font-mono lg:col-span-1 text-xs uppercase tracking-[0.16em] text-ink-3">
                 {SITE.location} · {SITE.timezone}
               </p>
             </div>

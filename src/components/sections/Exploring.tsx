@@ -4,7 +4,7 @@ import { Reveal } from '@/components/ui/Reveal';
 
 export function Exploring() {
   return (
-    <section id="exploring" aria-labelledby="exploring-title" className="scroll-mt-20 border-t border-line bg-bg-2/60 py-24 sm:py-28">
+    <section id="exploring" aria-labelledby="exploring-title" className="scroll-mt-20 border-t border-line bg-bg-2/60 py-12 sm:py-24 lg:py-28">
       <div className="container-x">
         <SectionHeading
           id="exploring-title"

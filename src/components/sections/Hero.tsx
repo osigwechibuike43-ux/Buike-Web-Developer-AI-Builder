@@ -27,13 +27,13 @@ export function Hero() {
       : { initial: { opacity: 0, y: 28 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] as const } };
 
   return (
-    <section id="top" aria-labelledby="hero-title" className="grain relative isolate overflow-hidden pt-28 sm:pt-32 lg:pt-36">
+    <section id="top" aria-labelledby="hero-title" className="grain relative isolate overflow-hidden pt-24 sm:pt-32 lg:pt-36">
       <div aria-hidden className="pointer-events-none absolute -right-40 top-10 -z-10 h-[34rem] w-[34rem] rounded-full bg-accent/15 blur-3xl" />
       <div aria-hidden className="pointer-events-none absolute -left-32 bottom-0 -z-10 h-[26rem] w-[26rem] rounded-full bg-brown/15 blur-3xl" />
 
-      <div className="container-x grid items-center gap-14 pb-16 lg:grid-cols-12 lg:gap-8 lg:pb-24">
+      <div className="container-x grid items-center gap-10 pb-12 lg:grid-cols-12 lg:gap-8 lg:pb-24">
         <div className="lg:col-span-8">
-          <m.p {...rise(0)} className="mb-7 inline-flex items-center gap-3 rounded-full border border-line-strong bg-surface/70 py-1.5 pl-3 pr-4 text-sm text-ink-2">
+          <m.p {...rise(0)} className="mb-5 inline-flex items-center gap-3 rounded-full border border-line-strong bg-surface/70 py-1.5 pl-3 pr-4 text-sm text-ink-2">
             <span className="relative flex h-2.5 w-2.5" aria-hidden>
               <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60 motion-safe:animate-ping" />
               <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-500" />
@@ -43,7 +43,7 @@ export function Hero() {
             <span>Nigeria</span>
           </m.p>
 
-          <m.h1 {...rise(0.08)} id="hero-title" className="h-display text-balance text-[clamp(2.9rem,8.4vw,5.4rem)] lg:text-[clamp(3.6rem,6.2vw,5.6rem)]">
+          <m.h1 {...rise(0.08)} id="hero-title" className="h-display text-balance text-[clamp(2.4rem,8.4vw,5.4rem)] lg:text-[clamp(3.6rem,6.2vw,5.6rem)]">
             Hello, I’m <span className="accent-serif text-accent-text">Osigwe Chibuike Joseph</span>
           </m.h1>
 
@@ -51,11 +51,11 @@ export function Hero() {
             Software Developer
           </m.p>
 
-          <m.p {...rise(0.18)} className="mt-5 max-w-xl text-pretty text-lg text-ink-2 sm:text-xl">
+          <m.p {...rise(0.18)} className="mt-4 max-w-xl text-pretty text-base text-ink-2 sm:mt-5 sm:text-xl">
             I design and develop digital products that solve real problems, from modern websites to AI-powered applications.
           </m.p>
 
-          <m.div {...rise(0.28)} className="mt-10 flex flex-wrap items-center gap-3">
+          <m.div {...rise(0.28)} className="mt-7 flex flex-wrap items-center gap-3 sm:mt-10">
             <a href="#work" className="btn btn-primary">
               Explore my work <ArrowRight className="h-4 w-4" />
             </a>
@@ -81,7 +81,7 @@ export function Hero() {
             ))}
           </m.ul>
 
-          <m.dl {...rise(0.38)} className="mt-12 grid max-w-xl grid-cols-3 gap-6 border-t border-line pt-6">
+          <m.dl {...rise(0.38)} className="mt-8 grid max-w-xl grid-cols-3 gap-4 border-t border-line pt-5 sm:mt-12 sm:gap-6 sm:pt-6">
             {[
               { k: String(PROJECTS.length), v: 'Projects built' },
               { k: String(aiCount), v: 'AI products' },
@@ -89,7 +89,7 @@ export function Hero() {
             ].map((s) => (
               <div key={s.v}>
                 <dt className="sr-only">{s.v}</dt>
-                <dd className="h-display text-4xl sm:text-5xl">{s.k}</dd>
+                <dd className="h-display text-3xl sm:text-5xl">{s.k}</dd>
                 <dd className="mt-1 text-sm text-ink-3" aria-hidden>
                   {s.v}
                 </dd>
@@ -101,7 +101,7 @@ export function Hero() {
         <m.div
           {...(reduce ? {} : { initial: { opacity: 0, rotate: 4, y: 30 }, animate: { opacity: 1, rotate: -2.5, y: 0 }, transition: { duration: 0.9, delay: 0.2, ease: [0.22, 1, 0.36, 1] as const } })}
           style={reduce ? { rotate: -2.5 } : undefined}
-          className="relative mx-auto w-full max-w-[26rem] lg:col-span-4 lg:max-w-none lg:pl-2"
+          className="relative mx-auto w-full max-w-[17rem] sm:max-w-[26rem] lg:col-span-4 lg:max-w-none lg:pl-2"
         >
           <Hero3D />
           <figure className="relative z-10 rounded-[1.75rem] border border-line-strong bg-surface p-3 shadow-[0_30px_60px_-30px_rgb(20_18_15/0.45)]">

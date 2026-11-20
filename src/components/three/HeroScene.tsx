@@ -12,12 +12,14 @@ const pointer = { x: 0, y: 0 };
 /** Eases the whole scene toward the pointer for a subtle parallax. */
 function Rig({ children }: { children: ReactNode }) {
   const group = useRef<THREE.Group>(null);
-  useFrame((_, dt) => {
+  useFrame(({ clock }, dt) => {
     const g = group.current;
     if (!g) return;
     const k = 1 - Math.exp(-dt * 3);
-    g.rotation.y += (pointer.x * 0.35 - g.rotation.y) * k;
-    g.rotation.x += (-pointer.y * 0.22 - g.rotation.x) * k;
+    // Slow idle sway so touch screens, which have no hover, still feel alive.
+    const t = clock.elapsedTime;
+    g.rotation.y += (pointer.x * 0.35 + Math.sin(t * 0.5) * 0.12 - g.rotation.y) * k;
+    g.rotation.x += (-pointer.y * 0.22 + Math.cos(t * 0.4) * 0.06 - g.rotation.x) * k;
   });
   return <group ref={group}>{children}</group>;
 }
@@ -40,18 +42,18 @@ function Floating({ position, speed = 1, spin = 0.2, children }: { position: [nu
   );
 }
 
-function Particles() {
+function Particles({ count }: { count: number }) {
   const ref = useRef<THREE.InstancedMesh>(null);
   const items = useMemo(
     () =>
-      Array.from({ length: 16 }, (_, i) => ({
+      Array.from({ length: count }, (_, i) => ({
         pos: new THREE.Vector3((Math.random() - 0.5) * 6.4, (Math.random() - 0.5) * 6, -1.5 + Math.random() * 2.5),
         s: 0.04 + Math.random() * 0.07,
         speed: 0.4 + Math.random() * 0.8,
         phase: Math.random() * 6.28,
         brown: i % 3 === 0,
       })),
-    [],
+    [count],
   );
   const dummy = useMemo(() => new THREE.Object3D(), []);
 
@@ -83,7 +85,7 @@ function Particles() {
   );
 }
 
-function Scene() {
+function Scene({ compact }: { compact: boolean }) {
   return (
     <>
       <ambientLight intensity={1.3} />
@@ -91,6 +93,7 @@ function Scene() {
       <pointLight position={[-5, -2, 3]} intensity={18} color={BROWN} distance={14} />
 
       <Rig>
+        <group scale={compact ? 0.72 : 1}>
         {/* Chocolate sphere, lower left, partly behind the portrait card */}
         <Floating position={[-2.35, -1.7, -1]} speed={0.7} spin={0.08}>
           <mesh>
@@ -127,13 +130,14 @@ function Scene() {
           </mesh>
         </Floating>
 
-        <Particles />
+        <Particles count={compact ? 8 : 16} />
+        </group>
       </Rig>
     </>
   );
 }
 
-export default function HeroScene({ active }: { active: boolean }) {
+export default function HeroScene({ active, compact = false }: { active: boolean; compact?: boolean }) {
   useEffect(() => {
     const onMove = (e: PointerEvent) => {
       pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
@@ -146,12 +150,12 @@ export default function HeroScene({ active }: { active: boolean }) {
   return (
     <Canvas
       frameloop={active ? 'always' : 'never'}
-      dpr={[1, 1.5]}
+      dpr={compact ? [1, 1.25] : [1, 1.5]}
       camera={{ position: [0, 0, 10], fov: 38 }}
       gl={{ antialias: true, alpha: true, powerPreference: 'low-power' }}
       aria-hidden
     >
-      <Scene />
+      <Scene compact={compact} />
     </Canvas>
   );
 }

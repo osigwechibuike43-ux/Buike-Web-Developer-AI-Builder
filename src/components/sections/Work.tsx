@@ -52,31 +52,31 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: (p: Projec
   return (
     <article
       style={{ '--pc': accent } as React.CSSProperties}
-      className="card group relative flex h-full flex-col overflow-hidden p-2.5 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--pc)] hover:shadow-[0_22px_44px_-26px_var(--pc)]"
+      className="card group relative flex h-full flex-col overflow-hidden p-2 sm:p-2.5 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--pc)] hover:shadow-[0_22px_44px_-26px_var(--pc)]"
     >
-      <button type="button" onClick={() => onOpen(project)} aria-label={`Open details for ${project.name}`} className="block w-full overflow-hidden rounded-xl text-left">
+      <button type="button" onClick={() => onOpen(project)} aria-label={`Open details for ${project.name}`} className="hidden w-full overflow-hidden rounded-xl text-left sm:block">
         <ProjectVisual project={project} compact className="transition-transform duration-500 group-hover:scale-[1.02]" />
       </button>
 
-      <div className="flex flex-1 flex-col px-2.5 pb-2.5 pt-4">
+      <div className="flex flex-1 flex-col px-2 pb-2 pt-2 sm:px-2.5 sm:pb-2.5 sm:pt-4">
         <div className="flex items-center gap-3">
-          <ProjectMark project={project} className="h-11 w-11" />
+          <ProjectMark project={project} className="h-10 w-10 sm:h-11 sm:w-11" />
           <div className="min-w-0">
-            <h3 className="h-display truncate text-xl leading-tight">{project.name}</h3>
+            <h3 className="h-display truncate text-lg leading-tight sm:text-xl">{project.name}</h3>
             <p className="truncate font-mono text-[0.68rem] uppercase tracking-[0.14em] text-ink-3">{project.category}</p>
           </div>
         </div>
 
-        <p className="mt-3 line-clamp-2 text-pretty text-sm text-ink-2">{project.description}</p>
+        <p className="mt-2 line-clamp-2 text-pretty text-sm text-ink-2 sm:mt-3">{project.description}</p>
 
-        <ul className="mt-3 flex flex-wrap gap-1.5" aria-label={`${project.name} technologies`}>
+        <ul className="mt-2.5 flex flex-wrap gap-1.5 sm:mt-3" aria-label={`${project.name} technologies`}>
           {project.stack.slice(0, 3).map((s) => (
             <li key={s} className="chip !px-2.5 !py-0.5 !text-[0.68rem]">{s}</li>
           ))}
           {project.stack.length > 3 && <li className="chip !px-2.5 !py-0.5 !text-[0.68rem]">+{project.stack.length - 3}</li>}
         </ul>
 
-        <div className="mt-auto flex flex-wrap items-center gap-2 pt-4">
+        <div className="mt-auto flex flex-wrap items-center gap-2 pt-3 sm:pt-4">
           <ProjectLinks project={project} compact />
           <button type="button" onClick={() => onOpen(project)} className="btn btn-ghost !min-h-11 !px-4 !text-sm">
             Details
@@ -176,7 +176,7 @@ export function Work() {
   const list = filter === 'all' ? PROJECTS : PROJECTS.filter((p) => p.filters.includes(filter));
 
   return (
-    <section id="work" aria-labelledby="work-title" className="scroll-mt-20 py-24 sm:py-32">
+    <section id="work" aria-labelledby="work-title" className="scroll-mt-20 py-14 sm:py-24 lg:py-32">
       <div className="container-x">
         <SectionHeading
           id="work-title"
@@ -190,7 +190,7 @@ export function Work() {
           intro="Every project below links to a live site or its source code. They are all personal or concept builds, and each one is labelled so you always know what you are looking at."
         />
 
-        <div role="group" aria-label="Filter projects" className="mb-10 flex flex-wrap gap-2">
+        <div role="group" aria-label="Filter projects" className="mb-6 flex flex-wrap gap-2 sm:mb-10">
           {PROJECT_FILTERS.map((f) => (
             <button
               key={f.id}
@@ -198,7 +198,7 @@ export function Work() {
               aria-pressed={filter === f.id}
               onClick={() => setFilter(f.id)}
               className={cn(
-                'min-h-11 rounded-full border px-4 text-sm font-medium transition-colors',
+                'min-h-10 rounded-full border px-3.5 text-sm font-medium transition-colors sm:min-h-11 sm:px-4',
                 filter === f.id ? 'border-ink bg-ink text-bg' : 'border-line-strong text-ink-2 hover:border-ink hover:text-ink',
               )}
             >
@@ -210,7 +210,7 @@ export function Work() {
           Showing {list.length} {list.length === 1 ? 'project' : 'projects'}
         </p>
 
-        <ul key={filter} className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <ul key={filter} className="grid gap-3 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
           {list.map((p, i) => (
             <Reveal as="li" key={p.id} delay={(i % 3) * 0.06} className="h-full">
               <ProjectCard project={p} onOpen={setSelected} />
@@ -218,7 +218,7 @@ export function Work() {
           ))}
         </ul>
 
-        <p className="mt-10 max-w-2xl text-sm text-ink-3">
+        <p className="mt-6 max-w-2xl text-sm text-ink-3 sm:mt-10">
           Project descriptions summarise what each build is designed to do. Client work will appear here with its own “Client work” label when it is added.
         </p>
       </div>

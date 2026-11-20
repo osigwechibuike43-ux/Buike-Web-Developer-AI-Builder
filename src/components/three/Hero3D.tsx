@@ -6,10 +6,9 @@ const HeroScene = lazy(() => import('./HeroScene'));
 function canUse3D(): boolean {
   if (typeof window === 'undefined') return false;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return false;
-  if (!window.matchMedia('(min-width: 768px)').matches) return false;
   const nav = navigator as Navigator & { deviceMemory?: number; connection?: { saveData?: boolean } };
   if (nav.connection?.saveData) return false;
-  if ((nav.hardwareConcurrency ?? 8) < 4 || (nav.deviceMemory ?? 8) < 4) return false;
+  if ((nav.hardwareConcurrency ?? 8) < 4 || (nav.deviceMemory ?? 8) < 2) return false;
   try {
     const c = document.createElement('canvas');
     return !!(c.getContext('webgl2') || c.getContext('webgl'));
@@ -18,16 +17,20 @@ function canUse3D(): boolean {
   }
 }
 
-/** Decorative 3D layer behind the portrait. Renders nothing on phones, low-power devices or reduced motion. */
+/** Decorative 3D layer behind the portrait. Lighter scene on phones; renders nothing on low-power devices, data-saver or reduced motion. */
 export function Hero3D() {
   const [enabled, setEnabled] = useState(false);
+  const [compact, setCompact] = useState(false);
   const [visible, setVisible] = useState(true);
   const box = useRef<HTMLDivElement>(null);
 
   // Wait until the page is idle so the 3D bundle never competes with first paint.
   useEffect(() => {
     if (!canUse3D()) return;
-    const start = () => setEnabled(true);
+    const start = () => {
+      setCompact(!window.matchMedia('(min-width: 768px)').matches);
+      setEnabled(true);
+    };
     const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number; cancelIdleCallback?: (id: number) => void };
     if (w.requestIdleCallback && w.cancelIdleCallback) {
       const id = w.requestIdleCallback(start, { timeout: 2500 });
@@ -52,10 +55,10 @@ export function Hero3D() {
   }, [enabled]);
 
   return (
-    <div ref={box} aria-hidden className="pointer-events-none absolute -inset-x-32 -inset-y-16 z-0 hidden md:block">
+    <div ref={box} aria-hidden className="pointer-events-none absolute -inset-x-10 -inset-y-12 z-0 md:-inset-x-32 md:-inset-y-16">
       {enabled && (
         <Suspense fallback={null}>
-          <HeroScene active={visible} />
+          <HeroScene active={visible} compact={compact} />
         </Suspense>
       )}
     </div>

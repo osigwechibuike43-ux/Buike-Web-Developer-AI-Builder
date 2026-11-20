@@ -6,7 +6,7 @@ import { ArrowUpRight, TiktokIcon } from '@/components/ui/Icons';
 
 export function Journey() {
   return (
-    <section id="journey" aria-labelledby="journey-title" className="scroll-mt-20 py-24 sm:py-32">
+    <section id="journey" aria-labelledby="journey-title" className="scroll-mt-20 py-14 sm:py-24 lg:py-32">
       <div className="container-x">
         <SectionHeading
           id="journey-title"
@@ -20,16 +20,16 @@ export function Journey() {
           intro="The path so far, and the things I keep coming back to."
         />
 
-        <div className="grid gap-14 lg:grid-cols-12">
+        <div className="grid gap-10 sm:gap-14 lg:grid-cols-12">
           <ol className="relative lg:col-span-7">
             <span aria-hidden className="absolute bottom-3 left-[1.15rem] top-3 w-px bg-line-strong" />
             {JOURNEY.map((step, i) => (
-              <Reveal as="li" key={step.number} className="relative pb-12 pl-14 last:pb-0">
+              <Reveal as="li" key={step.number} className="relative pb-8 pl-12 last:pb-0 sm:pb-12 sm:pl-14">
                   <span className={`absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full border font-mono text-xs ${i === JOURNEY.length - 1 ? 'border-accent-text bg-accent-text text-on-accent' : 'border-line-strong bg-bg text-ink-2'}`}>
                     {step.number}
                   </span>
-                  <h3 className="h-display text-3xl">{step.title}</h3>
-                  <p className="accent-serif mt-1 text-2xl text-ink-2">{step.tagline}</p>
+                  <h3 className="h-display text-2xl sm:text-3xl">{step.title}</h3>
+                  <p className="accent-serif mt-1 text-xl text-ink-2 sm:text-2xl">{step.tagline}</p>
                   <p className="mt-3 max-w-xl text-pretty text-ink-2">{step.description}</p>
                   <ul className="mt-4 flex flex-wrap gap-1.5">
                     {step.tags.map((t) => (
@@ -44,11 +44,11 @@ export function Journey() {
             <div className="lg:sticky lg:top-28">
               <Reveal>
                 <h3 className="eyebrow mb-5">Things that keep me curious</h3>
-                <ul className="grid gap-3">
+                <ul className="grid grid-cols-2 gap-2.5 sm:grid-cols-1 sm:gap-3">
                   {INTERESTS.map((x) => (
-                    <li key={x.title} className="card p-5">
-                      <p className="font-display text-xl font-semibold">{x.title}</p>
-                      <p className="mt-1 text-ink-2">{x.text}</p>
+                    <li key={x.title} className="card p-3.5 sm:p-5">
+                      <p className="font-display text-base font-semibold sm:text-xl">{x.title}</p>
+                      <p className="mt-1 text-sm text-ink-2 sm:text-base">{x.text}</p>
                     </li>
                   ))}
                 </ul>

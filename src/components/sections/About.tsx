@@ -32,7 +32,7 @@ const NOTES = [
 export function About() {
   const latest = PROJECTS[0];
   return (
-    <section id="about" aria-labelledby="about-title" className="scroll-mt-20 border-y border-line bg-bg-2/60 py-24 sm:py-32">
+    <section id="about" aria-labelledby="about-title" className="scroll-mt-20 border-y border-line bg-bg-2/60 py-14 sm:py-24 lg:py-32">
       <div className="container-x">
         <SectionHeading
           id="about-title"
