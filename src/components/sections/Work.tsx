@@ -4,6 +4,7 @@ import { PROJECT_FILTERS, type Project, type ProjectFilter } from '@/types';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Reveal } from '@/components/ui/Reveal';
 import { ProjectVisual } from '@/components/ui/ProjectVisual';
+import { ProjectMark } from '@/components/ui/ProjectMark';
 import { ArrowUpRight, Close } from '@/components/ui/Icons';
 import { cn } from '@/lib/cn';
 
@@ -13,19 +14,6 @@ function KindBadge({ kind }: { kind: Project['kind'] }) {
     <span className={cn('chip', personal ? '' : 'border-accent-text text-accent-text')}>
       <span aria-hidden className={cn('h-1.5 w-1.5 rounded-full', personal ? 'bg-ink-3' : 'bg-accent')} />
       {personal ? 'Personal project' : 'Client work'}
-    </span>
-  );
-}
-
-function ProjectLogo({ project, className }: { project: Project; className?: string }) {
-  const { bg, accent } = project.palette;
-  return (
-    <span
-      aria-hidden
-      className={cn('inline-flex shrink-0 items-center justify-center rounded-xl border font-display font-bold', className)}
-      style={{ background: bg, color: accent, borderColor: `color-mix(in srgb, ${accent} 45%, transparent)` }}
-    >
-      {project.name.slice(0, 1)}
     </span>
   );
 }
@@ -45,7 +33,7 @@ function ProjectLinks({ project, compact = false }: { project: Project; compact?
     <>
       {primaryUrl && (
         <a href={primaryUrl} target="_blank" rel="noopener noreferrer" className={cn('btn btn-primary', size)}>
-          {project.liveUrl ? 'Visit live site' : 'View on GitHub'} <ArrowUpRight className="h-4 w-4" />
+          {project.liveUrl ? (compact ? 'Live site' : 'Visit live site') : compact ? 'GitHub' : 'View on GitHub'} <ArrowUpRight className="h-4 w-4" />
           <span className="sr-only">({project.name}, opens in a new tab)</span>
         </a>
       )}
@@ -59,42 +47,39 @@ function ProjectLinks({ project, compact = false }: { project: Project; compact?
   );
 }
 
-function ProjectCard({ project, onOpen, large = false }: { project: Project; onOpen: (p: Project) => void; large?: boolean }) {
+function ProjectCard({ project, onOpen }: { project: Project; onOpen: (p: Project) => void }) {
+  const accent = project.palette.accent === '#FFFFFF' ? project.palette.fg : project.palette.accent;
   return (
-    <article className={cn('card group flex h-full flex-col overflow-hidden p-3 transition-shadow hover:shadow-[0_24px_50px_-28px_rgb(20_18_15/0.5)]', large && 'lg:grid lg:grid-cols-12 lg:gap-8 lg:p-5')}>
-      <button
-        type="button"
-        onClick={() => onOpen(project)}
-        aria-label={`Open details for ${project.name}`}
-        className={cn('block w-full overflow-hidden rounded-xl text-left transition-transform duration-500 group-hover:[&>div]:scale-[1.015]', large && 'lg:col-span-7')}
-      >
-        <ProjectVisual project={project} className="transition-transform duration-500" />
+    <article
+      style={{ '--pc': accent } as React.CSSProperties}
+      className="card group relative flex h-full flex-col overflow-hidden p-2.5 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--pc)] hover:shadow-[0_22px_44px_-26px_var(--pc)]"
+    >
+      <button type="button" onClick={() => onOpen(project)} aria-label={`Open details for ${project.name}`} className="block w-full overflow-hidden rounded-xl text-left">
+        <ProjectVisual project={project} compact className="transition-transform duration-500 group-hover:scale-[1.02]" />
       </button>
 
-      <div className={cn('flex flex-1 flex-col px-3 pb-3 pt-5', large && 'lg:col-span-5 lg:justify-center lg:px-2 lg:py-4')}>
-        <div className="mb-4 flex items-center justify-between gap-3">
-          <span className="flex items-center gap-3">
-            <ProjectLogo project={project} className="h-10 w-10 text-lg" />
-            <span className="font-mono text-xs text-ink-3">{project.number}</span>
-          </span>
-          <KindBadge kind={project.kind} />
+      <div className="flex flex-1 flex-col px-2.5 pb-2.5 pt-4">
+        <div className="flex items-center gap-3">
+          <ProjectMark project={project} className="h-11 w-11" />
+          <div className="min-w-0">
+            <h3 className="h-display truncate text-xl leading-tight">{project.name}</h3>
+            <p className="truncate font-mono text-[0.68rem] uppercase tracking-[0.14em] text-ink-3">{project.category}</p>
+          </div>
         </div>
-        <p className="eyebrow">{project.category}</p>
-        <h3 className={cn('h-display mt-2', large ? 'text-5xl' : 'text-3xl')}>{project.name}</h3>
-        <p className="accent-serif mt-1 text-2xl text-ink-2">{project.tagline}</p>
-        <p className={cn('mt-4 text-pretty text-ink-2', !large && 'line-clamp-3')}>{project.description}</p>
 
-        <ul className="mt-5 flex flex-wrap gap-1.5" aria-label={`${project.name} technologies`}>
-          {project.stack.slice(0, large ? 7 : 4).map((s) => (
-            <li key={s} className="chip">{s}</li>
+        <p className="mt-3 line-clamp-2 text-pretty text-sm text-ink-2">{project.description}</p>
+
+        <ul className="mt-3 flex flex-wrap gap-1.5" aria-label={`${project.name} technologies`}>
+          {project.stack.slice(0, 3).map((s) => (
+            <li key={s} className="chip !px-2.5 !py-0.5 !text-[0.68rem]">{s}</li>
           ))}
-          {!large && project.stack.length > 4 && <li className="chip">+{project.stack.length - 4}</li>}
+          {project.stack.length > 3 && <li className="chip !px-2.5 !py-0.5 !text-[0.68rem]">+{project.stack.length - 3}</li>}
         </ul>
 
-        <div className="mt-auto flex flex-wrap items-center gap-3 pt-6">
+        <div className="mt-auto flex flex-wrap items-center gap-2 pt-4">
           <ProjectLinks project={project} compact />
-          <button type="button" onClick={() => onOpen(project)} className="btn btn-ghost !min-h-11 !px-5 !text-sm">
-            Project details
+          <button type="button" onClick={() => onOpen(project)} className="btn btn-ghost !min-h-11 !px-4 !text-sm">
+            Details
           </button>
         </div>
       </div>
@@ -151,7 +136,7 @@ function ProjectDialog({ project, onClose }: { project: Project | null; onClose:
               </div>
               <div className="lg:col-span-6 lg:pr-10">
                 <div className="mb-4 flex items-center gap-3">
-                  <ProjectLogo project={project} className="h-12 w-12 text-xl" />
+                  <ProjectMark project={project} className="h-12 w-12" />
                   <span className="font-mono text-xs text-ink-3">{project.number}</span>
                   <KindBadge kind={project.kind} />
                 </div>
@@ -189,9 +174,6 @@ export function Work() {
   const [selected, setSelected] = useState<Project | null>(null);
   const [filter, setFilter] = useState<ProjectFilter | 'all'>('all');
   const list = filter === 'all' ? PROJECTS : PROJECTS.filter((p) => p.filters.includes(filter));
-  const showFeatured = filter === 'all';
-  const [featured, ...rest] = list;
-  const grid = showFeatured ? rest : list;
 
   return (
     <section id="work" aria-labelledby="work-title" className="scroll-mt-20 py-24 sm:py-32">
@@ -228,19 +210,13 @@ export function Work() {
           Showing {list.length} {list.length === 1 ? 'project' : 'projects'}
         </p>
 
-        {showFeatured && (
-          <Reveal>
-            <ProjectCard project={featured} onOpen={setSelected} large />
-          </Reveal>
-        )}
-
-        <div key={filter} className={cn('grid gap-6 md:grid-cols-2', showFeatured && 'mt-6')}>
-          {grid.map((p, i) => (
-            <Reveal key={p.id} delay={(i % 2) * 0.08}>
+        <ul key={filter} className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {list.map((p, i) => (
+            <Reveal as="li" key={p.id} delay={(i % 3) * 0.06} className="h-full">
               <ProjectCard project={p} onOpen={setSelected} />
             </Reveal>
           ))}
-        </div>
+        </ul>
 
         <p className="mt-10 max-w-2xl text-sm text-ink-3">
           Project descriptions summarise what each build is designed to do. Client work will appear here with its own “Client work” label when it is added.

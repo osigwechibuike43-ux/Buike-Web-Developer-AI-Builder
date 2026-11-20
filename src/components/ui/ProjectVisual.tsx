@@ -5,7 +5,8 @@ import { cn } from '@/lib/cn';
 const host = (url?: string) => (url ? url.replace(/^https?:\/\//, '').replace(/\/$/, '') : 'github.com');
 
 /** Generated preview panel in each project's own palette. Swap in a real screenshot via `project.image`. */
-export function ProjectVisual({ project, className }: { project: Project; className?: string }) {
+export function ProjectVisual({ project, className, compact = false }: { project: Project; className?: string; compact?: boolean }) {
+  const ratio = compact ? 'aspect-[16/8]' : 'aspect-[16/10]';
   const { bg, fg, accent } = project.palette;
   const faint = `color-mix(in srgb, ${fg} 14%, transparent)`;
   const soft = `color-mix(in srgb, ${fg} 30%, transparent)`;
@@ -18,7 +19,7 @@ export function ProjectVisual({ project, className }: { project: Project; classN
         alt={`Screenshot of ${project.name}`}
         loading="lazy"
         decoding="async"
-        className={cn('aspect-[16/10] w-full rounded-xl border border-line object-cover object-top', className)}
+        className={cn(ratio, 'w-full rounded-xl border border-line object-cover object-top', className)}
       />
     );
   }
@@ -228,7 +229,7 @@ export function ProjectVisual({ project, className }: { project: Project; classN
   })();
 
   return (
-    <div aria-hidden className={cn('relative aspect-[16/10] w-full overflow-hidden rounded-xl border', className)} style={{ background: bg, color: fg, borderColor: faint }}>
+    <div aria-hidden className={cn('relative w-full overflow-hidden rounded-xl border', ratio, className)} style={{ background: bg, color: fg, borderColor: faint }}>
       <div className="flex h-7 items-center gap-1.5 border-b px-3" style={{ borderColor: faint }}>
         {[0, 1, 2].map((i) => (
           <span key={i} className="h-1.5 w-1.5 rounded-full" style={{ background: soft }} />

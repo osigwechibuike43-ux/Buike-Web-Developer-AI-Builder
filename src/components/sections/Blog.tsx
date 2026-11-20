@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ARTICLES, ARTICLE_CATEGORIES, formatDate, readingMinutes, type ArticleCategory } from '@/data/blog';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 import { Reveal } from '@/components/ui/Reveal';
-import { ArticleCover } from '@/components/ui/ArticleCover';
+import { ArticleCover, CATEGORY_COLORS, CATEGORY_ICONS } from '@/components/ui/ArticleCover';
 import { ArrowRight } from '@/components/ui/Icons';
 import { linkClick } from '@/lib/router';
 import { cn } from '@/lib/cn';
@@ -51,29 +51,40 @@ export function Blog() {
         {visible.length === 0 ? (
           <p className="card p-8 text-ink-2">No articles in this category yet. New posts are added regularly.</p>
         ) : (
-          <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {visible.map((a, i) => (
-              <Reveal as="li" key={a.slug} delay={(i % 3) * 0.06}>
-                <article className="card group relative flex h-full flex-col overflow-hidden transition-shadow hover:shadow-[0_24px_50px_-28px_rgb(20_18_15/0.5)]">
-                  <ArticleCover category={a.category} />
-                  <div className="flex flex-1 flex-col p-6">
-                    <p className="font-mono text-xs text-ink-3">
-                      <time dateTime={a.date}>{formatDate(a.date)}</time> · {readingMinutes(a)} min read
-                    </p>
-                    <h3 className="h-display mt-3 text-2xl">
-                      <a href={`/blog/${a.slug}`} onClick={linkClick} className="after:absolute after:inset-0 hover:text-accent-text">
-                        {a.title}
-                      </a>
-                    </h3>
-                    <p className="mt-3 text-pretty text-ink-2">{a.description}</p>
-                    <span className="mt-auto inline-flex items-center gap-2 pt-6 font-semibold">
-                      Read more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                      <span className="sr-only">: {a.title}</span>
-                    </span>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
+          <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {visible.map((a, i) => {
+              const Icon = CATEGORY_ICONS[a.category];
+              return (
+                <Reveal as="li" key={a.slug} delay={(i % 3) * 0.06} className="h-full">
+                  <article
+                    style={{ '--c': CATEGORY_COLORS[a.category] } as React.CSSProperties}
+                    className="card group relative flex h-full flex-col overflow-hidden p-2.5 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--c)] hover:shadow-[0_20px_40px_-26px_var(--c)]"
+                  >
+                    <ArticleCover category={a.category} compact className="rounded-xl" />
+                    <div className="flex flex-1 flex-col px-2.5 pb-2.5 pt-4">
+                      <p className="flex items-center gap-2.5 font-mono text-[0.68rem] uppercase tracking-[0.12em] text-ink-3">
+                        <span aria-hidden className="flex h-7 w-7 items-center justify-center rounded-lg bg-[color-mix(in_srgb,var(--c)_16%,transparent)] text-[var(--c)]">
+                          <Icon className="h-4 w-4" strokeWidth={1.8} />
+                        </span>
+                        <span>
+                          <time dateTime={a.date}>{formatDate(a.date)}</time> · {readingMinutes(a)} min
+                        </span>
+                      </p>
+                      <h3 className="h-display mt-3 text-lg leading-snug">
+                        <a href={`/blog/${a.slug}`} onClick={linkClick} className="after:absolute after:inset-0 hover:text-accent-text">
+                          {a.title}
+                        </a>
+                      </h3>
+                      <p className="mt-2 line-clamp-2 text-pretty text-sm text-ink-2">{a.description}</p>
+                      <span className="mt-auto inline-flex items-center gap-2 pt-4 text-sm font-semibold">
+                        Read more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                        <span className="sr-only">: {a.title}</span>
+                      </span>
+                    </div>
+                  </article>
+                </Reveal>
+              );
+            })}
           </ul>
         )}
       </div>

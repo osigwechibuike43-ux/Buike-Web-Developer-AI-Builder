@@ -3,6 +3,7 @@ import type { JourneyStep, Service } from '../types';
 export const SERVICES: Service[] = [
   {
     id: 'website-development',
+    color: '#E4470F',
     title: 'Website Development',
     icon: 'globe',
     description: 'Fast, responsive websites for businesses, brands and individuals, built to be clear, accessible and easy to maintain.',
@@ -11,6 +12,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: 'web-applications',
+    color: '#5B6CFF',
     title: 'Web Application Development',
     icon: 'app',
     description: 'Interactive web apps with authentication, databases and dashboards, built with React, TypeScript and Supabase.',
@@ -19,6 +21,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: 'e-commerce',
+    color: '#C27C00',
     title: 'E-commerce Development',
     icon: 'cart',
     description: 'Online storefronts designed for easy browsing and a smooth path from product to purchase.',
@@ -27,6 +30,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: 'ai-integration',
+    color: '#8B5CF6',
     title: 'AI Integration',
     icon: 'ai',
     description: 'Assistants, tutors and smart features added to new or existing products through language-model APIs.',
@@ -35,6 +39,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: 'website-redesign',
+    color: '#0F9D8A',
     title: 'Website Redesign',
     icon: 'redesign',
     description: 'A fresh look and a faster build for a site that no longer reflects your brand or works well on phones.',
@@ -43,6 +48,7 @@ export const SERVICES: Service[] = [
   },
   {
     id: 'landing-pages',
+    color: '#E11D74',
     title: 'Landing Page Development',
     icon: 'rocket',
     description: 'Focused single-page experiences for launching a product, event or offer.',

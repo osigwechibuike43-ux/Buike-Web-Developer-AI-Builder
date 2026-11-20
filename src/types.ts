@@ -62,6 +62,8 @@ export interface Service {
   title: string;
   description: string;
   includes: string[];
+  /** Brand colour for this service's icon tile. */
+  color: string;
   /** Icon key rendered on the card. */
   icon: 'globe' | 'app' | 'cart' | 'ai' | 'redesign' | 'rocket';
   /** Value used to pre-select the contact form. */
